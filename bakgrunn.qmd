@@ -42,10 +42,12 @@ en [embedding modell][wiki_embedding].
 
 I @fig-rag-vector-database er det illustrert hvordan kunnskapsbasen og
 vektordatabasen henger sammen for å hente frem relevant kontekst for
-spårkmodellen. I figuren vises sammenhengen mellom embedding modellen og
+språkmodellen. I figuren vises sammenhengen mellom embedding modellen og
 vektordatabasen, både indeksen til vektordatabasen blir laget på bakgrunn av
 embedding modellen samtidig som spørsmålet til brukeren går gjennom embedding
-modellen for å søke i vektordatabasen.
+modellen for å søke i vektordatabasen. Merk at vektordatabasen oppdateres
+uavhengig fra språkmodellen som tilrettelegger for oppdatert informasjon fra
+kunnskapsbasen.
 
 ![Kunnskapsbase Baserte Språkmodeller med vektordatabase. I grått på
 illustrasjonen er det prøvd å vise hvordan vektordatabasen oppdateres fra
