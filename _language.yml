@@ -4,8 +4,8 @@ toc-title-website: "På nettsiden"
 related-formats-title: "Andre formater"
 related-notebooks-title: "Notatbøker"
 source-notebooks-prefix: "Kilde"
-other-links-title: "Andrelenker"
-code-links-title: "Kodelenker"
+other-links-title: "Andre lenker"
+code-links-title: "Kode lenker"
 
 section-title-abstract: "Abstrakt"
 section-title-appendices: "Vedlegg"
@@ -41,5 +41,7 @@ search-more-matches-text: "flere treff i dokumentet"
 search-clear-button-title: "Fjern"
 search-text-placeholder: ""
 search-label: "Søk"
+
+crossref-apx-prefix: "Vedlegg"
 
 draft: "Utkast"
