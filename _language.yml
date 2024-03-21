@@ -1,0 +1,41 @@
+toc-title-document: "Innholdsfortegnelse"
+toc-title-website: "På nettsiden"
+
+related-formats-title: "Andre formater"
+related-notebooks-title: "Notatbøker"
+source-notebooks-prefix: "Kilde"
+other-links-title: "Andrelenker"
+code-links-title: "Kodelenker"
+
+section-title-abstract: "Abstrakt"
+section-title-appendices: "Vedlegg"
+section-title-footnotes: "Fotnoter"
+section-title-references: "Referanser"
+
+title-block-author-single: "Forfatter"
+title-block-author-plural: "Forfattere"
+title-block-published: "Utgitt"
+title-block-modified: "Endret"
+title-block-keywords: "Nøkkelord"
+
+callout-tip-title: "Tips"
+callout-note-title: "Merk"
+callout-warning-title: "Advarsel"
+callout-important-title: "Viktig"
+callout-caution-title: "Forsiktig"
+
+code-summary: "Kode"
+
+back-to-top: "Tilbake til toppen"
+
+search-no-results-text: "Fant ingen resultater"
+search-matching-documents-text: "passende dokumenter"
+search-copy-link-title: "Kopier lenke for å søke"
+search-hide-matches-text: "skjul flere treff"
+search-more-match-text: "flere treff i dokumentet"
+search-more-matches-text: "flere treff i dokumentet"
+search-clear-button-title: "Fjern"
+search-text-placeholder: ""
+search-label: "Søk"
+
+draft: "Utkast"

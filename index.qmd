@@ -1,0 +1,14 @@
+# Om guiden {.unnumbered}
+
+Denne guiden tar for seg hvordan komme i gang med Kunnskapsbase Basert
+Språkmodeller (Retrieval-Augmented Generation (_RAG_)), forkortet _KBS_.
+
+Bakgrunnen for denne guiden er et ønske om å lage en søkemotor eller en chatbot
+basert på [store språkmodeller][1] som kan benytte en eksisterende kunnskapsbase for
+å besvare spørsmål.
+
+Guiden antar at modellen skal kjøre på Azure og vil være skreddersyd for dette
+formålet. Forhåpentligvis kan guiden fungere som inspirasjon for andre systemer,
+samt gi en innføring i konseptet KBS som kan gjennbrukes.
+
+[1]: https://snl.no/spr%C3%A5kmodell#-Nyere_spr%C3%A5kmodeller
