@@ -45,7 +45,7 @@ gjennom embedding modellen for å søke i vektordatabasen.
 
 ![Kunnskapsbase Baserte Språkmodeller med vektordatabase. I grått på
 illustrasjonen er det prøvd å vise hvordan vektordatabasen oppdateres fra
-kunnskapsbasen, uavhengig av
+kunnskapsbasen. Oppdateringen skjer uavhengig av
 språkmodellen.](assets/images/rag_vector_database.png){#fig-rag-vector-database}
 
 [wiki_rag]: https://en.wikipedia.org/wiki/Prompt_engineering#Retrieval-augmented_generation
