@@ -5,15 +5,22 @@ book:
   title: "Kunnskapsbase baserte språkmodeller"
   description: "Introduksjon til kunnskapsbase baserte språkmodeller på Azure"
   status: "Under arbeid"
-  author: "Jørgen Nordmoen"
-  authority: "NAV - Arbeids- og velferdsetaten"
+  author:
+    - name: Jørgen Nordmoen
+      affiliation: NAV IT
+      email: jorgen.halvorsen.nordmoen@nav.no
+  publisher: "NAV - Arbeids- og velferdsetaten"
+  image: "https://www.nav.no/gfx/social-share-fallback.png"
   genre: "Guide/Tutorial"
   license: "CC BY"
+  language: "no"
   date: now
   date-format: "DD.MM.YYYY"
   page-navigation: true
   repo-url: https://github.com/navikt
   repo-actions: [issue]
+  twitter-card: true
+  open-graph: true
   chapters:
     - index.qmd
     - bakgrunn.qmd
