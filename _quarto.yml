@@ -14,6 +14,11 @@ book:
   chapters:
     - index.qmd
     - bakgrunn.qmd
+    - forberedelser.qmd
+    - kunnskapsbasen.qmd
+    - modell.qmd
+  appendices:
+    - kost.qmd
   navbar:
     logo: "assets/nav_logo.svg"
     logo-alt: "NAV"
