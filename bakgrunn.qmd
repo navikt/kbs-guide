@@ -11,9 +11,11 @@ opptrening er en kostbar prosess. Med _KBS_ bruker vi deler av
 [kontekstvinduet][openai_token] til å fylle inn informasjon fra en
 kunnskapsbase. Dette gjør at kunnskapsbasen og språkmodellen kan utvikle seg
 uavhengig av hverandre og kunnskapsbasen kan oppdateres med ny informasjon uten
-at språkmodellen trenger å endre seg. I @fig-rag-overview er det illustrert
-hvordan flyten går fra bruker stiller spørsmål til språkmodellen som bruker både
-spørsmålet samt relevante dokumenter som input for å generere et svar.
+at språkmodellen trenger å endre seg.
+
+I @fig-rag-overview er det illustrert hvordan flyten går fra bruker stiller
+spørsmål til språkmodellen som benytter både spørsmålet samt relevante
+dokumenter som input for å generere et svar.
 
 ![Illustrasjon av Kunnskapsbase Baserte Språkmodeller. Språkmodellen tar som
 input både spørsmålet fra brukeren og relevante dokumenter som finnes i
@@ -21,7 +23,7 @@ kunnskapsbasen.](assets/images/rag_overview.png){#fig-rag-overview}
 
 En utfordring med _KBS_ er hvordan man skal organisere kunnskapsbasen slik at
 relevante dokumenter kan inkorporeres i konteksten til den store språkmodellen.
-Hvordan søke utføres vil ha stor innvirkning på kvaliteten på det genererte
+Hvordan søket utføres vil ha stor innvirkning på kvaliteten på det genererte
 svaret ettersom _KBS_ ofte krever at språkmodellen bare svarer på bakgrunn av
 dokumentene i konteksten. I teorien er det ikke noe i veien for å bruke et mer
 tradisjonelt søk etter dokumenter, ala Google søk. I oppsettet til Azure er det
@@ -36,12 +38,14 @@ tilsier er en vektordatabase en database med vektorer, det spesielle i
 konteksten av _KBS_ er at disse vektorene er generert med samme modell som
 språkmodellen bruker å oversette tekst til tall. Med andre ord, dokumentene i
 kunnskapsbasen indekseres med en feature vektor av inneholde deres, generert fra
-en [embedding modell][wiki_embedding]. I @fig-rag-vector-database er det
-illustrert hvordan kunnskapsbasen og vektordatabasen henger sammen for å hente
-frem relevant kontekst for spårkmodellen. I figuren vises sammenhengen mellom
-embedding modellen og vektordatabasen, både indeksen til vektordatabasen blir
-laget på bakgrunn av embedding modellen samtidig som spørsmålet til brukeren går
-gjennom embedding modellen for å søke i vektordatabasen.
+en [embedding modell][wiki_embedding].
+
+I @fig-rag-vector-database er det illustrert hvordan kunnskapsbasen og
+vektordatabasen henger sammen for å hente frem relevant kontekst for
+spårkmodellen. I figuren vises sammenhengen mellom embedding modellen og
+vektordatabasen, både indeksen til vektordatabasen blir laget på bakgrunn av
+embedding modellen samtidig som spørsmålet til brukeren går gjennom embedding
+modellen for å søke i vektordatabasen.
 
 ![Kunnskapsbase Baserte Språkmodeller med vektordatabase. I grått på
 illustrasjonen er det prøvd å vise hvordan vektordatabasen oppdateres fra
