@@ -26,6 +26,10 @@ callout-caution-title: "Forsiktig"
 
 code-summary: "Kode"
 
+repo-action-links-edit: "Foreslå endringer"
+repo-action-links-source: "Kildekode"
+repo-action-links-issue: "Rapporter feil"
+
 back-to-top: "Tilbake til toppen"
 
 search-no-results-text: "Fant ingen resultater"
