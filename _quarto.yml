@@ -6,6 +6,9 @@ book:
   description: "Introduksjon til kunnskapsbase baserte språkmodeller på Azure"
   status: "Under arbeid"
   author: "Jørgen Nordmoen"
+  authority: "NAV - Arbeids- og velferdsetaten"
+  genre: "Guide/Tutorial"
+  license: "CC BY"
   date: now
   date-format: "DD.MM.YYYY"
   page-navigation: true
@@ -29,7 +32,6 @@ book:
 
 format:
   html:
-    license: "CC BY"
     theme:
       light: flatly
       dark: darkly
