@@ -2,7 +2,7 @@ project:
   type: book
 
 book:
-  title: "Kunnskapsbase basert språkmodeller"
+  title: "Kunnskapsbase baserte språkmodeller"
   description: "Introduksjon til kunnskapsbase baserte språkmodeller på Azure"
   status: "Under arbeid"
   author: "Jørgen Nordmoen"

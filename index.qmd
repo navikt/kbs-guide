@@ -1,6 +1,6 @@
 # Om guiden {.unnumbered}
 
-Denne guiden tar for seg hvordan komme i gang med Kunnskapsbase Basert
+Denne guiden tar for seg hvordan komme i gang med Kunnskapsbase Baserte
 Språkmodeller (Retrieval-Augmented Generation (_RAG_)), forkortet _KBS_.
 
 Bakgrunnen for denne guiden er et ønske om å lage en søkemotor eller en chatbot
