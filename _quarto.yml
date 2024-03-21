@@ -3,10 +3,14 @@ project:
 
 book:
   title: "Kunnskapsbase basert språkmodeller"
-  description: "Introduksjon til kunnskapsbase baserte språkmodeller på Azure for NAV"
+  description: "Introduksjon til kunnskapsbase baserte språkmodeller på Azure"
   status: "Under arbeid"
   author: "Jørgen Nordmoen"
   date: now
+  date-format: "DD.MM.YYYY"
+  page-navigation: true
+  repo-url: https://github.com/navikt
+  repo-actions: [issue]
   chapters:
     - index.qmd
     - bakgrunn.qmd
@@ -14,15 +18,13 @@ book:
     logo: "assets/nav_logo.svg"
     logo-alt: "NAV"
     right:
-      - icon: github
-        href: https://github.com/navikt
-        aria-label: GitHub
       - icon: slack
         href: https://nav-it.slack.com
         aria-label: Slack
 
 format:
   html:
+    license: "CC BY"
     theme:
       light: flatly
       dark: darkly
