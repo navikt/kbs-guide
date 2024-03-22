@@ -1,4 +1,4 @@
-# Bakgrunn
+# Bakgrunn {#sec-bakgrunn}
 
 ## Kunnskapsbase Baserte Språkmodeller
 
@@ -14,7 +14,9 @@ slipper å dele kunnskapsbasen med tilbyder av språkmodellen samtidig som det h
 vist seg å [redusere hallusinering[^2] for språkmodellen][rag_paper]. Samtidig
 gjør det at kunnskapsbasen og språkmodellen kan utvikle seg uavhengig av
 hverandre og kunnskapsbasen kan oppdateres med ny informasjon uten at
-språkmodellen trenger å endre seg.
+språkmodellen trenger å endre seg. Bakdelen med _KBS_ er at språkmodellen må
+kunne klare å hente ut informasjon fra konteksten, noe som kan være utfordrende
+med mindre språkmodeller.
 
 I @fig-rag-overview er det illustrert hvordan flyten går fra bruker stiller
 spørsmål til språkmodellen som benytter både spørsmålet samt relevante
