@@ -35,7 +35,10 @@ book:
     right:
       - icon: slack
         href: https://nav-it.slack.com
-        aria-label: Slack
+        aria-label: Slack kanal for kontakt
+      - icon: people-fill
+        href: https://teamkatalogen.nav.no
+        aria-label: Ansvarlig team hos NAV
 
 format:
   html:
