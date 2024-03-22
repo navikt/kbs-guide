@@ -66,12 +66,14 @@ kunnskapsbasen når vi fyller inn kontekstvinduet til språkmodellen. Med andre
 ord, vi bruker bare feature vektorene og embedding modellen til å søke, ikke som
 faktisk input til språkmodellen. På grunn av begrensninger i kontekstvinduet til
 språkmodeller kan vi heller ikke bruke så mange dokumenter og det er derfor
-viktig å vurdere flere måter å representere kunnskapsbasen.
+viktigst at kunnskapsbasen har høy [dekning (eller
+sensitivitet)][wiki_recall_nn].
 
 [wiki_rag]: https://en.wikipedia.org/wiki/Prompt_engineering#Retrieval-augmented_generation
 [openai_token]: https://platform.openai.com/docs/introduction/tokens
 [wiki_embedding]: https://en.wikipedia.org/wiki/Sentence_embedding
 [rag_paper]: https://arxiv.org/abs/2403.10446
+[wiki_recall_nn]: https://nn.wikipedia.org/wiki/Presisjon_og_dekning
 
 [^1]: De fleste tilbydere bruker i dag vektordatabaser som søkemotor i deres
 _KBS_ oppsett.
