@@ -16,7 +16,8 @@ gjør det at kunnskapsbasen og språkmodellen kan utvikle seg uavhengig av
 hverandre og kunnskapsbasen kan oppdateres med ny informasjon uten at
 språkmodellen trenger å endre seg. Bakdelen med _KBS_ er at språkmodellen må
 kunne klare å hente ut informasjon fra konteksten, noe som kan være utfordrende
-med mindre språkmodeller.
+med mindre språkmodeller, samtidig som vi bruker plass i kontekstvinduet som
+kunne vært brukt til chat-historikk.
 
 I @fig-rag-overview er det illustrert hvordan flyten går fra bruker stiller
 spørsmål til språkmodellen som benytter både spørsmålet samt relevante
@@ -58,6 +59,14 @@ kunnskapsbasen.
 illustrasjonen er det prøvd å vise hvordan vektordatabasen oppdateres fra
 kunnskapsbasen. Oppdateringen skjer uavhengig av
 språkmodellen.](assets/images/rag_vector_database.png){#fig-rag-vector-database}
+
+Som nevnt i forrige seksjon så er det ingen absolutte krav til at språkmodellen
+må jobbe med en vektordatabase. I realiteten henter vi rådokumentene fra
+kunnskapsbasen når vi fyller inn kontekstvinduet til språkmodellen. Med andre
+ord, vi bruker bare feature vektorene og embedding modellen til å søke, ikke som
+faktisk input til språkmodellen. På grunn av begrensninger i kontekstvinduet til
+språkmodeller kan vi heller ikke bruke så mange dokumenter og det er derfor
+viktig å vurdere flere måter å representere kunnskapsbasen.
 
 [wiki_rag]: https://en.wikipedia.org/wiki/Prompt_engineering#Retrieval-augmented_generation
 [openai_token]: https://platform.openai.com/docs/introduction/tokens
