@@ -9,9 +9,12 @@ språkmodell generere svaret sitt basert på informasjon den plukket opp under
 opptrening. Bakdelen med dette er at det tar lang tid å trene opp samtidig som
 opptrening er en kostbar prosess. Med _KBS_ bruker vi deler av
 [kontekstvinduet][openai_token] til å fylle inn informasjon fra en
-kunnskapsbase. Dette gjør at kunnskapsbasen og språkmodellen kan utvikle seg
-uavhengig av hverandre og kunnskapsbasen kan oppdateres med ny informasjon uten
-at språkmodellen trenger å endre seg.
+kunnskapsbase. Dette gir språkmodellen tilgang til ekstra informasjon, man
+slipper å dele kunnskapsbasen med tilbyder av språkmodellen samtidig som det har
+vist seg å [redusere hallusinering[^2] for språkmodellen][rag_paper]. Samtidig
+gjør det at kunnskapsbasen og språkmodellen kan utvikle seg uavhengig av
+hverandre og kunnskapsbasen kan oppdateres med ny informasjon uten at
+språkmodellen trenger å endre seg.
 
 I @fig-rag-overview er det illustrert hvordan flyten går fra bruker stiller
 spørsmål til språkmodellen som benytter både spørsmålet samt relevante
@@ -57,6 +60,8 @@ språkmodellen.](assets/images/rag_vector_database.png){#fig-rag-vector-database
 [wiki_rag]: https://en.wikipedia.org/wiki/Prompt_engineering#Retrieval-augmented_generation
 [openai_token]: https://platform.openai.com/docs/introduction/tokens
 [wiki_embedding]: https://en.wikipedia.org/wiki/Sentence_embedding
+[rag_paper]: https://arxiv.org/abs/2403.10446
 
 [^1]: De fleste tilbydere bruker i dag vektordatabaser som søkemotor i deres
 _KBS_ oppsett.
+[^2]: [Forklaring av hallusinering på Wikipedia.](https://en.wikipedia.org/wiki/Hallucination_%28artificial_intelligence%29)
