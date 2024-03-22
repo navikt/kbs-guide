@@ -10,7 +10,7 @@ book:
       affiliation: NAV IT
       email: jorgen.halvorsen.nordmoen@nav.no
   publisher: "NAV - Arbeids- og velferdsetaten"
-  image: "https://www.nav.no/gfx/social-share-fallback.png"
+  image: "./assets/images/rag_overview.png"
   genre: "Guide/Tutorial/Veiledning"
   license: "CC BY"
   language: "no"
@@ -40,6 +40,7 @@ book:
 format:
   html:
     date-modified: now
+    date-format: "DD.MM.YYYY"
     lang: no
     theme:
       light: flatly
