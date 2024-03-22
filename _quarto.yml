@@ -11,14 +11,14 @@ book:
       email: jorgen.halvorsen.nordmoen@nav.no
   publisher: "NAV - Arbeids- og velferdsetaten"
   image: "https://www.nav.no/gfx/social-share-fallback.png"
-  genre: "Guide/Tutorial"
+  genre: "Guide/Tutorial/Veiledning"
   license: "CC BY"
   language: "no"
   date: now
   date-format: "DD.MM.YYYY"
   page-navigation: true
   repo-url: https://github.com/navikt
-  repo-actions: [issue]
+  repo-actions: [edit, issue]
   twitter-card: true
   open-graph: true
   chapters:
@@ -31,7 +31,7 @@ book:
     - kost.qmd
   navbar:
     logo: "assets/nav_logo.svg"
-    logo-alt: "NAV"
+    logo-alt: "Logo til NAV - Arbeids- og velferdsetaten"
     right:
       - icon: slack
         href: https://nav-it.slack.com
@@ -39,6 +39,8 @@ book:
 
 format:
   html:
+    date-modified: now
+    lang: no
     theme:
       light: flatly
       dark: darkly
