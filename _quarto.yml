@@ -11,7 +11,7 @@ book:
       email: jorgen.halvorsen.nordmoen@nav.no
   publisher: "NAV - Arbeids- og velferdsetaten"
   image: "./assets/images/rag_overview.png"
-  genre: "Guide/Tutorial/Veiledning"
+  genre: "Guide, Tutorial, Veiledning"
   license: "CC BY"
   language: "no"
   date: now
