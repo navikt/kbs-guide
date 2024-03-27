@@ -44,7 +44,7 @@ tilsier er en vektordatabase en database med vektorer, det spesielle i
 konteksten av _KBS_ er at disse vektorene er generert med samme modell som
 språkmodellen bruker å oversette tekst til tall. Med andre ord, dokumentene i
 kunnskapsbasen indekseres med en feature vektor av inneholde deres, generert fra
-en [embedding modell][wiki_embedding].
+en [embedding modell][wiki_embedding] (se @def-embedding).
 
 I @fig-rag-vector-database er det illustrert hvordan kunnskapsbasen og
 vektordatabasen henger sammen for å hente frem relevant kontekst for

@@ -29,6 +29,7 @@ book:
     - modell.qmd
   appendices:
     - kost.qmd
+    - definisjoner.qmd
   navbar:
     logo: "assets/nav_logo.svg"
     logo-alt: "Logo til NAV - Arbeids- og velferdsetaten"

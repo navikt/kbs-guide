@@ -1,0 +1,12 @@
+# Begreper og definisjoner
+
+Vi forsøker her å holde en oppdatert liste med begreper og definisjoner som kan
+brukes som oppslagsverk.
+
+---
+
+::: {#def-embedding}
+## Embedding
+En embedding er en vektor som forsøker å representere den semantiske meningen
+til innhold (kan være tekst, et bilde, en video eller lyd).
+:::
