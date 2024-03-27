@@ -3,7 +3,7 @@ project:
 
 book:
   title: "Kunnskapsbase baserte språkmodeller"
-  description: "Introduksjon til kunnskapsbase baserte språkmodeller på Azure"
+  description: "Introduksjon til utvikling av kunnskapsbase baserte språkmodeller for NAV"
   status: "Under arbeid"
   author:
     - name: Jørgen Nordmoen
