@@ -10,3 +10,13 @@ brukes som oppslagsverk.
 En embedding er en vektor som forsøker å representere den semantiske meningen
 til innhold (kan være tekst, et bilde, en video eller lyd).
 :::
+
+::: {#def-sprakmodell}
+## Språkmodell
+I denne veiledningen brukes [språkmodell][snl_sprakmodell] og [Store
+Språkmodeller][wiki_llm] om hverandre og refererer til store kunstige nevrale
+nettverk som kan prosessere naturlig språk og generere naturlig språk som svar.
+:::
+
+[wiki_llm]: https://en.wikipedia.org/wiki/Large_language_model
+[snl_sprakmodell]: https://snl.no/spr%C3%A5kmodell#-Nyere_spr%C3%A5kmodeller

@@ -5,8 +5,8 @@ Språkmodeller (Retrieval-Augmented Generation (_RAG_)), forkortet _KBS_, se
 [Kapittel @sec-bakgrunn] for en introduksjon til teknikken.
 
 Bakgrunnen for denne guiden er et ønske om å lage en søkemotor eller en chatbot
-basert på [store språkmodeller][1] som kan benytte en eksisterende kunnskapsbase
-for å besvare spørsmål.
+basert på store språkmodeller (se @def-sprakmodell) som kan benytte en
+eksisterende kunnskapsbase for å besvare spørsmål.
 
 Nivået på guiden antar en hvis forståelse og kjennskap til store språkmodeller.
 Av den grunn er det ikke sikkert at alle termer vil bli godt nok forklart. Bruk
@@ -17,5 +17,3 @@ Guiden antar at modellen skal kjøre på interne flater hos NAV og vil være
 skreddersydd for dette formålet. Forhåpentligvis kan guiden fungere som
 inspirasjon for andre systemer, samt gi en innføring i konseptet _KBS_ som kan
 gjenbrukes.
-
-[1]: https://snl.no/spr%C3%A5kmodell#-Nyere_spr%C3%A5kmodeller
