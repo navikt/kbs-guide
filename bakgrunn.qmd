@@ -36,15 +36,18 @@ tradisjonelt søk etter dokumenter, ala Google søk. I oppsettet til Azure/Verte
 AI er det derimot satt opp til at man bruker en vektordatabase som finner
 relevante dokumenter[^1].
 
-## Vektordatabase
+## Vektordatabase {#sec-vektordatabase}
 
 I konteksten av _KBS_ er en vektordatabase en måte å lagre en indeks over
 dokumenter som sammenfaller med måten språkmodellen forstår tekst. Som navnet
 tilsier er en vektordatabase en database med vektorer, det spesielle i
-konteksten av _KBS_ er at disse vektorene er generert med samme modell som
-språkmodellen bruker å oversette tekst til tall. Med andre ord, dokumentene i
+konteksten av _KBS_ er at disse vektorene er generert med en modell som er trent
+på en lignende måte som en stor språkmodell. Med andre ord, dokumentene i
 kunnskapsbasen indekseres med en feature vektor av inneholde deres, generert fra
-en [embedding modell][wiki_embedding] (se @def-embedding).
+en [embedding modell][wiki_embedding] (se @def-embedding). Merk at embedding
+modellen er uavhengig av språkmodellen i bruk. Ofte brukes en embedding modell
+som sammenfaller med språkmodellen, f.eks. brukes OpenAI sin embedding modell
+sammen med GPT-4, men det er absolutt ingen krav [^3].
 
 I @fig-rag-vector-database er det illustrert hvordan kunnskapsbasen og
 vektordatabasen henger sammen for å hente frem relevant kontekst for
@@ -77,4 +80,6 @@ sensitivitet)][wiki_recall_nn].
 
 [^1]: De fleste tilbydere bruker i dag vektordatabaser som søkemotor i deres
 _KBS_ oppsett.
-[^2]: [Forklaring av hallusinering på Wikipedia.](https://en.wikipedia.org/wiki/Hallucination_%28artificial_intelligence%29)
+[^2]: Forklaring av hallusinering [på Wikipedia](https://en.wikipedia.org/wiki/Hallucination_%28artificial_intelligence%29).
+[^3]: Man kan til og med bruke flere forskjellige embedding modeller på samme
+tid så lenge spørring og henting av dokumenter bruker samme modell.
