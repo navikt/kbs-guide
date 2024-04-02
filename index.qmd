@@ -14,8 +14,8 @@ gjerne `Foreslå endringer` knappen i menyen til venstre hvis du har et forslag
 eller tips om termer som må forklares bedre.
 
 Guiden antar at modellen skal kjøre på interne flater hos NAV og vil være
-skreddersyd for dette formålet. Forhåpentligvis kan guiden fungere som
+skreddersydd for dette formålet. Forhåpentligvis kan guiden fungere som
 inspirasjon for andre systemer, samt gi en innføring i konseptet _KBS_ som kan
-gjennbrukes.
+gjenbrukes.
 
 [1]: https://snl.no/spr%C3%A5kmodell#-Nyere_spr%C3%A5kmodeller

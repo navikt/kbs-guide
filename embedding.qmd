@@ -3,7 +3,7 @@
 En embedding modell er en modell som prøver å generere en vektor av tall som
 representerer det semantiske innholdet i et media (se @def-embedding).
 
-I en _KBS_ kontekts brukes embedding modellen til å sammenligne en spørring fra
+I en _KBS_ kontekst brukes embedding modellen til å sammenligne en spørring fra
 bruker med innhold i en kunnskapsbase, se @sec-vektordatabase for mer utfyllende
 bakgrunn.
 
