@@ -1,0 +1,27 @@
+# Embedding modeller
+
+En embedding modell er en modell som prøver å generere en vektor av tall som
+representerer det semantiske innholdet i et media (se @def-embedding).
+
+I en _KBS_ kontekts brukes embedding modellen til å sammenligne en spørring fra
+bruker med innhold i en kunnskapsbase, se @sec-vektordatabase for mer utfyllende
+bakgrunn.
+
+## Valg av modell
+
+I NAV har vi i hovedsak mulighet til å bruke embedding modeller fra både OpenAI
+(Azure) samt Vertex AI (GCP)[^1]. Hvilken modell som gir best resultat er avhengig
+av kunnskapsbasen samt hvilken vektordatabase som skal brukes.
+
+I en innledende fase av implementering av _KBS_ kan det gi mye verdi å
+sammenligne flere embedding modeller. Dette kan gjøres ved å både generere
+vektorene i vektordatabasen med begge/alle modellene og deretter bruke modellene
+til å teste flere spørringer og se hvilke dokumenter som hentes. Etter utprøving
+kan man så bare generere vektorene med valgt modell og forenkle tabell i
+vektordatabasen.
+
+## Erfaringer
+
+**Å GJØRE**
+
+[^1]: Lokale modeller kan selvsagt også brukes.
