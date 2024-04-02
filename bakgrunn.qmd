@@ -25,7 +25,8 @@ dokumenter som input for å generere et svar.
 
 ![Illustrasjon av Kunnskapsbase Baserte Språkmodeller. Språkmodellen tar som
 input både spørsmålet fra brukeren og relevante dokumenter som finnes i
-kunnskapsbasen.](assets/images/rag_overview.png){#fig-rag-overview}
+kunnskapsbasen for å kunne generere et
+svar.](assets/images/rag_overview.png){#fig-rag-overview}
 
 En utfordring med _KBS_ er hvordan man skal organisere kunnskapsbasen slik at
 relevante dokumenter kan inkorporeres i konteksten til den store språkmodellen.
@@ -68,9 +69,10 @@ må jobbe med en vektordatabase. I realiteten henter vi rådokumentene fra
 kunnskapsbasen når vi fyller inn kontekstvinduet til språkmodellen. Med andre
 ord, vi bruker bare feature vektorene og embedding modellen til å søke, ikke som
 faktisk input til språkmodellen. På grunn av begrensninger i kontekstvinduet til
-språkmodeller kan vi heller ikke bruke så mange dokumenter og det er derfor
-viktigst at kunnskapsbasen har høy [dekning (eller
-sensitivitet)][wiki_recall_nn].
+språkmodeller kan vi heller ikke bruke for mange dokumenter og det er derfor
+viktig at kunnskapsbasen har høy [dekning (eller sensitivitet)][wiki_recall_nn].
+De fleste tilbydere av språkmodeller tar også betalt for antall token i input
+til modellen, noe som også gir et insentiv for å begrense antall dokumenter.
 
 [wiki_rag]: https://en.wikipedia.org/wiki/Prompt_engineering#Retrieval-augmented_generation
 [openai_token]: https://platform.openai.com/docs/introduction/tokens

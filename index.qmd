@@ -11,7 +11,7 @@ for å besvare spørsmål.
 Nivået på guiden antar en hvis forståelse og kjennskap til store språkmodeller.
 Av den grunn er det ikke sikkert at alle termer vil bli godt nok forklart. Bruk
 gjerne `Foreslå endringer` knappen i menyen til venstre hvis du har et forslag
-eller tips om termer som må forklares bedre.
+eller tips om noe som bør forklares bedre.
 
 Guiden antar at modellen skal kjøre på interne flater hos NAV og vil være
 skreddersydd for dette formålet. Forhåpentligvis kan guiden fungere som
