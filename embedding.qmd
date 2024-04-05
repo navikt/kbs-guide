@@ -11,7 +11,7 @@ bakgrunn.
 
 I NAV har vi i hovedsak mulighet til å bruke embedding modeller fra både OpenAI
 (Azure) samt Vertex AI (GCP)[^1]. Hvilken modell som gir best resultat er avhengig
-av kunnskapsbasen samt hvilken vektordatabase som skal brukes.
+av kunnskapsbasen[^2] samt hvilken vektordatabase som skal brukes.
 
 I en innledende fase av implementering av _KBS_ kan det gi mye verdi å
 sammenligne flere embedding modeller. Dette kan gjøres ved å både generere
@@ -25,3 +25,6 @@ vektordatabasen.
 **Å GJØRE**
 
 [^1]: Lokale modeller kan selvsagt også brukes.
+[^2]: Parametere som antall dokumenter, størrelsen på enkelt dokumenter, hvilket
+format og hvor mange forskjellige dokumenter som man slår opp i, vil kunne
+påvirke valg av embedding modell
