@@ -12,7 +12,9 @@ benytte forskjellige rammeverk. De fleste rammeverk for språkmodeller sikter p�
 systemet i Python. Samtidig utvikles de fleste NAIS applikasjoner i dag i Kotlin
 og de fleste utviklere kan dette bedre enn Python. Denne arkitekturen tillater
 derfor at Data Scientister kan enklere samarbeide med utviklere ved at
-komponentene kan utvikles hver for seg.
+komponentene kan utvikles hver for seg. Forhåpentligvis gjør det også at selve
+chatten kan gjenbrukes av flere prosjekter da den er mer uavhengig fra
+kunnskapsbasen og språkmodellen enn selve _KBS_ systemet.
 
 ![Visuellfremstilling av overordnet teknisk arkitektur på NAIS
 plattformen.](./assets/images/nais_arkitektur.png){#fig-nais-arkitektur}
