@@ -89,5 +89,7 @@ anbefalingene så må man teste og vurdere på bakgrunn av kunnskapsbasen man
 |                         | -   Mer kontroll over database og kostnader        | -   Krever kode                              |
 +-------------------------+----------------------------------------------------+----------------------------------------------+
 
+: Fordeler og ulemper med vektordatabaser.
+
 [azure_ai_search]: https://azure.microsoft.com/en-us/products/ai-services/ai-search
 [vertex_ai_search]: https://cloud.google.com/enterprise-search?hl=nb
