@@ -24,6 +24,7 @@ book:
   chapters:
     - index.qmd
     - bakgrunn.qmd
+    - tilbyder.qmd
     - forberedelser.qmd
     - kunnskapsbasen.qmd
     - modell.qmd

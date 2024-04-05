@@ -29,7 +29,8 @@ Det er viktig i denne oversikten å presisere at man ikke trenger å bruke
 språkmodell, embedding modell eller vektordatabase fra samme tilbyder. Det vil
 være fullt mulig å kombinere slik man måtte ønske, f.eks. bruke språkmodell fra
 Vertex AI, embedding modell fra Azure OpenAI og Postgres (Cloud SQL) som
-vektordatabase.
+vektordatabase (se @sec-tilbyder for mer utfyllende informasjon om valget av
+tilbyder).
 
 [^1]: Det anbefales å tilpasse _KBS_ systemet per kunnskapsbase da dette gir
 best resultater, samtidig som det er viktig å lære av hverandre.

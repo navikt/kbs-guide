@@ -1,0 +1,93 @@
+# Valg av tilbyder {#sec-tilbyder}
+
+Et av de første valgene man må foreta seg er hvilke tilbyder(e) man ønsker å
+benytte for systemet. Som nevnt tidligere har vi i NAV i hovedsak mulighet til å
+bruke [Azure OpenAI
+Services](https://azure.microsoft.com/en-us/products/ai-services/openai-service)
+(@def-azure-openai) eller [Vertex AI](https://cloud.google.com/vertex-ai?hl=nb)
+(@def-vertex-ai).
+
+Selv om man kan blande tilbyder av språkmodell, embedding modell og
+vektordatabase vil det i de fleste tilfeller falle naturlig å velge én tilbyder
+av alle tre. Det er derfor viktig å være bevist dette valget og tenke på
+helheten av applikasjonen.
+
+## Valg av språkmodell
+
+Det er vanskelig å gi en sterke anbefalinger den ene eller den andre veien for
+hvilken språkmodell man burde foretrekke. Her vil det komme ned til utprøving av
+begge modeller og preferanser utover selve modellen. Husk også at modellene
+forbedres hele tiden så egen erfaring og testing burde veie tungt sammenlignet
+med tidsbestemte anbefalinger.
+
++--------------+-------------------------------------------------------------------+--------------------------------------------+
+| Språkmodell  | Fordeler                                                          | Ulemper                                    |
++==============+===================================================================+============================================+
+| Azure OpenAI | -   Kan benytte kjente modeller som `GPT-3.5` og `GPT-4`          | -   Må forholde seg til både NAIS og Azure |
+|              | -   Mye tilgjengelig dokumentasjon utover det Azure/OpenAI tilbyr | -   To koststeder som må samkjøres         |
++--------------+-------------------------------------------------------------------+--------------------------------------------+
+| Vertex AI    | -   Kjører på samme plattform som NAIS                            | -   Ikke like kjente modeller som OpenAI   |
++--------------+-------------------------------------------------------------------+--------------------------------------------+
+
+: Fordeler og ulemper ved valg av språkmodell.
+
+## Valg av embedding modell
+
+Embedding modell kanskje enda mer enn språkmodell må testes grundig før endelig
+valg faller. Siden embedding modellen vil styre hvor godt vektordatabasen klarer
+å hente ut relevante dokumenter og siden vi er avhengig av en modell som forstår
+Norsk godt.
+
++------------------+----------------------------------------------------------+
+| Embedding modell | Egenskaper                                               |
++==================+==========================================================+
+| Azure OpenAI     | -   Flere modeller å velge mellom                        |
+|                  | -   Støtte for multimodalitet (kan tolke flere formater) |
+|                  | -   Mulighet for å styre størrelsen på vektorene         |
++------------------+----------------------------------------------------------+
+| Vertex AI        | -   Flere modeller å velge mellom                        |
+|                  | -   Støtte for multimodalitet (kan tolke flere formater) |
++------------------+----------------------------------------------------------+
+
+: Egenskaper til embedding modell.
+
+## Valg av vektordatabase
+
+Det mest interessante valget kommer når man skal vurdere vektordatabase. For
+vektordatabase har man både mulighet til å velge fra en av tilbydere som
+allerede er nevnt, [Azure AI Search][azure_ai_search] og [Vertex AI
+Search][vertex_ai_search], men man har også mulighet for å velge en
+"self-hosted" løsning med PostgreSQL.
+
+::: {.callout-note collapse="true"}
+## *KBS* i NAV
+På NAIS plattformen vil det være Cloud SQL med støtte for `pgvector` som vil
+være ekvivalent med en "self-hosted" løsning.
+:::
+
+Det som man må være observant på og teste selv er hvor mye ekstra verdi
+hybridløsningene fra Azure OpenAI og Vertex AI gir utover en ren vektordatabase
+som Postgres. Siden Azure AI Search og Vertex AI Search har støtte for hybridsøk
+kan de i teorien gi bedre sensitivitet når det søkes i kunnskapsbasen, men med
+forståelsen av at man mister litt kontroll over søket. Som i de andre
+anbefalingene så må man teste og vurdere på bakgrunn av kunnskapsbasen man
+ønsker å søke i.
+
++-------------------------+----------------------------------------------------+----------------------------------------------+
+| Vektordatabase          | Fordeler                                           | Ulemper                                      |
++=========================+====================================================+==============================================+
+| Azure AI Search         | -   Hybridsøk                                      | -   Mindre kontroll over oppsett av database |
+|                         | -   Enkelt å komme i gang med                      | -   Egen kostnad                             |
+|                         | -   No/low- code                                   |                                              |
++-------------------------+----------------------------------------------------+----------------------------------------------+
+| Vertex AI Search        | -   Hybridsøk                                      | -   Mindre kontroll over oppsett av database |
+|                         | -   Enkelt å komme i gang med                      | -   Egen kostnad                             |
+|                         | -   No/low- code                                   |                                              |
++-------------------------+----------------------------------------------------+----------------------------------------------+
+| PostgreSQL (`pgvector`) | -   "Innebygget" i NAIS applikasjoner              | -   Vanskeligere å komme i gang med          |
+|                         | -   Enklere å kombinere tabeller for applikasjonen | -   Krever mer i oppstartfasen               |
+|                         | -   Mer kontroll over database og kostnader        | -   Krever kode                              |
++-------------------------+----------------------------------------------------+----------------------------------------------+
+
+[azure_ai_search]: https://azure.microsoft.com/en-us/products/ai-services/ai-search
+[vertex_ai_search]: https://cloud.google.com/enterprise-search?hl=nb
