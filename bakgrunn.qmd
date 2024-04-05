@@ -59,6 +59,13 @@ modellen for å søke i vektordatabasen. Merk at vektordatabasen oppdateres
 uavhengig fra språkmodellen som tilrettelegger for oppdatert informasjon fra
 kunnskapsbasen.
 
+::: {.callout-note}
+## _KBS_ i NAV
+For [NAIS applikasjoner][nais_doc] opprettes det automatisk en Cloud SQL
+database. Denne databasen støtter [`pgvector`][pgvector] som kan brukes som et
+utgangspunkt for en [vektordatabase][pgvector_gcp].
+:::
+
 ![Kunnskapsbase Baserte Språkmodeller med vektordatabase. I grått på
 illustrasjonen er det prøvd å vise hvordan vektordatabasen oppdateres fra
 kunnskapsbasen. Oppdateringen skjer uavhengig av
