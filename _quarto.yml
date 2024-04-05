@@ -30,7 +30,6 @@ book:
     - modell.qmd
   appendices:
     - kost.qmd
-    - embedding.qmd
     - arkitektur.qmd
     - definisjoner.qmd
   navbar:
