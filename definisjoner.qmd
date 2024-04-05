@@ -1,14 +1,42 @@
-# Begreper og definisjoner
+# Begreper og definisjoner {#sec-definisjoner}
 
 Vi forsøker her å holde en oppdatert liste med begreper og definisjoner som kan
 brukes som oppslagsverk.
 
 ---
 
+::: {#def-azure-openai}
+## Azure OpenAI Service
+Er navnet på det helhetlige Generativ KI (@def-gki) produktet til Microsoft på
+Azure.
+:::
+
 ::: {#def-embedding}
 ## Embedding
 En embedding er en vektor som forsøker å representere den semantiske meningen
 til innhold (kan være tekst, et bilde, en video eller lyd).
+:::
+
+::: {#def-kontekst}
+## Kontekst
+Kontekst eller kontekstvindu refererer til teksten eller inputen man gir en
+Språkmodell (@def-sprakmodell) for å generere ny output. Størrelsen på
+konteksten er begrenset av modellen og kan ikke vokse uendelig.
+:::
+
+::: {#def-ki}
+## Kunstig Intelligens (KI)
+KI er fagfeltet innen datavitenskapen som utvikler metoder for å la datamaskiner
+løse oppgaver på egenhånd.
+
+> [E]n datamaskin som er i stand til å løse oppgaver uten å få instruksjoner fra
+> et menneske om hvordan den skal gjøre det[.] - [SNL][snl_ki]
+:::
+
+::: {#def-gki}
+## Generativ Kunstig Intelligens (GKI)
+GKI er en samlebetegnelse for metoder som bruker store nevrale nettverk til å
+generere media. [Språkmodeller @def-sprakmodell] er et eksempel på GKI.
 :::
 
 ::: {#def-sprakmodell}
@@ -18,5 +46,11 @@ Språkmodeller][wiki_llm] om hverandre og refererer til store kunstige nevrale
 nettverk som kan prosessere naturlig språk og generere naturlig språk som svar.
 :::
 
+::: {#def-vertex-ai}
+## Vertex AI
+Er navnet på det helhetlige Generativ KI (@def-gki) produktet til Google på GCP.
+:::
+
 [wiki_llm]: https://en.wikipedia.org/wiki/Large_language_model
 [snl_sprakmodell]: https://snl.no/spr%C3%A5kmodell#-Nyere_spr%C3%A5kmodeller
+[snl_ki]: https://snl.no/kunstig_intelligens

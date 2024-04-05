@@ -8,12 +8,12 @@ informasjon når en stor språkmodell skal generere svar. Uten _KBS_ vil en stor
 språkmodell generere svaret sitt basert på informasjon den plukket opp under
 opptrening. Bakdelen med dette er at det tar lang tid å trene opp samtidig som
 opptrening er en kostbar prosess. Med _KBS_ bruker vi deler av
-[kontekstvinduet][openai_token] til å fylle inn informasjon fra en
-kunnskapsbase. Dette gir språkmodellen tilgang til ekstra informasjon, man
-slipper å dele kunnskapsbasen med tilbyder av språkmodellen samtidig som det har
-vist seg å [redusere hallusinering[^2] for språkmodellen][rag_paper]. Samtidig
-gjør det at kunnskapsbasen og språkmodellen kan utvikle seg uavhengig av
-hverandre og kunnskapsbasen kan oppdateres med ny informasjon uten at
+[kontekstvinduet][openai_token] (se @def-kontekst) til å fylle inn informasjon
+fra en kunnskapsbase. Dette gir språkmodellen tilgang til ekstra informasjon,
+man slipper å dele kunnskapsbasen med tilbyder av språkmodellen samtidig som det
+har vist seg å [redusere hallusinering[^2] for språkmodellen][rag_paper].
+Samtidig gjør det at kunnskapsbasen og språkmodellen kan utvikle seg uavhengig
+av hverandre og kunnskapsbasen kan oppdateres med ny informasjon uten at
 språkmodellen trenger å endre seg. Bakdelen med _KBS_ er at språkmodellen må
 kunne klare å hente ut informasjon fra konteksten, noe som kan være utfordrende
 med mindre språkmodeller, samtidig som vi bruker plass i kontekstvinduet som

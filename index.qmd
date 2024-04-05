@@ -9,9 +9,10 @@ basert på store språkmodeller (se @def-sprakmodell) som kan benytte en
 eksisterende kunnskapsbase for å besvare spørsmål.
 
 Nivået på guiden antar en hvis forståelse og kjennskap til store språkmodeller.
-Av den grunn er det ikke sikkert at alle termer vil bli godt nok forklart. Bruk
-gjerne `Foreslå endringer` knappen i menyen til venstre hvis du har et forslag
-eller tips om noe som bør forklares bedre.
+Av den grunn er det ikke sikkert at alle termer vil bli godt nok forklart. Vi
+forsøker å holde en oppdatert liste med begreper og definisjoner i
+@sec-definisjoner. Bruk gjerne `Foreslå endringer` knappen i menyen til venstre hvis
+du har et forslag eller tips om noe som bør forklares bedre.
 
 Guiden antar at modellen skal kjøre på interne flater hos NAV og vil være
 skreddersydd for dette formålet. Forhåpentligvis kan guiden fungere som
