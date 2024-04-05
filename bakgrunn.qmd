@@ -81,11 +81,43 @@ viktig at kunnskapsbasen har høy [dekning (eller sensitivitet)][wiki_recall_nn]
 De fleste tilbydere av språkmodeller tar også betalt for antall token i input
 til modellen, noe som også gir et insentiv for å begrense antall dokumenter.
 
+## Hybridsøk
+
+Både [Azure][azure_ai_search] og [Vertex AI][vertex_ai_search] tilbyr egne
+databaser for søk sammen med språkmodeller. Argumentet for å bruke disse
+databasene sammenlignet med en renere vektordatabase er at både Azure og Vertex
+AI tilbyr forbedret søk, noe som er veldig viktig i en _KBS_ kontekst. Bakdelen
+med disse databasene er at man mister litt av kontrollen over databasen til
+tilbyder samtidig som det er en ekstra kostnad som må tas hensyn til. Det er
+derfor viktig å teste om de ekstra tjenestene som tilbys gir mer verdi i
+sammenheng med kunnskapsbasen som det skal søkes i.
+
+Måten disse hybride søkene fungerer er ved å kombinere vektorsøk med mer
+tradisjonelle søkemetoder som for eksempel [`BM25`][wiki_bm25]. Dette krever mer
+regnekraft og kan dermed være tregere, men til gjengjeld gi bedre dekning. Det
+er i utgangspunktet ikke noe i veien for å implementere de samme søkene manuelt
+og avveiningen blir naturlig nok mellom tid og penger.
+
+::: {.callout-caution collapse="true"}
+## Hybridsøk i Azure AI Search
+I Azure AI Search kan man selv styre hvordan databasen skal operere. Ved bruk av
+`hybrid` vil den operere som beskrevet i denne seksjonen, men ved bruk av
+`similarity` vil den operere som en ren vektordatabase. Vær varsom med å benytte
+riktig søk og i NAV sammenheng vurder andre databaser hvis bare `similarity`
+benyttes.
+:::
+
 [wiki_rag]: https://en.wikipedia.org/wiki/Prompt_engineering#Retrieval-augmented_generation
 [openai_token]: https://platform.openai.com/docs/introduction/tokens
 [wiki_embedding]: https://en.wikipedia.org/wiki/Sentence_embedding
 [rag_paper]: https://arxiv.org/abs/2403.10446
 [wiki_recall_nn]: https://nn.wikipedia.org/wiki/Presisjon_og_dekning
+[azure_ai_search]: https://azure.microsoft.com/en-us/products/ai-services/ai-search
+[vertex_ai_search]: https://cloud.google.com/enterprise-search?hl=nb
+[wiki_bm25]: https://en.wikipedia.org/wiki/Okapi_BM25
+[nais_doc]: https://doc.nais.io/
+[pgvector]: https://github.com/pgvector/pgvector
+[pgvector_gcp]: https://cloud.google.com/blog/products/databases/faster-similarity-search-performance-with-pgvector-indexes
 
 [^1]: De fleste tilbydere bruker i dag vektordatabaser som søkemotor i deres
 _KBS_ oppsett.
