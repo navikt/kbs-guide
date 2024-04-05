@@ -16,6 +16,12 @@ komponentene kan utvikles hver for seg. Forhåpentligvis gjør det også at selv
 chatten kan gjenbrukes av flere prosjekter da den er mer uavhengig fra
 kunnskapsbasen og språkmodellen enn selve _KBS_ systemet[^1].
 
+Det andre hovedpoenget med denne arkitekturen er å kjøre selve _KBS_ systemet på
+NAIS plattformen og ikke på Azure eller Vertex AI sine no/low-code løsninger.
+Dette gir sterkere kontroll over systemet samtidig som man gjør seg mer
+uavhengig av tilbyder av språkmodell og det vil være med på å gi bedre kontroll
+over kostnader.
+
 ![Visuellfremstilling av overordnet teknisk arkitektur på NAIS
 plattformen.](./assets/images/nais_arkitektur.png){#fig-nais-arkitektur}
 
