@@ -57,6 +57,15 @@ Norsk godt.
 
 : Egenskaper til embedding modell.
 
+::: {.callout-tip collapse="true"}
+## Benchmark som et godt utgangspunkt
+Det finnes flere benchmark-er som sammenligner forskjellige modeller som gir et
+godt utgangspunkt før man velger modell.
+
+- [Skandinavisk modell sammenligning][seb]
+- [Hugging Face embedding leaderboard][mteb]
+:::
+
 ## Valg av vektordatabase
 
 Det mest interessante valget kommer når man skal vurdere vektordatabase. For
@@ -99,5 +108,8 @@ anbefalingene så må man teste og vurdere på bakgrunn av kunnskapsbasen man
 
 [azure_ai_search]: https://azure.microsoft.com/en-us/products/ai-services/ai-search
 [vertex_ai_search]: https://cloud.google.com/enterprise-search?hl=nb
+[seb]: https://kennethenevoldsen.github.io/scandinavian-embedding-benchmark/
+[mteb]: https://huggingface.co/spaces/mteb/leaderboard
+
 [^1]: På Vertex AI har man mulighet for å bruke Antropics Claud 3 modeller som i
 mange sammenhenger er minst like gode som `GPT-4`.
