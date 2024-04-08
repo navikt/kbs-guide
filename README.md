@@ -11,5 +11,5 @@ generere nettsiden lokalt:
 
 ```bash
 # Kjør følgende kommando i roten av prosjektet
-$ quarto preview
+quarto preview
 ```
