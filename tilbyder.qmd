@@ -12,6 +12,30 @@ vektordatabase vil det i de fleste tilfeller falle naturlig å velge én tilbyde
 av alle tre. Det er derfor viktig å være bevist dette valget og tenke på
 helheten av applikasjonen.
 
+## Bruk av no/low-code løsninger
+
+Både Azure OpenAI og Vertex AI tilbyr i dag no/low-code løsninger for å komme i
+gang med et _KBS_ system. Disse løsningene gjør det raskt å komme i gang med
+utvikling og tilbyr ekstra funksjonalitet utover bare språkmodellen,
+vektordatabase og embedding modell. Bakdelen med disse no/low-code løsningene er
+selvsagt at man mister litt av kontrollen og låser seg helt til en tilbyder.
+
+::: {.callout-tip collapse="true"}
+## Alternativer til no/low-code
+Det er selvsagt mange alternativer man kan utforske når man ikke går for en av
+no/low-code løsningene til Azure OpenAI eller Vertex AI og vi kommer ikke til å
+liste opp alle her, men kanskje forslagene kan være et sted å starte å se på
+alternativer:
+
+- [`LangChain`][langchain] - Et rammeverk for å skape språkmodell-baserte
+applikasjoner.
+    - Har støtte for de fleste tilbydere og man kan gjennom dette rammeverket
+    kalle på Azure OpenAI og Vertex AI modeller.
+- API direkte
+    - [Azure OpenAI SDK][azure_sdk]
+    - [Vertex AI SDK][vertex_sdk]
+:::
+
 ## Valg av språkmodell
 
 Det er vanskelig å gi en sterke anbefalinger den ene eller den andre veien for
@@ -110,6 +134,9 @@ anbefalingene så må man teste og vurdere på bakgrunn av kunnskapsbasen man
 [vertex_ai_search]: https://cloud.google.com/enterprise-search?hl=nb
 [seb]: https://kennethenevoldsen.github.io/scandinavian-embedding-benchmark/
 [mteb]: https://huggingface.co/spaces/mteb/leaderboard
+[langchain]: https://www.langchain.com
+[azure_sdk]: https://learn.microsoft.com/en-us/fabric/data-science/ai-services/how-to-use-openai-sdk-synapse?tabs=python
+[vertex_sdk]: https://cloud.google.com/vertex-ai/docs/python-sdk/use-vertex-ai-python-sdk-ref
 
 [^1]: På Vertex AI har man mulighet for å bruke Antropics Claud 3 modeller som i
 mange sammenhenger er minst like gode som `GPT-4`.
