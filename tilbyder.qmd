@@ -31,6 +31,12 @@ med tidsbestemte anbefalinger.
 
 : Fordeler og ulemper ved valg av språkmodell.
 
+::: {.callout-tip}
+## GPT4 mot verden
+Selv om `GPT` modellene fra Azure OpenAI i dag _kanskje_ gir bedre svar vil det
+på veldig fort jevne seg ut[^1].
+:::
+
 ## Valg av embedding modell
 
 Embedding modell kanskje enda mer enn språkmodell må testes grundig før endelig
@@ -93,3 +99,5 @@ anbefalingene så må man teste og vurdere på bakgrunn av kunnskapsbasen man
 
 [azure_ai_search]: https://azure.microsoft.com/en-us/products/ai-services/ai-search
 [vertex_ai_search]: https://cloud.google.com/enterprise-search?hl=nb
+[^1]: På Vertex AI har man mulighet for å bruke Antropics Claud 3 modeller som i
+mange sammenhenger er minst like gode som `GPT-4`.
