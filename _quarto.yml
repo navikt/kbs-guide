@@ -17,7 +17,7 @@ book:
   date: now
   date-format: "DD.MM.YYYY"
   page-navigation: true
-  repo-url: https://github.com/navikt
+  repo-url: https://github.com/navikt/kbs-guide
   repo-actions: [edit, issue]
   twitter-card: true
   open-graph: true
