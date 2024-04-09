@@ -6,18 +6,20 @@ Kunnskapsbase Baserte Språkmodeller (_KBS_), oversatt fra [Retrieval-Augmented
 Generation][wiki_rag], er en teknikk for å inkorporere ekstern eller ny
 informasjon når en stor språkmodell skal generere svar. Uten _KBS_ vil en stor
 språkmodell generere svaret sitt basert på informasjon den plukket opp under
-opptrening. Bakdelen med dette er at det tar lang tid å trene opp samtidig som
-opptrening er en kostbar prosess. Med _KBS_ bruker vi deler av
-[kontekstvinduet][openai_token] (se @def-kontekst) til å fylle inn informasjon
-fra en kunnskapsbase. Dette gir språkmodellen tilgang til ekstra informasjon,
-man slipper å dele kunnskapsbasen med tilbyder av språkmodellen samtidig som det
-har vist seg å [redusere hallusinering[^2] for språkmodellen][rag_paper].
-Samtidig gjør det at kunnskapsbasen og språkmodellen kan utvikle seg uavhengig
-av hverandre og kunnskapsbasen kan oppdateres med ny informasjon uten at
-språkmodellen trenger å endre seg. Bakdelen med _KBS_ er at språkmodellen må
-kunne klare å hente ut informasjon fra konteksten, noe som kan være utfordrende
-med mindre språkmodeller, samtidig som vi bruker plass i kontekstvinduet som
-kunne vært brukt til chat-historikk.
+opptrening. Fordelen med dette er at informasjonen er innebygget i modellen og
+det er enklere for modellen å bruke kunnskapen (ikke zero-shot learning).
+Bakdelen med dette er at det tar lang tid å trene opp samtidig som opptrening er
+en kostbar prosess. Med _KBS_ bruker vi deler av [kontekstvinduet][openai_token]
+(se @def-kontekst) til å fylle inn informasjon fra en kunnskapsbase. Dette gir
+språkmodellen tilgang til ekstra informasjon, man slipper å dele kunnskapsbasen
+med tilbyder av språkmodellen samtidig som det har vist seg å [redusere
+hallusinering[^2] for språkmodellen][rag_paper].  Samtidig gjør det at
+kunnskapsbasen og språkmodellen kan utvikle seg uavhengig av hverandre og
+kunnskapsbasen kan oppdateres med ny informasjon uten at språkmodellen trenger å
+endre seg. Bakdelen med _KBS_ er at språkmodellen må kunne klare å hente ut
+informasjon fra konteksten, noe som kan være utfordrende med mindre
+språkmodeller, samtidig som vi bruker plass i kontekstvinduet som kunne vært
+brukt til chat-historikk.
 
 I @fig-rag-overview er det illustrert hvordan flyten går fra bruker stiller
 spørsmål til språkmodellen som benytter både spørsmålet samt relevante
@@ -48,7 +50,7 @@ kunnskapsbasen indekseres med en feature vektor av inneholde deres, generert fra
 en [embedding modell][wiki_embedding] (se @def-embedding). Merk at embedding
 modellen er uavhengig av språkmodellen i bruk. Ofte brukes en embedding modell
 som sammenfaller med språkmodellen, f.eks. brukes OpenAI sin embedding modell
-sammen med GPT-4, men det er absolutt ingen krav [^3].
+sammen med GPT-4, men det er absolutt ingen krav[^3].
 
 I @fig-rag-vector-database er det illustrert hvordan kunnskapsbasen og
 vektordatabasen henger sammen for å hente frem relevant kontekst for
@@ -83,8 +85,8 @@ til modellen, noe som også gir et insentiv for å begrense antall dokumenter.
 
 ## Hybridsøk
 
-Både [Azure][azure_ai_search] og [Vertex AI][vertex_ai_search] tilbyr egne
-databaser for søk sammen med språkmodeller. Argumentet for å bruke disse
+Både [Azure OpenAI][azure_ai_search] og [Vertex AI][vertex_ai_search] tilbyr
+egne databaser for søk sammen med språkmodeller. Argumentet for å bruke disse
 databasene sammenlignet med en renere vektordatabase er at både Azure og Vertex
 AI tilbyr forbedret søk, noe som er veldig viktig i en _KBS_ kontekst. Bakdelen
 med disse databasene er at man mister litt av kontrollen over databasen til
