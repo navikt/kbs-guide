@@ -31,10 +31,16 @@ alternativer:
 applikasjoner.
     - Har støtte for de fleste tilbydere og man kan gjennom dette rammeverket
     kalle på Azure OpenAI og Vertex AI modeller.
-- API direkte
+- API direkte - her binder man seg til en tilbyder, men man har fortsatt mer
+kontroll over hele applikasjonen
     - [Azure OpenAI SDK][azure_sdk]
     - [Vertex AI SDK][vertex_sdk]
 :::
+
+Hvilken løsning man ønsker å gå for bestemmes i stor grad av produktet som skal
+utvikles og hvem som er med å utvikle produktet. På samme måte som ellers i
+produktutvikling for NAV anbefales det at teamet tar en bevist avgjørelse med de
+fordeler og ulemper som følger med.
 
 ## Valg av språkmodell
 
