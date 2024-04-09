@@ -37,10 +37,10 @@ book:
     logo-alt: "Logo til NAV - Arbeids- og velferdsetaten"
     right:
       - icon: slack
-        href: https://nav-it.slack.com
+        href: https://nav-it.slack.com/archives/C04MRJ9SHM4
         aria-label: Slack kanal for kontakt
       - icon: people-fill
-        href: https://teamkatalogen.nav.no
+        href: https://teamkatalog.nav.no/team/415e12bc-61fb-4579-840a-c9307765f2fc
         aria-label: Ansvarlig team hos NAV
 
 format:
