@@ -18,3 +18,7 @@ Guiden antar at modellen skal kjøre på interne flater hos NAV og vil være
 skreddersydd for dette formålet. Forhåpentligvis kan guiden fungere som
 inspirasjon for andre systemer, samt gi en innføring i konseptet _KBS_ som kan
 gjenbrukes.
+
+# Endringslogg
+
+- **01.01.1970**: Første versjon publisert
