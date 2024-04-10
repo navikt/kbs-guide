@@ -1,1 +1,32 @@
 # Forberedelser
+
+## Providere tjenester på Azure OpenAI Services
+
+- Opprett et prosjekt på Azure OpenAI
+    - For å få tilgang til dataseksjonen sitt prosjekt kan man følge [veiledningen
+til dataseksjonen][azure_tilgang].
+- Opprett en ressursgruppe på Azure
+    - Gå til [portal.azure.com][azure_portal]
+    - Velg `Subscriptions` og deretter `Dataseksjonen` (eller prosjektet ditt)
+    - Under menyen på venstre side velg `Settings` -> `Resource groups`
+    - Velg `Create` og lag en ny gruppe
+        - **OBS!** Husk å velge region `Norway East`
+- Lag en ny ressurs av typen `Azure OpenAI`
+- Provider modell
+    - Velg ressursen (`Azure OpenAI`) du lagde i forrige steg
+    - Velg `Resource Management` -> `Model deployments`
+        - Dette tar deg til Azure OpenAI Studio
+    - Velg `Create new deployment` og sett opp ønskede ressurser
+        - For _KBS_ trenger man
+            - `text-embedding-ada-002`
+            - `gpt-4`
+
+## Providere tjenester på Vertex AI
+
+- For å komme i gang med Vertex AI trenger man et prosjekt på GCP og deretter
+[aktivere Vertex AI komponentene][vertex_tilgang].
+
+
+[azure_tilgang]: https://dataseksjonen.intern.nav.no/kompetanse/guider/openai_azure.html
+[vertex_tilgang]: https://cloud.google.com/vertex-ai/docs/start/cloud-environment
+[azure_portal]: https://portal.azure.com
