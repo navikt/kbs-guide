@@ -1,1 +1,85 @@
 # Kunnskapsbasen
+
+NAV Kontaktsenter (NKS) sitt oppslagsverk med rutiner og faglig innhold heter kunnskapsbasen. Kunnskapsbasen består av mange kunnskapsartikler.
+
+En kunnskapsartikkel er inneholder informasjon som veilederne i NAV Kontaktsenter kan dele med den som tar kontakt. Artiklene kan også inneholde interne rutiner og grensesnitt. Kunnskapsartiklene oppdateres jevnlig av NKS sine fagnettverk.
+
+For ansatte i NKS er kunnskapsbasen tilgjengelig gjennom Salesforce. For NAV-ansatte uten Salesforce-lisens er kunnskapsartiklene tilgjengelig via [datamarkedsplassen](https://data.intern.nav.no/quarto/e7b3e02a-0c45-4b5c-92a2-a6d364120dfb). 
+
+## Artikkeltyper
+Det finnes i hovedsak 3 artikkeltyper: 
+
+* Fagartikler, som gjelder for et spesifikt fagområde (f.eks. dagpenger, barnetrygd eller alderspensjon)  
+* Fellesartikler, som inneholder informasjon som er felles for alle fagområder, uavhengig av kø/tastevalg  
+* Interne rutiner    
+
+### Kunnskapsartikkel - fag 
+Her følger en oversikt over artikkelfeltene som finnes i en fag-artikkel.   
+(Merk: Ikke alle felter trenger å være utfylt)
+
+**Personbruker**  
+Her finnes informasjon som gjelder for henvendelser som i hovedsak gjelder personbrukere. I feltet "Til brukeren" finner veileder tekster med informasjon som kan deles i svar til brukeren.
+
+I feltet "Mer informasjon" finnes avklaringer og spesielle tilfeller som også kan deles med brukeren. Her kan det også finnes informasjon som kun er ment for ansatte i NAV Kontaktsenter, denne informasjonen er merket med "Informasjon til veileder i NAV Kontaktsenter".
+
+**Oversettelser**  
+Her ligger det eventuelt nynorsk og engelsk versjon av teksten som finnes under "Til brukeren". 
+
+**Arbeidsgiver**  
+Her finnes relevant informasjon for arbeidsgivere, primært til bruk for veiledere som besvarer arbeidsgivertelefonen. 
+
+I feltet "Til arbeidsgiver" finnes tekster med informasjon som kan deles med arbeidsgiver.
+
+I feltet "Mer informasjon" finnes avklaringer og spesielle tilfeller som også kan deles med arbeidsgiver. Her kan det også finnes informasjon som kun er ment ansatte i NAV Kontaktsenter, denne informasjonen er merket med "Informasjon til veileder i NAV Kontaktsenter".
+
+**Internasjonalt**  
+Her legges relevant informasjon for veiledere som besvarer henvendelser på tema "Internasjonalt".
+
+I feltet "Til brukeren" finnes tekster med informasjon som kan deles i svar til brukeren.
+
+I feltet "Mer informasjon" finnes avklaringer og spesielle tilfeller som også kan deles med brukeren. Her kan det også finnes informasjon som kun er ment for ansatte i NAV Kontaktsenter, denne informasjonen er merket med "Informasjon til veileder i NAV Kontaktsenter"
+
+**Lege og behandler**  
+Her finnes informasjon som gjelder for henvendelser som i hovedsak gjelder samhandlere. 
+
+I feltet "Til samhandler" finnes tekster med informasjon som kan deles i svar til den som tar kontakt med NKS.
+
+I feltet "Mer informasjon" finnes avklaringer og spesielle tilfeller som også kan deles med samhandler. Her kan det også finnes informasjon som kun er ment for ansatte i NAV Kontaktsenter, denne informasjonen er merket med "Informasjon til veileder i NAV Kontaktsenter".
+
+**Hvem gjør hva?**  
+Her er det satt opp en oversikt over hvem som gjør hva både internt og eksternt (der det er relevant). Er det grensesnitt opp mot NAV-kontoret f.eks., vil man kunne finne det her. 
+
+**Slik sender du oppgave**  
+Her vil man finne informasjon om hvor oppgave skal sendes og hvordan de skal merkes.
+
+**nav.no**  
+Her finner man relevante sider på nav.no. 
+
+**Ressurser**  
+Her samles andre relevante ressurser. Dette kan være andre kunnskapsartikler, sider på Navet eller kontaktsenterportalen, eksterne nettsider med mer. 
+
+**Lovverk**  
+Her finnes lenker til relevant lovverk.
+
+### Kunnskapsartikkel - felles  
+Fellesartiklene følger i stor grad samme struktur som fagartiklene, bare forenklet. Fremfor å ha komponentene `Personbruker`, `Arbeidsgiver`, `Internasjonalt` og `Lege og behandler` har man bare en bolk som kalles `Generelt`. Utenom det brukes de samme komponentene som nevnt i forrige avsnitt. 
+
+**Generelt**  
+I feltet "Til brukeren" finnes tekster med informasjon som kan deles i svar til brukeren.
+
+I feltet "Mer informasjon" finnes avklaringer og spesielle tilfeller som også kan deles med brukeren. Her kan det også finnes informasjon som kun er ment for ansatte i NAV Kontaktsenter, denne informasjonen er merket med "Informasjon til veileder i NAV Kontaktsenter".
+
+### Intern rutine   
+Det finnes også en artikkeltype som heter "Intern rutine" som ikke har noen underkomponenter. I disse artiklene legges interne rutiner som for eksempel rutinene NKS har for chat eller skriv til oss.
+
+## Artikkeltitler
+Kunnskapsartiklene er navngitt på følgende måte "Tema - Navn på artikkel" f.eks.:
+
+- AAP - Gjenopptak
+- Felles - Kontonummer
+- Sykepenger -  Egenmelding
+
+## Tema-tags
+Hver kunnskapsartikkel skal også ha én eller flere tema-tags (disse kalles for datacategories inne i Salesforce). Ofte vil det være samsvar mellom en artikkels tema som fremkommer av artikkeltittelen og tema-taggen, men ikke alltid.
+
+Tema-taggene kan også brukes til å vise at en artikkel handler om mer enn bare ett tema. For eksempel har artikkelen med titel 'Dagpenger DP - Dagpenger og sykepenger' både taggen `Dagpenger` og taggen `Sykepenger`. 
