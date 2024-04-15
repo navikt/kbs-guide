@@ -9,6 +9,9 @@ book:
     - name: Jørgen Nordmoen
       affiliation: NAV IT
       email: jorgen.halvorsen.nordmoen@nav.no
+    - name: Beate Sildnes
+      affiliation: NAV IT
+      email: beate.sildnes@nav.no
   publisher: "NAV - Arbeids- og velferdsetaten"
   image: "./assets/images/rag_overview.png"
   genre: "Guide, Tutorial, Veiledning"
