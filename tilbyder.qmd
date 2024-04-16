@@ -15,7 +15,7 @@ helheten av applikasjonen.
 ## Bruk av no/low-code løsninger
 
 Både Azure OpenAI og Vertex AI tilbyr i dag no/low-code løsninger for å komme i
-gang med et _KBS_ system. Disse løsningene gjør det raskt å komme i gang med
+gang med et *KBS* system. Disse løsningene gjør det raskt å komme i gang med
 utvikling og tilbyr ekstra funksjonalitet utover bare språkmodellen,
 vektordatabase og embedding modell. Bakdelen med disse no/low-code løsningene er
 selvsagt at man mister litt av kontrollen og låser seg helt til en tilbyder.
@@ -27,14 +27,11 @@ no/low-code løsningene til Azure OpenAI eller Vertex AI og vi kommer ikke til �
 liste opp alle her, men kanskje forslagene kan være et sted å starte å se på
 alternativer:
 
-- [`LangChain`][langchain] - Et rammeverk for å skape språkmodell-baserte
-applikasjoner.
-    - Har støtte for de fleste tilbydere og man kan gjennom dette rammeverket
-    kalle på Azure OpenAI og Vertex AI modeller.
-- API direkte - her binder man seg til en tilbyder, men man har fortsatt mer
-kontroll over hele applikasjonen
-    - [Azure OpenAI SDK][azure_sdk]
-    - [Vertex AI SDK][vertex_sdk]
+-   [`LangChain`](https://www.langchain.com) - Et rammeverk for å skape språkmodell-baserte applikasjoner.
+    -   Har støtte for de fleste tilbydere og man kan gjennom dette rammeverket kalle på Azure OpenAI og Vertex AI modeller.
+-   API direkte - her binder man seg til en tilbyder, men man har fortsatt mer kontroll over hele applikasjonen
+    -   [Azure OpenAI SDK](https://learn.microsoft.com/en-us/fabric/data-science/ai-services/how-to-use-openai-sdk-synapse?tabs=python)
+    -   [Vertex AI SDK](https://cloud.google.com/vertex-ai/docs/python-sdk/use-vertex-ai-python-sdk-ref)
 :::
 
 Hvilken løsning man ønsker å gå for bestemmes i stor grad av produktet som skal
@@ -61,11 +58,14 @@ med tidsbestemte anbefalinger.
 
 : Fordeler og ulemper ved valg av språkmodell.
 
-::: {.callout-tip}
+::: callout-tip
 ## GPT4 mot verden
-Selv om `GPT` modellene fra Azure OpenAI i dag _kanskje_ gir bedre svar vil det
-på veldig fort jevne seg ut[^1].
+Selv om `GPT` modellene fra Azure OpenAI i dag *kanskje* gir bedre svar vil det
+på veldig fort jevne seg ut[^tilbyder-1].
 :::
+
+[^tilbyder-1]: På Vertex AI har man mulighet for å bruke Antropics Claud 3
+modeller som i mange sammenhenger er minst like gode som `GPT-4`.
 
 ## Valg av embedding modell
 
@@ -92,17 +92,20 @@ Norsk godt.
 Det finnes flere benchmark-er som sammenligner forskjellige modeller som gir et
 godt utgangspunkt før man velger modell.
 
-- [Skandinavisk modell sammenligning][seb]
-- [Hugging Face embedding leaderboard][mteb]
+- [Skandinavisk modell
+sammenligning](https://kennethenevoldsen.github.io/scandinavian-embedding-benchmark/)
+- [Hugging Face embedding
+leaderboard](https://huggingface.co/spaces/mteb/leaderboard)
 :::
 
 ## Valg av vektordatabase
 
 Det mest interessante valget kommer når man skal vurdere vektordatabase. For
 vektordatabase har man både mulighet til å velge fra en av tilbydere som
-allerede er nevnt, [Azure AI Search][azure_ai_search] og [Vertex AI
-Search][vertex_ai_search], men man har også mulighet for å velge en
-"self-hosted" løsning med PostgreSQL.
+allerede er nevnt, [Azure AI
+Search](https://azure.microsoft.com/en-us/products/ai-services/ai-search) og
+[Vertex AI Search](https://cloud.google.com/enterprise-search?hl=nb), men man
+har også mulighet for å velge en "self-hosted" løsning med PostgreSQL.
 
 ::: {.callout-note collapse="true"}
 ## *KBS* i NAV
@@ -133,16 +136,9 @@ anbefalingene så må man teste og vurdere på bakgrunn av kunnskapsbasen man
 |                         | -   Enklere å kombinere tabeller for applikasjonen | -   Krever mer i oppstartfasen               |
 |                         | -   Mer kontroll over database og kostnader        | -   Krever kode                              |
 +-------------------------+----------------------------------------------------+----------------------------------------------+
+| BigQuery                | -   Enkel tilgang for NAV                          | -   Låser til Google GCP                     |
+|                         | -   Enkelt å komme i gang med                      |                                              |
+|                         | -   God nok ytelse for mindre kunnskapsbaser       |                                              |
++-------------------------+----------------------------------------------------+----------------------------------------------+
 
 : Fordeler og ulemper med vektordatabaser.
-
-[azure_ai_search]: https://azure.microsoft.com/en-us/products/ai-services/ai-search
-[vertex_ai_search]: https://cloud.google.com/enterprise-search?hl=nb
-[seb]: https://kennethenevoldsen.github.io/scandinavian-embedding-benchmark/
-[mteb]: https://huggingface.co/spaces/mteb/leaderboard
-[langchain]: https://www.langchain.com
-[azure_sdk]: https://learn.microsoft.com/en-us/fabric/data-science/ai-services/how-to-use-openai-sdk-synapse?tabs=python
-[vertex_sdk]: https://cloud.google.com/vertex-ai/docs/python-sdk/use-vertex-ai-python-sdk-ref
-
-[^1]: På Vertex AI har man mulighet for å bruke Antropics Claud 3 modeller som i
-mange sammenhenger er minst like gode som `GPT-4`.
