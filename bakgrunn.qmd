@@ -83,7 +83,7 @@ viktig at kunnskapsbasen har høy [dekning (eller sensitivitet)][wiki_recall_nn]
 De fleste tilbydere av språkmodeller tar også betalt for antall token i input
 til modellen, noe som også gir et insentiv for å begrense antall dokumenter.
 
-## Hybridsøk
+### Hybridsøk
 
 Både [Azure OpenAI][azure_ai_search] og [Vertex AI][vertex_ai_search] tilbyr
 egne databaser for søk sammen med språkmodeller. Argumentet for å bruke disse
@@ -108,6 +108,23 @@ I Azure AI Search kan man selv styre hvordan databasen skal operere. Ved bruk av
 riktig søk og i NAV sammenheng vurder andre databaser hvis bare `similarity`
 benyttes.
 :::
+
+## Embedding modell
+
+Et konsept som ofte blir brukt i forbindelse med *KBS* og språkmodeller er
+såkalte embedding modeller (se @def-embedding). En embedding modell har som
+oppgave å ta inn et ord eller en tekst og returnere en vektor som representerer
+den semantiske meningen til inputen. Embedding modeller er ikke noe nytt
+innenfor språkteknologi, men det brukes ofte sammen med vektordatabaser slik at
+vektorene representerer det semantiske innholdet til en tekst, som beskrevet i
+forrige seksjon. Ved å ha en abstrakt representasjon av det semantiske innholdet
+vil man kunne sammenligne, se på forskjeller eller gjøre andre operasjoner på
+vektorene.
+
+Et viktig poeng med embedding modeller er at de kan brukes på mer enn bare
+tekst, multimodale modeller kan også representere bilder, video og lyd. Hvis
+samme modell kan tolke flere forskjellige media kan man så bruke vektorene
+produsert for å sammenligne innholdet i de forskjellige media.
 
 [wiki_rag]: https://en.wikipedia.org/wiki/Prompt_engineering#Retrieval-augmented_generation
 [openai_token]: https://platform.openai.com/docs/introduction/tokens
