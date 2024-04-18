@@ -25,6 +25,7 @@ til dataseksjonen][azure_tilgang].
 
 - For å komme i gang med Vertex AI trenger man et prosjekt på GCP og deretter
 [aktivere Vertex AI komponentene][vertex_tilgang].
+    - Vertex AI komponentene også aktiveres med: `gcloud services enable aiplatform.googleapis.com`
 
 
 [azure_tilgang]: https://dataseksjonen.intern.nav.no/kompetanse/guider/openai_azure.html
