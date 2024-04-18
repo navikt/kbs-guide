@@ -1,4 +1,4 @@
-# Kunnskapsbasen
+# NKS kunnskapsbasen {#sec-nks-kunnskapsbase}
 
 NAV Kontaktsenter (NKS) sitt oppslagsverk med rutiner og faglig innhold heter kunnskapsbasen. Kunnskapsbasen består av mange kunnskapsartikler.
 

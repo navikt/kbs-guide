@@ -29,7 +29,11 @@ book:
     - bakgrunn.qmd
     - tilbyder.qmd
     - forberedelser.qmd
-    - kunnskapsbasen.qmd
+    - part: kunnskapsbasen/intro.qmd
+      chapters: 
+        - kunnskapsbasen/nks.qmd
+        - kunnskapsbasen/vektordatabase.qmd
+        - kunnskapsbasen/tips.qmd
     - modell.qmd
   appendices:
     - kost.qmd
