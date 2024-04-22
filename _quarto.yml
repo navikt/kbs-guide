@@ -30,7 +30,7 @@ book:
     - tilbyder.qmd
     - forberedelser.qmd
     - part: kunnskapsbasen/intro.qmd
-      chapters: 
+      chapters:
         - kunnskapsbasen/nks.qmd
         - kunnskapsbasen/vektordatabase.qmd
         - kunnskapsbasen/tips.qmd
