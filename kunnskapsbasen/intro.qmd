@@ -1,6 +1,6 @@
 # Kunnskapsbase
 
-Som beskrevet i [Seksjon @sec-bakgrunn] så er kunnskapsbasen, både den originale
+Som beskrevet i [Kapittel @sec-bakgrunn] så er kunnskapsbasen, både den originale
 og den vi generere for *KBS* systemet, en av de viktigste komponentene som vi
 trenger. Hvis vi ikke klarer å hente frem relevant informasjon til språkmodellen
 vil den ikke kunne gi relevante svar og sannsynligheten for hallusinasjoner
