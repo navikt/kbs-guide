@@ -35,6 +35,7 @@ book:
         - kunnskapsbasen/vektordatabase.qmd
         - kunnskapsbasen/tips.qmd
     - modell.qmd
+    - fremtid.qmd
   appendices:
     - kost.qmd
     - arkitektur.qmd

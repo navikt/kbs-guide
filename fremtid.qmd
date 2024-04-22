@@ -1,0 +1,29 @@
+# Veien videre {.sec-videre}
+
+Når systemet er oppe og kjører er det naturlig å begynne å tenke på forbedringer
+og utvidelser. Akkurat hvilke utvidelser man ønsker vil være avhengig av domenet
+og teamet rundt. Vi vil allikevel prøve å dokumentere noen av utvidelsene vi har
+gjort samt lenke videre til andre tips for forbedringer.
+
+## Forbedringer
+
+🚧 **Arbeids med** 🚧
+
+## Nyttige lenker
+
+- [`LangChain` RAG from
+Scratch](https://github.com/langchain-ai/rag-from-scratch)
+    - Gir en oversikt over mulige forbedringer og forslag til hvordan forbedre
+    *KBS* systemet.
+- [Ragas](https://docs.ragas.io/en/stable/index.html)
+    - Rammeverk for å evaluere *KBS* systemet.
+
+## Forskningsartikler
+
+- [RAFT: Adapting Language Model to Domain Specific
+RAG](https://techcommunity.microsoft.com/t5/ai-ai-platform-blog/raft-a-new-way-to-teach-llms-to-be-better-at-rag/ba-p/4084674)
+    - Beskriver hvordan man kan forbedre *KBS* ved å fintune en enklere modell
+    på kunnskapsbasen.
+    - Fordelen er at man kan bruke en enklere modell enn GPT-4, som vil være
+    både billigere og raskere til å svare.
+    - Mulig vei til lokale modeller på NAV.
