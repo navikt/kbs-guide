@@ -10,7 +10,7 @@ til dataseksjonen][azure_tilgang].
     - Velg `Subscriptions` og deretter `Dataseksjonen` (eller prosjektet ditt)
     - Under menyen på venstre side velg `Settings` -> `Resource groups`
     - Velg `Create` og lag en ny gruppe
-        - **OBS!** Husk å velge region `Norway East`
+        - **OBS!** Husk å velge region `Norway East` eller `Sweden Central`
 - Lag en ny ressurs av typen `Azure OpenAI`
 - Provider modell
     - Velg ressursen (`Azure OpenAI`) du lagde i forrige steg
