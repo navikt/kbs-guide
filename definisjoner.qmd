@@ -39,6 +39,19 @@ GKI er en samlebetegnelse for metoder som bruker store nevrale nettverk til å
 generere media. [Språkmodeller @def-sprakmodell] er et eksempel på GKI.
 :::
 
+::: {#def-prompt}
+## Prompt (eller ledetekst)
+Er teksten vi gir med oppgave til språkmodellen. Den kan referere til både
+systemteksten vi designer, men også spørsmålet til brukeren.
+:::
+
+::: {#def-prompt-engineer}
+## Prompt engineer
+Er en betegnelse på arbeidet med å designe [ledeteksten @def-prompt] til en
+språkmodell.  Betegnelsen kan brukes både om det tekniske arbeidet, men kan også
+brukes om måten brukere tilpasser spørsmålene sin for å oppnå ønsket output.
+:::
+
 ::: {#def-sprakmodell}
 ## Språkmodell
 I denne veiledningen brukes [språkmodell][snl_sprakmodell] og [Store

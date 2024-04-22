@@ -1,1 +1,110 @@
 # Oppsett av vektordatabase {#sec-oppsett-vektordatabase}
+
+Som beskrevet i @sec-tilbyder finnes det flere mulighet når man velger
+vektordatabase. I denne seksjonen vil vi detaljere hvordan vi satt opp BigQuery,
+PostgreSQL og Azure AI Search som vektordatabaser. I neste seksjon,
+@sec-tips-testing, vil vi gå gjennom hvordan vi sammenlignet vektordatabasene
+for å lande én tilbyder.
+
+Vi kommer til å anta at den originale kunnskapsbasen allerede eksisterer og at
+den er mulig å hente inn programmatisk. For NKS sin kunnskapsbase konverterte vi
+artiklene til Markdown før vi begynte å behandle dem. Dette ble gjort for å
+redusere antall ekstra tegn (mao. HTML tag-er), men samtidig beholde strukturer
+som overskrifter. Et enklere format kan hjelpe språkmodellen til å enklere hente
+ut direkte sitater, det blir mindre jobb med å rense output og det kan gjør det
+enklere å [prompt-engineer @def-prompt-engineer ] senere.
+
+::: {.callout-tip collapse="true"}
+## Konvertere til et annet format
+Hvis kunnskapsbasen er tilgjengelig som filer kan
+[`pandoc`](https://pandoc.org/) være et godt verktøy å bruke for å konvertere
+mellom formater.
+:::
+
+Videre kommer vi til å bruke [`LangChain`](https://www.langchain.com/) som
+rammeverk for å interagere med dokumenter, vektordatabasen og språkmodellen.
+Bruk av `LangChain` er valgfritt, men det kan hjelpe med å komme i gang.
+Teknikkene vi går gjennom under vil være de samme uavhengig av rammeverk.
+
+## BigQuery og PostgreSQL
+
+For både BigQuery og PostgreSQL må man gjøre flere ting manuelt sammenlignet med
+Azure AI Search. `LangChain` kan hjelpe oss med å sette opp vektordatabasen og
+ordne riktig indeksering, men for å laste opp dokumenter må vi manuelt dele de
+opp slik at teksten ikke blir for stor for embedding modellen.
+
+### Forberede `Document`-er
+
+`LangChain` organiserer kunnskapsbasene sine rundt `Document` som er et dokument
+med tekst, `page_content`, og metadata. Som en første tilnærming leser vi bare
+inn innholdet i et `Document` og legger ved all relevant metadata som vi har fra
+den originale kunnskapsbasen.
+
+```python
+client = bigquery.Client(project=project)
+results = client.query(sql).result()
+
+docs: list[Document] = []
+for row in results:
+    content = row["Content"]
+    metadata = {k: v for k, v in row.items() if k != "Content"}
+    docs.append(Document(page_content=content, metadata=metadata))
+```
+
+### Dele opp `Document`-er
+
+Fordi artikler i kunnskapsbasen kan være større enn det embedding modellen
+klarer å håndtere må vi dele opp dokumentene i flere små dokumenter. `LangChain`
+støtter dette rett ut av boksen og [tilbyr flere måter å dele opp
+på][langchain_text_splitters]. Den vanligste måten å dele opp er ved å rekursivt
+prøve å dele dokumentet i en gitt størrelse, med eller uten overlapp.
+
+::: {.callout-note collapse="true"}
+## Størrelse på split
+Det er vanskelig å komme med en klar anbefaling på størrelsen på dokumentene. På
+den ene siden er man begrenset av embedding modellen, men å prøve å fylle dette
+vinduet er heller ikke den beste løsningen. Vi ønsker å dele dokumentet inn i
+underdeler som er semantisk forskjellige slik at vi kan hente de minste tekstene
+vi kan når vi gir det videre til språkmodellen.
+
+To vanlige konfigurasjoner er enten `500` tegn uten overlapp eller `1000` tegn
+med overlapp på `200`. Hvilken man velger burde baseres på testing.
+:::
+
+```python
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000, chunk_overlap=200,
+)
+splits: list[Document] = text_splitter.split_documents(docs)
+```
+
+Metadata på det originale dokumentet dupliseres så til hvert nye dokument som
+genereres slik at vi har mulighet til å hente ut den samme metadata. Husk derfor
+på å ha en form for ID på original dokumentene slik at man kan identifisere
+splitter som hører sammen.
+
+### Opplasting til vektordatabase
+
+Tilslutt kan vi laste opp til vektordatabasen. Litt avhengig av hvordan man
+oppretter `LangChain` vektordatabasen kan man enten laste opp ved
+`add_documents` eller `from_documents`.
+
+```python
+db = BigQueryVectorSearch.from_documents(splits, AzureOpenAIEmbeddings())
+```
+
+Både BigQuery og PostgreSQL integrasjonen til `LangChain` vil opprette en tabell
+som ser omtrent slik ut:
+
+| ID | Tekst | Embedding vektor | Metadata |
+|----|-------|------------------|----------|
+| UUID | STRING | FLOAT REPEATED | JSON |
+
+Dette er et greit utgangspunkt, hvor man enkelt kan søke med i embedding
+vektorene, men det er litt begrensende når det kommer til å søke i metadata. Det
+burde derfor vurderes å bruke BigQuery eller PostgreSQL direkte og heller
+kopiere fra `LangChain` integrasjonen som inspirasjon.
+
+## Azure AI Search
+
+[langchain_text_splitters]: https://python.langchain.com/docs/modules/data_connection/document_transformers/
