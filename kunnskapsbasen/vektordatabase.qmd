@@ -1,6 +1,6 @@
 # Oppsett av vektordatabase {#sec-oppsett-vektordatabase}
 
-Som beskrevet i @sec-tilbyder finnes det flere mulighet når man velger
+Som beskrevet i @sec-tilbyder finnes det flere muligheter når man velger
 vektordatabase. I denne seksjonen vil vi detaljere hvordan vi satt opp BigQuery,
 PostgreSQL og Azure AI Search som vektordatabaser. I neste seksjon,
 @sec-tips-testing, vil vi gå gjennom hvordan vi sammenlignet vektordatabasene
@@ -93,6 +93,8 @@ oppretter `LangChain` vektordatabasen kan man enten laste opp ved
 db = BigQueryVectorSearch.from_documents(splits, AzureOpenAIEmbeddings())
 ```
 
+---
+
 Både BigQuery og PostgreSQL integrasjonen til `LangChain` vil opprette en tabell
 som ser omtrent slik ut:
 
@@ -100,10 +102,13 @@ som ser omtrent slik ut:
 |----|-------|------------------|----------|
 | UUID | STRING | FLOAT REPEATED | JSON |
 
-Dette er et greit utgangspunkt, hvor man enkelt kan søke med i embedding
+: Illustrasjon av tabellen som `LangChain` setter opp på BigQuery og PostgreSQL.
+
+Dette er et greit utgangspunkt, hvor man enkelt kan søke med embedding
 vektorene, men det er litt begrensende når det kommer til å søke i metadata. Det
 burde derfor vurderes å bruke BigQuery eller PostgreSQL direkte og heller
-kopiere fra `LangChain` integrasjonen som inspirasjon.
+kopiere fra `LangChain` integrasjonen som inspirasjon. Da har man mulighet til å
+sette opp flere kolonner som man enklere kan benytte i søket.
 
 ## Azure AI Search
 
