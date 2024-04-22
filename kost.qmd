@@ -1,1 +1,42 @@
 # Kostnader
+
+For en sammensatt applikasjon som et *KBS* system vil kostnader kunne fordele
+seg på flere tilbydere, spesielt med tanke på valgene man tar av komponenter, se
+@sec-tilbyder. Oversikten under er ikke uttømmende, men prøver å peke i riktig
+retning.
+
+::: {.callout-important}
+Den desidert største kostnaden for et *KBS* system vil være språkmodellen, det
+er derfor viktig å ha god oversikt over kostnaden fra valgt tilbyder.
+:::
+
+## NAIS
+
+For kostnader på NAIS plattformen se [NAIS
+Console](https://console.nav.cloud.nais.io/). Velg deretter ønsket team og trykk
+på `Cost` i menyen på venstreside.
+
+![Skjermskudd av NAIS Console når `Cost` er valgt for et gitt
+prosjekt.](./assets/images/nais_console_cost.png)
+
+## Azure
+
+For kostnader på Azure kan man aksessere
+[portal.azure.com](https://portal.azure.com) og under `All services` velge
+`Management and governance` på venstreside og deretter `Cost Management`.
+
+For en umiddelbar oversikt kan man velge `Cost analysis`, under `Cost
+Management` i menyen på venstreside, og så trykke på `Accumulated costs`.
+
+![Skjermskudd av Azure Portal som viser hvor man kan trykke for å se akkumulert
+kostnad for en ressurs.](./assets/images/azure_cost_management.png)
+
+## GCP
+
+For kostnader på GCP kan må gå til
+[console.cloud.google.com](https://console.cloud.google.com), passe på at rett
+team er valgt i nedtrekksmenyen øverst og deretter velge `Billing` på forsiden.
+
+![Skjermskudd av GCP console som viser, i blått, hvor man kan velge team og hvor
+man skal trykke for å komme til kostnadssiden, markert i
+rødt.](./assets/images/gcp_billing.png)
