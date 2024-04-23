@@ -136,9 +136,12 @@ anbefalingene så må man teste og vurdere på bakgrunn av kunnskapsbasen man
 |                         | -   Enklere å kombinere tabeller for applikasjonen | -   Krever mer i oppstartfasen               |
 |                         | -   Mer kontroll over database og kostnader        | -   Krever kode                              |
 +-------------------------+----------------------------------------------------+----------------------------------------------+
-| BigQuery                | -   Enkel tilgang for NAV                          | -   Låser til Google GCP                     |
+| BigQuery                | -   Enkel tilgang for NAV                          | -   Låser til Google GCP [^2]                |
 |                         | -   Enkelt å komme i gang med                      |                                              |
 |                         | -   God nok ytelse for mindre kunnskapsbaser       |                                              |
 +-------------------------+----------------------------------------------------+----------------------------------------------+
 
 : Fordeler og ulemper med vektordatabaser.
+
+[^2]: BigQuery er en proprietær løsning fra Google og er ikke nødvendigvis
+overførbar til andre SQL løsninger.
