@@ -14,14 +14,16 @@ Azure.
 ::: {#def-embedding}
 ## Embedding
 En embedding er en vektor som forsøker å representere den semantiske meningen
-til innhold (kan være tekst, et bilde, en video eller lyd).
+til media som kan være tekst, bilde, video eller lyd. Vi snakker ofte om
+embedding modeller som er modeller som skaper vektorene som sin output.
 :::
 
 ::: {#def-kontekst}
 ## Kontekst
 Kontekst eller kontekstvindu refererer til teksten eller inputen man gir en
 Språkmodell (@def-sprakmodell) for å generere ny output. Størrelsen på
-konteksten er begrenset av modellen og kan ikke vokse uendelig.
+konteksten er begrenset av modellen og man kan ikke overskride den gitte
+størrelsen.
 :::
 
 ::: {#def-ki}
