@@ -10,6 +10,12 @@ Den desidert største kostnaden for et *KBS* system vil være språkmodellen, de
 er derfor viktig å ha god oversikt over kostnaden fra valgt tilbyder.
 :::
 
+::: {.callout-caution}
+Ved bruk av Azure AI Search eller Vertex AI Search tilkommer det en ekstra
+kostnad for søk som løper kontinuerlig, da man betaler for at tilbyder skal
+holde en virtuell maskin kjørende for søk.
+:::
+
 ## NAIS
 
 For kostnader på NAIS plattformen se [NAIS
