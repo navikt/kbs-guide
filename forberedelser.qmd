@@ -7,10 +7,11 @@
 til dataseksjonen][azure_tilgang].
 - Opprett en ressursgruppe på Azure
     - Gå til [portal.azure.com][azure_portal]
-    - Velg `Subscriptions` og deretter `Dataseksjonen` (eller prosjektet ditt)
+    - Velg `Subscriptions` og deretter `nks` (eller prosjektet ditt)
     - Under menyen på venstre side velg `Settings` -> `Resource groups`
-    - Velg `Create` og lag en ny gruppe
-        - **OBS!** Husk å velge region `Norway East` eller `Sweden Central`
+    - Velg `Create` og lag en ny gruppe 
+        - **OBS!** Husk å velge region `Norway East` eller `Sweden Central`   
+        (`Sweden Central` har i skrivende stund tilgang på flere modeller enn `Norway East`)
 - Lag en ny ressurs av typen `Azure OpenAI`
 - Provider modell
     - Velg ressursen (`Azure OpenAI`) du lagde i forrige steg
@@ -20,6 +21,18 @@ til dataseksjonen][azure_tilgang].
         - For _KBS_ trenger man
             - `text-embedding-ada-002`
             - `gpt-4`
+
+### Providere en Azure Search instans
+Dersom man videre vil bruke Azure Search som vektordatabase setter man opp dette slik:
+
+- Fra [portal.azure.com][azure_portal] lager du en ny ressurs av typen `Azure AI Search`
+- Angi `Subscription` og `Resource group`, gi instansen et navn, og sett region (bruk samme region som du anga for ressursgruppen).
+- Velg `Pricing tier`.   
+        - **OBS!** Default-nivået `Standard` kan fort være mer enn du behøver. Om du ikke har veldig store datamengder bør du nedgradere til `Basic` eller `Free` av kostnadshensyn. 
+- Velg `Review + create` og bekreft med `Create`.
+
+For beskrivelse av hvordan man laster opp dokumenter til en Azure Search Index, se @sec-oppsett-vektordatabase.
+    
 
 ## Providere tjenester på Vertex AI
 

@@ -23,15 +23,13 @@ mellom formater.
 
 Videre kommer vi til å bruke [`LangChain`](https://www.langchain.com/) som
 rammeverk for å interagere med dokumenter, vektordatabasen og språkmodellen.
-Bruk av `LangChain` er valgfritt, men det kan hjelpe med å komme i gang.
-Teknikkene vi går gjennom under vil være de samme uavhengig av rammeverk.
+Bruk av `LangChain` er valgfritt, men det kan hjelpe med å komme i gang. 
+I vårt tilfelle har vi benyttet `LangChain` for å sette opp vektordatabasene og
+ordne riktig indeksering.   
 
-## BigQuery og PostgreSQL
-
-For både BigQuery og PostgreSQL må man gjøre flere ting manuelt sammenlignet med
-Azure AI Search. `LangChain` kan hjelpe oss med å sette opp vektordatabasen og
-ordne riktig indeksering, men for å laste opp dokumenter må vi manuelt dele de
+For å laste opp dokumenter til vektordatabasene må vi først dele de
 opp slik at teksten ikke blir for stor for embedding modellen.
+Teknikkene vi går gjennom under vil være de samme uavhengig av rammeverk.
 
 ### Forberede `Document`-er
 
@@ -95,21 +93,24 @@ db = BigQueryVectorSearch.from_documents(splits, AzureOpenAIEmbeddings())
 
 ---
 
-Både BigQuery og PostgreSQL integrasjonen til `LangChain` vil opprette en tabell
+Både BigQuery, PostgreSQL og Azure Search integrasjonen til `LangChain` vil opprette en tabell
 som ser omtrent slik ut:
 
 | ID | Tekst | Embedding vektor | Metadata |
 |----|-------|------------------|----------|
 | UUID | STRING | FLOAT REPEATED | JSON |
 
-: Illustrasjon av tabellen som `LangChain` setter opp på BigQuery og PostgreSQL.
+: Illustrasjon av tabellen som `LangChain` setter opp som default.
 
 Dette er et greit utgangspunkt, hvor man enkelt kan søke med embedding
-vektorene, men det er litt begrensende når det kommer til å søke i metadata. Det
-burde derfor vurderes å bruke BigQuery eller PostgreSQL direkte og heller
+vektorene, men det er litt begrensende når det kommer til å søke i metadata. 
+
+**BigQuery eller PostgreSQL**  
+Det burde vurderes å bruke BigQuery eller PostgreSQL direkte og heller
 kopiere fra `LangChain` integrasjonen som inspirasjon. Da har man mulighet til å
 sette opp flere kolonner som man enklere kan benytte i søket.
 
-## Azure AI Search
-
-[langchain_text_splitters]: https://python.langchain.com/docs/modules/data_connection/document_transformers/
+**Azure AI Search**  
+Når `AzureSearch`- vektordatabasen opprettes med `LangChain` kan man samtidig angi 
+tilleggsfelter som det kan filtreres etter og/eller søkes i.  I vårt oppsett har lagt til
+hvert metadata-felt som egne kolonner i Azure-indexen. 
