@@ -12,11 +12,13 @@ prøve å benytte en språkmodell til å lage spørsmål til kunnskapsbasen. Det
 være så enkelt som å be språkmodellen lage et spørsmål som bare kan besvares av
 teksten som kommer sammen med spørsmålet. En bakdel med dette er jo at man ikke
 nødvendigvis kan si om spørsmålene er gode uten ekspertkunnskap, men samtidig så
-vil det være identiske spørsmål som må besvares så alle burde ha mulighet til å
-gjøre det like bra eller dårlig.
+vil det være identiske spørsmål som må besvares, så alle vektordatabasene burde
+ha lik mulighet til å gjøre det bra eller dårlig.
 
 I vårt arbeid med NKS Digital Assistent har vi gjort en sammenligning basert på
 syntetiske spørsmål.
 
-- Fremgangsmåte for å generere spørsmål (ekstern datafortelling)
-- Sammenligning av forskjellige vektordatabaser på NKS sin kunnskapsbase (ekstern datafortelling)
+- [Fremgangsmåte for å generere spørsmål (ekstern
+datafortelling)](https://data.ansatt.nav.no/story/98cec0de-b872-4713-a56f-9bdb49112345/index.html)
+- (Kommer) Sammenligning av forskjellige vektordatabaser på NKS
+sin kunnskapsbase (ekstern datafortelling)
