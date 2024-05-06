@@ -1,1 +1,22 @@
 # Tips og testing {#sec-tips-testing}
+
+For å vurdere vektordatabasen må man opprette et set med spørsmål og
+artikkelsvar fra kunnskapsbasen og sammenligne hvor godt hver database gjør det.
+Dette er dog tidkrevende og kan være vanskelig å gjøre uten ekspertkompetanse på
+den originale kunnskapsbasen.
+
+## Syntetiske spørsmål
+
+For å komme rundt begrensningen med ekspertkunnskap på kunnskapsbasen kan man
+prøve å benytte en språkmodell til å lage spørsmål til kunnskapsbasen. Dette kan
+være så enkelt som å be språkmodellen lage et spørsmål som bare kan besvares av
+teksten som kommer sammen med spørsmålet. En bakdel med dette er jo at man ikke
+nødvendigvis kan si om spørsmålene er gode uten ekspertkunnskap, men samtidig så
+vil det være identiske spørsmål som må besvares så alle burde ha mulighet til å
+gjøre det like bra eller dårlig.
+
+I vårt arbeid med NKS Digital Assistent har vi gjort en sammenligning basert på
+syntetiske spørsmål.
+
+- Fremgangsmåte for å generere spørsmål (ekstern datafortelling)
+- Sammenligning av forskjellige vektordatabaser på NKS sin kunnskapsbase (ekstern datafortelling)
