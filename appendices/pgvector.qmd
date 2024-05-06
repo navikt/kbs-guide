@@ -1,0 +1,71 @@
+# Oppsett av `pgvector` på NAIS
+
+Det er mulig å bruke PostgreSQL på GCP (kalt CloudSQL) som en vektordatabase som
+en del av en [NAIS applikasjon][nais_postgres]. For å gjøre dette må man først
+be om en PostgreSQL database i NAIS konfigurasjonen, før man trenger å skru på
+[`pgvector` som er en utvidelse til PostgreSQL][pgvector] som tilfører vektorsøk
+funksjonalitet.
+
+## NAIS konfigurasjon
+
+Det anbefales å følge veiledningen til [NAIS om oppsett av
+PostgreSQL][nais_postgres], men vi gjenskaper de viktigste momentene her.
+
+For at NAIS skal providere en PostgreSQL database trenger man å opprette en
+`.nais/app.yaml` fil og be om følgende.
+
+```yaml
+spec:
+  gcp:
+    sqlInstances:
+      - type: POSTGRES_15
+        databases:
+          - name: <Ønsket navn på databasen>
+            envVarPrefix: <Ønsket prefix>
+```
+
+Deretter må man [deploy-e en applikasjon gjennom NAIS][nais_deploy] som så vil
+opprette databasen. Når dette er gjort vil man kunne inspisere databasen i NAIS
+Console og det burde se omtrent slik ut:
+
+![Skjermbilde av NAIS Console som viser database
+informasjon.](../assets/images/nais_postgres.png)
+
+## Skru på `pgvector`
+
+På CloudSQL så kan ikke en hvilken som helst bruker aktivere utvidelser. Det må
+derfor gjøres litt manuelt arbeid før man kan bruke databasen som en
+vektordatabase.
+
+- For å skru på `pgvector` manuelt må man følge lenken fra NAIS Console til `SQL
+Instance` som tar oss til GCP console.
+- Deretter må man gå til `Users` i menyen på venstreside, her er det en oversikt
+over brukere som har tilgang på databasen hvor `<Navn på din applikasjon>` er
+brukeren som NAIS gir tilgang til, mens `postgres` er en automatisk opprettet
+bruker fra GCP.
+    - Det er `postgres` brukeren vi må benytte for å kunne skru på `pgvector`.
+    - Velg så hamburgermenyen bak `postgres` og velg `Change password`.
+- Når dette er gjort kan vi gå til `Cloud SQL Studio`, også i menyen på
+venstreside. Her velger man så databasen man satt opp med NAIS og logger inn med
+`postgres` brukeren.
+- Velg så `Create extension` i hamburgermenyen bak `Extensions` og skriv inn
+`CREATE EXTENSION IF NOT EXISTS vector;` som vist under. Når denne spørringen er
+kjørt burde det dukke opp i Cloud SQL Studio at én utvidelse er aktivert.
+
+![Skjermbilde av Cloud SQL Studio hvor det vises hvordan man skrur på `pgvector`
+med et SQL uttrykk.](../assets/images/gcp_enable_pgvector.png)
+
+## Videre arbeid
+
+Når de to stegene over er fullført kan man så benytte CloudSQL som en
+vektordatabase. Neste skritt kan være å [koble til lokalt][nais_postgres_local]
+og sjekke at alt fungerer som normalt.
+
+For `LangChain` kan man nå benytte [`PGVector`][langchain_pgvector] klassen som
+grunnlag for vektordatabasen.
+
+[nais_deploy]: https://docs.nais.io/how-to-guides/github-action/
+[nais_postgres]: https://docs.nais.io/how-to-guides/persistence/postgres/
+[nais_postgres_local]: https://docs.nais.io/how-to-guides/persistence/postgres/#personal-database-access
+[pgvector]: https://github.com/pgvector/pgvector
+[langchain_pgvector]: https://python.langchain.com/docs/integrations/vectorstores/pgvector/
