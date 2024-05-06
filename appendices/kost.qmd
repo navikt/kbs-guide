@@ -23,7 +23,7 @@ Console](https://console.nav.cloud.nais.io/). Velg deretter ønsket team og tryk
 på `Cost` i menyen på venstreside.
 
 ![Skjermskudd av NAIS Console når `Cost` er valgt for et gitt
-prosjekt.](./assets/images/nais_console_cost.png)
+prosjekt.](../assets/images/nais_console_cost.png)
 
 ## Azure
 
@@ -35,7 +35,7 @@ For en umiddelbar oversikt kan man velge `Cost analysis`, under `Cost
 Management` i menyen på venstreside, og så trykke på `Accumulated costs`.
 
 ![Skjermskudd av Azure Portal som viser hvor man kan trykke for å se akkumulert
-kostnad for en ressurs.](./assets/images/azure_cost_management.png)
+kostnad for en ressurs.](../assets/images/azure_cost_management.png)
 
 ## GCP
 
@@ -45,4 +45,4 @@ team er valgt i nedtrekksmenyen øverst og deretter velge `Billing` på forsiden
 
 ![Skjermskudd av GCP console som viser, i blått, hvor man kan velge team og hvor
 man skal trykke for å komme til kostnadssiden, markert i
-rødt.](./assets/images/gcp_billing.png)
+rødt.](../assets/images/gcp_billing.png)
