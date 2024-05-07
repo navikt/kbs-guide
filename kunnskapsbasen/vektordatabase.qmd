@@ -112,5 +112,59 @@ sette opp flere kolonner som man enklere kan benytte i søket.
 
 **Azure AI Search**  
 Når `AzureSearch`- vektordatabasen opprettes med `LangChain` kan man samtidig angi 
-tilleggsfelter som det kan filtreres etter og/eller søkes i.  I vårt oppsett har lagt til
-hvert metadata-felt som egne kolonner i Azure-indexen. 
+tilleggsfelter som det kan filtreres etter og/eller søkes i.  I vårt oppsett har vi lagt til
+hvert metadata-felt som custom kolonner i Azure-indexen. For å gjøre dette må man definere et schema for Azure-indexen som inneholder metadatafeltene pluss Azure sitt default schema. Eksempelet under viser hvordan man definerer et schema med "Tittel" som ekstra søkbart metadatafelt.
+```python
+from azure.search.documents.indexes.models import (
+    SearchableField,
+    SearchField,
+    SearchFieldDataType,
+    SimpleField,
+)
+fields = [
+    # default felter som må være med
+    SimpleField(
+        name="id",
+        type=SearchFieldDataType.String,
+        key=True,
+        filterable=True,
+    ),
+    SearchableField(
+        name="content",
+        type=SearchFieldDataType.String,
+        searchable=True,
+    ),
+    SearchField(
+        name="content_vector",
+        type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
+        searchable=True,
+        vector_search_dimensions=len(embedding_function("Text")),
+        vector_search_profile_name="myHnswProfile",
+    ),
+    SearchableField(
+        name="metadata",
+        type=SearchFieldDataType.String,
+        searchable=True,
+    ),
+    # custom kolonne
+    SearchableField(
+        name="Tittel",
+        type=SearchFieldDataType.String,
+        searchable=True,
+    ),
+]
+
+index_name: str = "navn_på_index"
+
+vector_store: AzureSearch = AzureSearch(
+    azure_search_endpoint=vector_store_address,
+    azure_search_key=vector_store_password,
+    index_name=index_name,
+    embedding_function=embedding_function,
+    fields=fields,
+)
+```
+::: {.callout-tip collapse="true"}
+## Custom scoring profile
+Ved oppsett av custom schema for Azure Search kan man også vurdere å legge til en `scoring profile`. En `scoring profile` kan benyttes for å vekte relevansen av kolonnene som ikke er den vektoriserte teksten, noe som kan være nyttig ved hybridsøk. 
+:::
