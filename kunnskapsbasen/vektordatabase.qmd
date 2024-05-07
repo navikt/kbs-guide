@@ -166,5 +166,5 @@ vector_store: AzureSearch = AzureSearch(
 ```
 ::: {.callout-tip collapse="true"}
 ## Custom scoring profile
-Ved oppsett av custom schema for Azure Search kan man også vurdere å legge til en `scoring profile`. En `scoring profile` kan benyttes for å vekte relevansen av kolonnene som ikke er den vektoriserte teksten, noe som kan være nyttig ved hybridsøk. 
+Ved oppsett av custom schema for Azure Search index kan man også vurdere å legge til en `scoring profile`. En `scoring profile` kan benyttes for å vekte relevansen av kolonnene som ikke er den vektoriserte teksten, noe som kan være nyttig ved hybridsøk. 
 :::
