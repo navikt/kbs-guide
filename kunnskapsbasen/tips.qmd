@@ -20,5 +20,29 @@ syntetiske spørsmål.
 
 - [Fremgangsmåte for å generere spørsmål (ekstern
 datafortelling)](https://data.ansatt.nav.no/story/98cec0de-b872-4713-a56f-9bdb49112345/index.html)
+
+## Evalueringsmetrikker
+
+Med de syntetiske spørsmålene har vi ønsket å sammenligne hvor gode de forskjellige vektordatabasene er på å finne tilbake "fasiten", det vil si teksten som spørsmålet ble generert fra. 
+
+To metrikker som ofte går igjen i evaluering av RAG-systemer er `hit rate` og `mean reciprocal rank`. Se f.eks [LlamaIndex](https://www.llamaindex.ai/blog/boosting-rag-picking-the-best-embedding-reranker-models-42d079022e83). 
+
+### Hit rate
+For hver testcase sjekkes rett og slett om den korrekte teksten er blant de topp `k` returnerte resultatene. Den samlede hitraten tilsvarer da andelen caser der korrekt tekst ble funnet.  
+
+### Mean reciprocal rank (MRR)
+For hver testcase finnes først ranken til den høyest scorede korrekte teksten. Reciprocal rank er definert som 1/rank, så dersom korrekt artikkel er rangert som nummer 1 vil reciprocal rank være 1. Dersom korrekt artikkel er rangert som nummer 2 vil reciprocal rank være 1/2 osv. Den samlede MRR-scoren er gjennomsnittet av disse rank-scorene per case. 
+
+### Fordeler og ulemper
+Fordelen med `hit rate` og `mean reciprocal rank` er at de begge de begge er enkle å forstå og implementere. 
+
+Ulempen er kanskje at de er litt for enkle:  
+
+- Vi klassifiserer i praksis de returnerte dokumentene binært som "riktig" eller "feil". I virkeligheten vil dokumentene ha ulike grad av relevans, der tekster som ikke er "fasit"-teksten likevel kan handle om samme tema som det syntetiske spørsmålet. Her kan man vurdere å utarbeide en mer avansert relevans-scoring og anvende evalueringsmetrikker som hensyntar dette.   
+- `hit rate` og `MRR` vil egne seg  mindre bra til å evaluere caser der det er meningen å returnere mer enn 1 tekst. Selv om den type caser vil være viktig for NKS Digital assistent å beherske, så har vi i sammenligningen av vektordatabasene holdt dette utenfor.  
+- `hit rate` og `MRR` gir heller ingen "straff" til vektordatabasene dersom de returnerer irrelevante dokumenter (så lenge riktig dokument blir funnet.)  
+
+En annen faktor å ha med i betraktingen er at noen av tekstene som har vært kilde for et syntetisk spørsmål, har i vektordatabasene blitt splittet opp i flere chunks. Når vi ber om å få returnert de topp `k` mest relevante dokumentene for et spørsmål kan det derfor hende at samme tekst vil bli representert mer enn én gang i resultatsettet. Vi har valgt å holde evalueringen på "tekst-nivå" ved å gi uttelling til vektordatabasen for den høyest rangerte chunken fra riktige tekst. 
+
 - (Kommer) Sammenligning av forskjellige vektordatabaser på NKS
 sin kunnskapsbase (ekstern datafortelling)
