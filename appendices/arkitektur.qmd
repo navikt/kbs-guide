@@ -23,7 +23,7 @@ uavhengig av tilbyder av språkmodell og det vil være med på å gi bedre kontr
 over kostnader.
 
 ![Visuellfremstilling av overordnet teknisk arkitektur på NAIS
-plattformen.](./assets/images/nais_arkitektur.png){#fig-nais-arkitektur}
+plattformen.](../assets/images/nais_arkitektur.png){#fig-nais-arkitektur}
 
 Det er viktig i denne oversikten å presisere at man ikke trenger å bruke
 språkmodell, embedding modell eller vektordatabase fra samme tilbyder. Det vil
