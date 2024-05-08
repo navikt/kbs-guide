@@ -1,16 +1,15 @@
 # Kunnskapsbase
 
-Som beskrevet i [Kapittel @sec-bakgrunn] så er kunnskapsbasen, både den originale
-og den vi generere for *KBS* systemet, en av de viktigste komponentene som vi
-trenger. Hvis vi ikke klarer å hente frem relevant informasjon til språkmodellen
-vil den ikke kunne gi relevante svar og sannsynligheten for hallusinasjoner
-øker.
+Som beskrevet i [Kapittel @sec-bakgrunn] så er kunnskapsbasen, både den
+originale og den vi generere for *KBS* systemet, en av de viktigste komponentene
+vi trenger. Hvis vi ikke klarer å hente frem relevant informasjon til
+språkmodellen vil den ikke kunne gi relevante svar eller svar i det hele tatt.
 
 I dette kapittelet kommer vi til å ta for oss følgende:
 
-- I [seksjon @sec-nks-kunnskapsbase] går vi gjennom den originale kunnskapsbasen
+- I [Kapittel @sec-nks-kunnskapsbase] går vi gjennom den originale kunnskapsbasen
 som er bakgrunnen for denne veiledningen.
-- Deretter ser vi på hvordan man kan sette opp en vektordatabase i [seksjon
+- Deretter ser vi på hvordan man kan sette opp en vektordatabase i [Kapittel
 @sec-oppsett-vektordatabase].
 - Vi avslutter med tips og råd til hvordan man kan teste vektordatabasen i
-[seksjon @sec-tips-testing].
+[Kapittel @sec-tips-testing].
