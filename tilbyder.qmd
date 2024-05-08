@@ -27,9 +27,14 @@ no/low-code løsningene til Azure OpenAI eller Vertex AI og vi kommer ikke til �
 liste opp alle her, men kanskje forslagene kan være et sted å starte å se på
 alternativer:
 
--   [`LangChain`](https://www.langchain.com) - Et rammeverk for å skape språkmodell-baserte applikasjoner.
-    -   Har støtte for de fleste tilbydere og man kan gjennom dette rammeverket kalle på Azure OpenAI og Vertex AI modeller.
--   API direkte - her binder man seg til en tilbyder, men man har fortsatt mer kontroll over hele applikasjonen
+-   [`LangChain`](https://www.langchain.com) - Et rammeverk for å skape
+språkmodell-baserte applikasjoner.
+    -   Har støtte for de fleste tilbydere og man kan gjennom dette rammeverket
+    kalle på Azure OpenAI og Vertex AI modeller.
+- [`LlamaIndex`](https://www.llamaindex.ai/) - Et rammeverk for å skape
+språkmodell-baserte applikasjoner.
+-   API direkte - Et godt valg hvis man vet at man ikke kommer til å bytte
+mellom tilbydere.
     -   [Azure OpenAI SDK](https://learn.microsoft.com/en-us/fabric/data-science/ai-services/how-to-use-openai-sdk-synapse?tabs=python)
     -   [Vertex AI SDK](https://cloud.google.com/vertex-ai/docs/python-sdk/use-vertex-ai-python-sdk-ref)
 :::
