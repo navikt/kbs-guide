@@ -1,1 +1,236 @@
 # Lage modellen
+
+Frem til nå har denne veiledningen fokusert på kunnskapsbasen og embedding
+modellen som brukes sammen med vektordatabasen. Vi skal i dette kapittelet
+fokusere på språkmodellen, men grunnen til at dette er satt til sist er at det
+ikke er så mye å gjøre med språkmodellen. I de fleste tilfeller hvor man ønsker
+å benytte *KBS* vil det allerede være gitt at man bruker en av de bedre
+språkmodellene. Dette gjør at det ikke er så mye som skal settes opp for å komme
+i gang og jobben som må gjøres går mer på å forberede ledetekst
+(@def-prompt-engineer) enn å sette opp selve språkmodellen.
+
+[`LangChain` har en god introduksjon til *KBS*][langchain_rag] som inneholder
+mer detaljer enn det vi kommer til å gjenskape her.
+
+## Gi dokumenter til modellen
+
+Det første vi trenger å gjøre i *KBS* systemet er å gi språkmodellen tilgang til
+utvalgte dokumenter fra kunnskapsbasen vår. Siden de fleste språkmodeller har
+begrenset kontekstvindu må vi begrense antall dokumenter også for å ikke
+forvirre modellen. Måten vi gjør dette på er å designe systemledeteksten vår på
+en måte hvor den inneholder dokumentene.
+
+Et eksempel på en systemledetekst er gitt under:
+```txt
+You are an assistant for question-answering tasks. Use the following pieces of
+retrieved context to answer the question. If you don't know the answer, just
+say that you don't know. Use three sentences maximum and keep the answer
+concise. Answer in Norwegian, or English if the question is English.
+
+{context}
+```
+
+I eksempelet over ber vi systemet svare på spørsmål, men spesifiserer at den
+bare skal benytte konteksten vi fyller ut senere. Utformingen på ledeteksten
+gjør at språkmodellen prøver å benytte teksten fra kunnskapsbasen og eventuelt
+ikke svare heller enn å hallusinere.
+
+::: {.callout-note collapse="true"}
+## Språk på ledetekst
+Vi bruker for det meste engelsk i ledeteksten vi skriver og ber modellen svare
+på norsk. Grunnen til dette er at erfaring tilsier at modellene er trent for å
+svare på spørsmål med et spesifikt språk. Et eksempel på dette som vi kommer
+tilbake senere er at modellen forstår `chat history` mye bedre enn å benytte
+`context`.
+
+Her gjelder rådene om utprøving og det kan godt hende at egen erfaring tilsier
+at norsk fungerer utmerket!
+:::
+
+Vi gjør deretter teksten over om til et `ChatPromptTemplate` som så kan benyttes
+av `LangChain`.
+
+```python
+from langchain_core.prompts import ChatPromptTemplate
+
+prompt = ChatPromptTemplate.from_messages(
+    [
+        ("system", system_prompt),
+        ("human", "{question}")
+    ]
+)
+```
+
+Vi setter så dette sammen til en `LangChain` kjede:
+
+```python
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
+from langchain_google_community import BigQueryVectorSearch
+from langchain_openai import AzureChatOpenAI
+
+store = BigQueryVectorSearch.from_documents()
+retriever = store.as_retriever(search_kwargs=dict(k=5))
+llm = AzureChatOpenAI()
+rag_chain = (
+    {"context": retriever , "question": RunnablePassthrough()}
+    | prompt
+    | llm
+    | StrOutputParser()
+)
+```
+
+Og tilslutt, for å benytte kjeden:
+
+```python
+rag_chain.invoke("Hva er samordning mellom dagpenger og sykepenger?")
+```
+
+---
+
+[`LangChain` har støtte for å kalle på kjeden på mange forskjellige
+måter][langchain_runnable] i forskjellige kontekster. Dette gir muligheter for å
+`batch`-e kallene eller strømme svar for bedre brukeropplevelse.
+
+## Forbedre spørsmål i en chat-historikk
+
+Ved å bruke oppsette over vil man fort oppleve at det første spørsmålet gir
+veldig gode svar og deretter blir svarene veldig dårlige eller ikke
+eksisterende. Grunnen til dette er at dokumentene som blir sendt til
+språkmodellen ikke lengre gir mening.
+
+### Mangel på kontekst
+
+For å prøve å kontekstualisere dette kan vi se på en tenkt samtale:
+
+```txt
+> (Bruker) Hva er samordning mellom dagpenger og sykepenger?
+
+> (AI): Samordning mellom dagpenger og sykepenger er relevant når en person er
+sykmeldt, men fortsatt i stand til å jobbe 50% eller mer. I slike tilfeller vil
+NAV vurdere en kombinasjon av dagpenger og sykepenger. Dette innebærer at
+personen må sende inn søknad om sykepenger og NAV vil sende beskjed til det
+lokale NAV-kontoret som vurderer denne samordningen.
+
+> (Bruker) Hva innebærer det for pensjon?
+
+> (AI): Det kan jeg ikke svare på...
+```
+
+Når vi ser på dokumentene som ble hentet til det andre spørsmålet til brukeren
+så fikk vektordatabasen teksten `Hva innebærer det for pensjon?`. Dette gjør det
+veldig vanskelig for vektordatabasen å hente ut informasjon fordi vi manger
+kontekst fra det første spørsmålet.
+
+For å utbedre dette kan vi benytte språkmodellen til å omformulere spørsmålet
+før vi sender spørsmålet videre til vektordatabasen.
+
+### Omformulere spørsmålet
+
+Teknikken er å be språkmodellen om å omformulere spørsmålet hvis det mangler
+kontekst. Dette koster oss litt ekstra tid ved å spørre en språkmodellen, men
+det er en robust måte å få omformulert spørsmålet slik at man ikke trenger
+chat historikk for å finne dokumenter i vektordatabasen.
+
+Vi lager først en ny ledetekst som ber språkmodellen om å kontekstualisere et
+spørsmål:
+
+```txt
+Given a chat history and the latest user question which might reference context
+in the chat history, formulate a standalone question which can be understood
+without the chat history. Do NOT answer the question, just reformulate it if
+needed and otherwise return it as is. The answer should be in Norwegian, or
+English if the question is English.
+```
+
+Vi kombinerer det så med chat historikk:
+
+```python
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.prompts import MessagesPlaceholder
+
+context_prompt = ChatPromptTemplate.from_messages(
+        [
+            ("system", contextualize_text),
+            MessagesPlaceholder("chat_history"),
+            ("human", "{question}"),
+        ]
+    )
+```
+
+Tilslutt kombinerer vi både kontekst omformuleringen med vår tidligere kjede:
+
+```python
+from langchain.chains import create_history_aware_retriever, create_retrieval_chain
+from langchain.chains.combine_documents import create_stuff_documents_chain
+
+history_retriever = create_history_aware_retriever(llm, retriever, context_prompt)
+qa_chain = create_stuff_documents_chain(llm, question_prompt)
+
+rag_chain = create_retrieval_chain(history_retriever, qa_chain)
+```
+
+Merk at `question_prompt` også blir endret til å inneholde `MessagesPlaceholder`
+for å gi chat historikken til språkmodellen:
+
+```python
+question_prompt = ChatPromptTemplate.from_messages(
+    [
+        ("system", system_prompt),
+        MessagesPlaceholder("chat_history"),
+        ("human", "{question}")
+    ]
+)
+```
+
+## Sitere kilder
+
+Det siste vi skal diskutere i dette kapittelet er hvordan man kan guide modellen
+til å gi kilder. Store språkmodeller som `GPT-4` er gode på å tolke og formulere
+både `JSON` og `XML` så dette er et godt utgangspunkt.
+
+Vi modifiserer systemledeteksten vi brukte i forrige seksjon til å inneholde et
+krav om å forklare hvor sitatet kom fra.
+
+```txt
+You are an assistant for question-answering tasks. Use the following pieces of
+retrieved context to answer the question. If you don't know the answer, just
+say that you don't know. Use three sentences maximum and keep the answer
+concise. Answer in Norwegian, or English if the question is English.
+
+When answering you should try to cite VERBATIM from the context in the form of
+<quote source="KnowledgeArticleId" title="Tittel" section="Seksjon">Text
+quote</quote>.
+
+{context}
+```
+
+Utenom system spesifikk sitering vil arbeidet med sitering være forbehold
+ledetekstutvikling (@def-prompt-engineer). Her anbefales det å prøve seg frem og
+be språkmodellen om strukturerte svar i form av `JSON` eller `XML` som man
+deretter kan tolke.
+
+---
+
+Ledeteksten over gir svar på følgende format:
+
+```txt
+Spørsmål til kunnskapsbasen: Hva er samordning mellom dagpenger og sykepenger?
+
+Samordning mellom dagpenger og sykepenger er en prosess som skal hindre at flere
+ytelser hver for seg gir full dekning for samme inntektstap. Det er aktuelt å
+samordne dagpenger og sykepenger når man fyller vilkårene for begge ytelsene
+samtidig. Dette vil være aktuelt i tilfeller hvor bruker er sykmeldt 50% eller
+mindre. Hvis bruker er sykmeldt over 50%, er det ikke aktuelt med samordning
+mellom sykepenger og dagpenger, da det er kun sykepenger som er aktuelt. <quote
+source="kA02o000000M7PACA0" title="Dagpenger DP - Dagpenger og sykepenger"
+section="Intern informasjon">Samordning skal hindre at flere ytelser hver for
+seg gir full dekning for samme inntektstap.</quote> <quote
+source="kA02o000000M8QUCA0" title="Sykepenger - Kombinerte ytelser: Dagpenger"
+section="Intern informasjon">Sykepenger og dagpenger kan kombineres / samordnes.
+Dette vil være aktuelt i tilfeller hvor bruker er sykmeldt 50% eller mindre
+(inntil 50% sykmelding).</quote>
+```
+
+[langchain_rag]: https://python.langchain.com/docs/use_cases/question_answering/
+[langchain_runnable]: https://python.langchain.com/docs/expression_language/interface/
