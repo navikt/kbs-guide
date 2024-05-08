@@ -2,12 +2,7 @@
 
 Når systemet er oppe og kjører er det naturlig å begynne å tenke på forbedringer
 og utvidelser. Akkurat hvilke utvidelser man ønsker vil være avhengig av domenet
-og teamet rundt. Vi vil allikevel prøve å dokumentere noen av utvidelsene vi har
-gjort samt lenke videre til andre tips for forbedringer.
-
-## Forbedringer
-
-🚧 **Arbeids med** 🚧
+og teamet rundt.
 
 ## Nyttige lenker
 
