@@ -31,10 +31,10 @@ To metrikker som ofte går igjen i evaluering av RAG-systemer er `hit rate` og `
 For hver testcase sjekkes rett og slett om den korrekte teksten er blant de topp `k` returnerte resultatene. Den samlede hitraten tilsvarer da andelen caser der korrekt tekst ble funnet.  
 
 ### Mean reciprocal rank (MRR)
-For hver testcase finnes først ranken til den høyest scorede korrekte teksten. Reciprocal rank er definert som 1/rank, så dersom korrekt artikkel er rangert som nummer 1 vil reciprocal rank være 1. Dersom korrekt artikkel er rangert som nummer 2 vil reciprocal rank være 1/2 osv. Den samlede MRR-scoren er gjennomsnittet av disse rank-scorene per case. 
+For hver testcase finnes først ranken til den høyest scorede korrekte teksten. Reciprocal rank er definert som $\frac{1}{rank}$, så dersom korrekt artikkel er rangert som nummer 1 vil reciprocal rank være 1. Dersom korrekt artikkel er rangert som nummer 2 vil reciprocal rank være $\frac{1}{2}$ osv. Den samlede MRR-scoren er gjennomsnittet av disse rank-scorene per case. 
 
 ### Fordeler og ulemper
-Fordelen med `hit rate` og `mean reciprocal rank` er at de begge de begge er enkle å forstå og implementere. 
+Fordelen med `hit rate` og `MRR` er at de begge de begge er enkle å forstå og implementere. 
 
 Ulempen er kanskje at de er litt for enkle:  
 
