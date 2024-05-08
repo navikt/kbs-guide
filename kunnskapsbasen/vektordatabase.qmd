@@ -7,7 +7,7 @@ PostgreSQL og Azure AI Search som vektordatabaser. I neste seksjon,
 for å lande én tilbyder.
 
 Vi kommer til å anta at den originale kunnskapsbasen allerede eksisterer og at
-den er mulig å hente inn programmatisk. For NKS sin kunnskapsbase konverterte vi
+den er mulig å hente ut programmatisk. For NKS sin kunnskapsbase konverterte vi
 artiklene til Markdown før vi begynte å behandle dem. Dette ble gjort for å
 redusere antall ekstra tegn (mao. HTML tag-er), men samtidig beholde strukturer
 som overskrifter. Et enklere format kan hjelpe språkmodellen til å enklere hente
@@ -27,9 +27,14 @@ Bruk av `LangChain` er valgfritt, men det kan hjelpe med å komme i gang.
 I vårt tilfelle har vi benyttet `LangChain` for å sette opp vektordatabasene og
 ordne riktig indeksering.   
 
-For å laste opp dokumenter til vektordatabasene må vi først dele de
-opp slik at teksten ikke blir for stor for embedding modellen.
-Teknikkene vi går gjennom under vil være de samme uavhengig av rammeverk.
+For å laste opp dokumenter til vektordatabasene må vi først dele de opp slik at
+teksten ikke blir for stor for embedding modellen. Det viktigste med oppdelingen
+er at hvert tekst fragment vi sender til embedding modellen er semantisk lik,
+det er derfor viktig å være bevist på hvordan tekst behandles før det ender opp
+i vektordatabasen.
+
+*Teknikkene vi går gjennom under vil være de samme uavhengig
+av rammeverk.*
 
 ### Forberede `Document`-er
 
@@ -56,6 +61,8 @@ klarer å håndtere må vi dele opp dokumentene i flere små dokumenter. `LangCh
 støtter dette rett ut av boksen og [tilbyr flere måter å dele opp
 på][langchain_text_splitters]. Den vanligste måten å dele opp er ved å rekursivt
 prøve å dele dokumentet i en gitt størrelse, med eller uten overlapp.
+`LangChain` prøver å dele så nærme nye paragrafer, dette gjør at innhold som er
+tett knyttet - ved å være i samme paragraf, holdes sammen.
 
 ::: {.callout-note collapse="true"}
 ## Størrelse på split
@@ -77,9 +84,10 @@ splits: list[Document] = text_splitter.split_documents(docs)
 ```
 
 Metadata på det originale dokumentet dupliseres så til hvert nye dokument som
-genereres slik at vi har mulighet til å hente ut den samme metadata. Husk derfor
-på å ha en form for ID på original dokumentene slik at man kan identifisere
-splitter som hører sammen.
+genereres slik at vi har mulighet til å hente ut den samme metadata.
+
+**Husk å ha en form for ID på original dokumentene slik at man kan identifisere
+splitter som hører sammen.**
 
 ### Opplasting til vektordatabase
 
@@ -98,7 +106,7 @@ som ser omtrent slik ut:
 
 | ID | Tekst | Embedding vektor | Metadata |
 |----|-------|------------------|----------|
-| UUID | STRING | FLOAT REPEATED | JSON |
+| UUID | STRING | VECTOR(FLOAT) | JSON |
 
 : Illustrasjon av tabellen som `LangChain` setter opp som default.
 
@@ -109,6 +117,11 @@ vektorene, men det er litt begrensende når det kommer til å søke i metadata.
 Det burde vurderes å bruke BigQuery eller PostgreSQL direkte og heller
 kopiere fra `LangChain` integrasjonen som inspirasjon. Da har man mulighet til å
 sette opp flere kolonner som man enklere kan benytte i søket.
+
+PostgreSQL har også mulighet for å gjøre fulltekstsøk samtidig som et vektorsøk,
+[eksempel med `Reciprocal Rank
+Fusion`](https://github.com/pgvector/pgvector-python/blob/master/examples/hybrid_search_rrf.py),
+men det krever manuelt oppsett.
 
 **Azure AI Search**  
 Når `AzureSearch`- vektordatabasen opprettes med `LangChain` kan man samtidig angi 
@@ -168,3 +181,5 @@ vector_store: AzureSearch = AzureSearch(
 ## Custom scoring profile
 Ved oppsett av custom schema for Azure Search index kan man også vurdere å legge til en `scoring profile`. En `scoring profile` kan benyttes for å vekte relevansen av kolonnene som ikke er den vektoriserte teksten, noe som kan være nyttig ved hybridsøk. 
 :::
+
+[langchain_text_splitters]: https://python.langchain.com/docs/modules/data_connection/document_transformers/
