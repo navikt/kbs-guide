@@ -28,7 +28,8 @@ Det første vi trenger å gjøre i *KBS* systemet er å gi språkmodellen tilgan
 utvalgte dokumenter fra kunnskapsbasen vår. Siden de fleste språkmodeller har
 begrenset kontekstvindu må vi begrense antall dokumenter, også for å ikke
 forvirre modellen. Måten vi gjør dette på er å designe systemledeteksten vår på
-en måte hvor den inneholder dokumentene.
+en måte hvor den inneholder dokumentene og så ber modellen svare på påfølgende
+spørsmål på bakgrunn av disse dokumentene.
 
 Et eksempel på en systemledetekst er gitt under:
 ```txt
@@ -90,10 +91,28 @@ rag_chain = (
 )
 ```
 
-Og tilslutt, for å benytte kjeden:
+Måten denne kjeden fungerer er ved at `context` blir fylt ut av `retriever` (ved
+å kalle `__call__` metoden til `retriever` som søker i vektordatabasen med
+teksten som kommer inn som argument til hele kjeden) samtidig som `question`
+blir fylt ut av teksten som kommer inn som argument til kjeden. Deretter sendes
+begge disse over til `prompt` som bruker parameterne (`context` og `question`)
+til å formatere ledeteksten. Ferdig utfylt ledetekst blir deretter sendt til
+språkmodellen, `llm`, som genererer svaret vårt. Kjeden avsluttes ved å tolke
+svaret fra modellen som en ren tekststreng.
+
+Tilslutt, for å benytte kjeden:
+
 
 ```python
 rag_chain.invoke("Hva er samordning mellom dagpenger og sykepenger?")
+```
+
+```txt
+> Samordning mellom dagpenger og sykepenger er relevant når en person er
+sykmeldt, men fortsatt i stand til å jobbe 50% eller mer. I slike tilfeller vil
+NAV vurdere en kombinasjon av dagpenger og sykepenger. Dette innebærer at
+personen må sende inn søknad om sykepenger og NAV vil sende beskjed til det
+lokale NAV-kontoret som vurderer denne samordningen.
 ```
 
 ---
