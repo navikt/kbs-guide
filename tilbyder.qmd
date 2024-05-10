@@ -50,7 +50,14 @@ Det er vanskelig å gi en sterke anbefalinger den ene eller den andre veien for
 hvilken språkmodell man burde foretrekke. Her vil det komme ned til utprøving av
 begge modeller og preferanser utover selve modellen. Husk også at modellene
 forbedres hele tiden så egen erfaring og testing burde veie tungt sammenlignet
-med tidsbestemte anbefalinger.
+med tidsbestemte anbefalinger, som denne tabellen.
+
+::: {.column-margin}
+På kort sikt er det fornuftig å velge en språkmodell som gir gode svar fra
+første stund. Men i et lengre perspektiv burde produktutviklingen i NAV ta
+stilling til lokale modeller som kan ytterligere tilpasses den enkeltes
+bruksområde.
+:::
 
 +--------------+-------------------------------------------------------------------+--------------------------------------------+
 | Språkmodell  | Fordeler                                                          | Ulemper                                    |
@@ -63,10 +70,10 @@ med tidsbestemte anbefalinger.
 
 : Fordeler og ulemper ved valg av språkmodell.
 
-::: callout-tip
-## GPT4 mot verden
+:::{.column-margin}
 Selv om `GPT` modellene fra Azure OpenAI i dag *kanskje* gir bedre svar vil det
-på veldig fort jevne seg ut[^tilbyder-1].
+på sikt jevne seg ut[^tilbyder-1]. Gemeni-1.5 Pro har for eksempel et veldig mye
+større kontekstvindu som kan være attraktivt.
 :::
 
 [^tilbyder-1]: På Vertex AI har man mulighet for å bruke Antropics Claud 3
