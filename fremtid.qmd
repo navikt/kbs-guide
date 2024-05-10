@@ -6,6 +6,9 @@ og teamet rundt.
 
 ## Nyttige lenker
 
+- [NORA.llm modeller på Hugging Face](https://huggingface.co/norallm)
+    - Store språkmodeller trent på norsk språk.
+    - Vurder disse for kjøring lokalt.
 - [`LangChain` RAG from
 Scratch](https://github.com/langchain-ai/rag-from-scratch)
     - Gir en oversikt over mulige forbedringer og forslag til hvordan forbedre
@@ -13,7 +16,7 @@ Scratch](https://github.com/langchain-ai/rag-from-scratch)
 - [Ragas](https://docs.ragas.io/en/stable/index.html)
     - Rammeverk for å evaluere *KBS* systemet.
 - [Eksempel på hybridsøk med PostgreSQL](https://github.com/pgvector/pgvector-python/blob/master/examples/hybrid_search_rrf.py)
-    - Hvordan kombinere vektorsøk med tekstsøk gjennom Reciprocal Rank Fusion
+    - Hvordan kombinere vektorsøk med tekstsøk gjennom Reciprocal Rank Fusion.
 
 ## Forskningsartikler
 
@@ -23,4 +26,4 @@ RAG](https://techcommunity.microsoft.com/t5/ai-ai-platform-blog/raft-a-new-way-t
     på kunnskapsbasen.
     - Fordelen er at man kan bruke en enklere modell enn GPT-4, som vil være
     både billigere og raskere til å svare.
-    - Mulig vei til lokale modeller på NAV.
+    - Burde vurderes i sammenheng med lokale modeller.
