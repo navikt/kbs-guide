@@ -183,6 +183,18 @@ question_prompt = ChatPromptTemplate.from_messages(
 )
 ```
 
+---
+
+Oppsummert ender vi opp med et system som illustrert i @fig-context-system. For
+vektordatabasen omformulerer vi spørsmålet til et selvstendig spørsmål som ikke
+er avhengig av kontekst. Samtidig ser språkmodellen det originale spørsmålet,
+chat historikken og de relevante dokumentene (hentet ved hjelp av det
+omformulerte spørsmålet).
+
+![Illustrasjon av hvordan omformulering fungerer for å hente ut relevante
+dokumenter til det originale
+spørsmålet.](./assets/images/vectordatabase_context.png){#fig-context-system}
+
 ## Sitere kilder
 
 Det siste vi skal diskutere i dette kapittelet er hvordan man kan guide modellen
