@@ -21,4 +21,4 @@ gjenbrukes.
 
 # Endringslogg
 
-- **01.01.1970**: Første versjon publisert
+- **{{< meta date >}}**: Første versjon publisert
