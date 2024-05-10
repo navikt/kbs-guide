@@ -61,6 +61,14 @@ Språkmodeller][wiki_llm] om hverandre og refererer til store kunstige nevrale
 nettverk som kan prosessere naturlig språk og generere naturlig språk som svar.
 :::
 
+::: {#def-temperatur}
+## Temperatur
+I konteksten av [Språkmodeller @def-sprakmodell] refererer temperatur til et
+parameter som styrer hvor stor frihet modellen har til å, *tilfeldig*, velge
+neste passende ord i svaret sitt. Høyere temperatur gir mer variasjon i svar,
+mens lavere temperatur gir mer uniforme svar.
+:::
+
 ::: {#def-vertex-ai}
 ## Vertex AI
 Er navnet på det helhetlige Generativ KI (@def-gki) produktet til Google på GCP.

@@ -12,10 +12,7 @@ i gang og jobben som må gjøres går mer på å forberede ledetekst
 :::{.callout-note collapse="true"}
 ## Temperatur til språkmodellen
 En av de få variablene som man kan endre på som vil gi store utslag på svarene
-fra språkmodellen er temperatur. **Temperatur er et parameter som språkmodellen
-bruker for å styre hvor stor frihet modellen har til å velge ord**. Høyere
-temperatur tillater modellen å velge mellom et større utvalg passende ord og man
-får mer variasjon i svar fra modellen.
+fra språkmodellen er [temperatur @def-temperatur].
 
 I et *KBS* system vil det være naturlig å velge lavere temperatur for å få
 gjentakende svar som ligner på hverandre. Bakdelen med dette er at svarene har
