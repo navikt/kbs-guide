@@ -29,7 +29,7 @@ mer detaljer enn det vi kommer til å gjenskape her.
 
 Det første vi trenger å gjøre i *KBS* systemet er å gi språkmodellen tilgang til
 utvalgte dokumenter fra kunnskapsbasen vår. Siden de fleste språkmodeller har
-begrenset kontekstvindu må vi begrense antall dokumenter også for å ikke
+begrenset kontekstvindu må vi begrense antall dokumenter, også for å ikke
 forvirre modellen. Måten vi gjør dette på er å designe systemledeteksten vår på
 en måte hvor den inneholder dokumentene.
 
@@ -60,7 +60,7 @@ Her gjelder rådene om utprøving og det kan godt hende at egen erfaring tilsier
 at norsk fungerer utmerket!
 :::
 
-Vi gjør deretter teksten over om til et `ChatPromptTemplate` som så kan benyttes
+Vi gjør deretter teksten over om til en `ChatPromptTemplate` som så kan benyttes
 av `LangChain`.
 
 ```python
@@ -82,7 +82,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_google_community import BigQueryVectorSearch
 from langchain_openai import AzureChatOpenAI
 
-store = BigQueryVectorSearch.from_documents()
+store = BigQueryVectorSearch.from_documents()  # Se kapittel om vektordatabase
 retriever = store.as_retriever(search_kwargs=dict(k=5))
 llm = AzureChatOpenAI()
 rag_chain = (
@@ -119,31 +119,34 @@ For å prøve å kontekstualisere dette kan vi se på en tenkt samtale:
 ```txt
 > (Bruker) Hva er samordning mellom dagpenger og sykepenger?
 
-> (AI): Samordning mellom dagpenger og sykepenger er relevant når en person er
-sykmeldt, men fortsatt i stand til å jobbe 50% eller mer. I slike tilfeller vil
-NAV vurdere en kombinasjon av dagpenger og sykepenger. Dette innebærer at
-personen må sende inn søknad om sykepenger og NAV vil sende beskjed til det
-lokale NAV-kontoret som vurderer denne samordningen.
+> (Språkmodell): Samordning mellom dagpenger og sykepenger er relevant når en
+person er sykmeldt, men fortsatt i stand til å jobbe 50% eller mer. I slike
+tilfeller vil NAV vurdere en kombinasjon av dagpenger og sykepenger. Dette
+innebærer at personen må sende inn søknad om sykepenger og NAV vil sende beskjed
+til det lokale NAV-kontoret som vurderer denne samordningen.
 
 > (Bruker) Hva innebærer det for pensjon?
 
-> (AI): Det kan jeg ikke svare på...
+> (Språkmodell): Det kan jeg ikke svare på...
 ```
 
-Når vi ser på dokumentene som ble hentet til det andre spørsmålet til brukeren
-så fikk vektordatabasen teksten `Hva innebærer det for pensjon?`. Dette gjør det
-veldig vanskelig for vektordatabasen å hente ut informasjon fordi vi manger
-kontekst fra det første spørsmålet.
+Når vi ser på teksten som ble gitt til vektordatabasen for det andre spørsmålet
+til brukeren var det begrenset til `Hva innebærer det for pensjon?`. Dette gjør
+det veldig vanskelig for vektordatabasen å hente ut informasjon fordi vi manger
+kontekst fra det første spørsmålet. Språkmodellen mottar deretter dokumenter som
+ikke har så mye med samordning og pensjon, og klarer ikke å generere et svar med
+de begrensningene vi har gitt i systemledeteksten.
 
-For å utbedre dette kan vi benytte språkmodellen til å omformulere spørsmålet
-før vi sender spørsmålet videre til vektordatabasen.
+For å utbedre dette kan vi først benytte språkmodellen til å omformulere
+spørsmålet før vi sender spørsmålet videre til vektordatabasen.
 
 ### Omformulere spørsmålet
 
 Teknikken er å be språkmodellen om å omformulere spørsmålet hvis det mangler
 kontekst. Dette koster oss litt ekstra tid ved å spørre en språkmodellen, men
 det er en robust måte å få omformulert spørsmålet slik at man ikke trenger
-chat historikk for å finne dokumenter i vektordatabasen.
+chat historikk for å finne dokumenter i vektordatabasen. I @fig-context-system
+har vi illustrert hvordan omformulering fungerer.
 
 Vi lager først en ny ledetekst som ber språkmodellen om å kontekstualisere et
 spørsmål:
@@ -211,8 +214,14 @@ spørsmålet.](./assets/images/vectordatabase_context.png){#fig-context-system}
 ## Sitere kilder
 
 Det siste vi skal diskutere i dette kapittelet er hvordan man kan guide modellen
-til å gi kilder. Store språkmodeller som `GPT-4` er gode på å tolke og formulere
-både `JSON` og `XML` så dette er et godt utgangspunkt.
+til å gi kilder. 
+
+Utenom system spesifikk sitering vil arbeidet med sitering være forbehold
+ledetekstutvikling (@def-prompt-engineer). Her anbefales det å prøve seg frem og
+be språkmodellen om strukturerte svar i form av `JSON` eller `XML` som man
+deretter kan tolke. Store språkmodeller som `GPT-4` er gode på å tolke og
+formulere både `JSON` og `XML` så denne egenskapen kan brukes for å hente ut
+strukturerte svar uten at modellen må tilpasses.
 
 Vi modifiserer systemledeteksten vi brukte i forrige seksjon til å inneholde et
 krav om å forklare hvor sitatet kom fra.
@@ -229,13 +238,6 @@ quote</quote>.
 
 {context}
 ```
-
-Utenom system spesifikk sitering vil arbeidet med sitering være forbehold
-ledetekstutvikling (@def-prompt-engineer). Her anbefales det å prøve seg frem og
-be språkmodellen om strukturerte svar i form av `JSON` eller `XML` som man
-deretter kan tolke.
-
----
 
 Ledeteksten over gir svar på følgende format:
 
