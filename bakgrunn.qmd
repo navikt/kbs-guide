@@ -122,6 +122,13 @@ forrige seksjon. Ved å ha en abstrakt representasjon av det semantiske innholde
 vil man kunne sammenligne, se på forskjeller eller gjøre andre operasjoner på
 vektorene.
 
+:::{.column-margin}
+![Eksempel på embedding av enkelt ord, som illustrerer likhet i vektorrom mellom
+ord som er semantisk like.  Merk for eksempel at avstanden mellom `Mann` -
+`Kvinne` og `Konge` - `Dronning` kan
+sammenlignes.](./assets/images/word%20embedding.png)
+:::
+
 Et viktig poeng med embedding modeller er at de kan brukes på mer enn bare
 tekst, multimodale modeller kan også representere bilder, video og lyd. Hvis
 samme modell kan tolke flere forskjellige media kan man så bruke vektorene
