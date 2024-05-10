@@ -44,5 +44,6 @@ Ulempen er kanskje at de er litt for enkle:
 
 En annen faktor å ha med i betraktingen er at noen av tekstene som har vært kilde for et syntetisk spørsmål, har i vektordatabasene blitt splittet opp i flere chunks. Når vi ber om å få returnert de topp `k` mest relevante dokumentene for et spørsmål kan det derfor hende at samme tekst vil bli representert mer enn én gang i resultatsettet. Vi har valgt å holde evalueringen på "tekst-nivå" ved å gi uttelling til vektordatabasen for den høyest rangerte chunken fra riktige tekst. 
 
-- (Kommer) Sammenligning av forskjellige vektordatabaser på NKS
-sin kunnskapsbase (ekstern datafortelling)
+- [Sammenligning av forskjellige vektordatabaser på NKS sin kunnskapsbase
+(ekstern
+datafortelling)](https://data.ansatt.nav.no/story/e17a7b82-8721-4357-ba92-4c734f68e9f5/index.html#resultater)
