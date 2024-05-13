@@ -1,4 +1,4 @@
-# Tips og testing {#sec-tips-testing}
+# Sammenligning av vektordatabaser {#sec-tips-testing}
 
 For å vurdere vektordatabasen må man opprette et set med spørsmål og
 artikkelsvar fra kunnskapsbasen og sammenligne hvor godt hver database gjør det.
