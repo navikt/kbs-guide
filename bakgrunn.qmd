@@ -48,10 +48,10 @@ tilsier er en vektordatabase en database med vektorer, det spesielle i
 konteksten av _KBS_ er at disse vektorene er generert med en modell som er trent
 på en lignende måte som en stor språkmodell. Med andre ord, dokumentene i
 kunnskapsbasen indekseres med en feature vektor av inneholde deres, generert fra
-en [embedding modell][wiki_embedding] (se @def-embedding). Merk at embedding
-modellen er uavhengig av språkmodellen i bruk. Ofte brukes en embedding modell
-som sammenfaller med språkmodellen, f.eks. brukes OpenAI sin embedding modell
-sammen med GPT-4, men det er absolutt ingen krav[^3].
+en [embedding modell][wiki_embedding] (se @def-embedding og neste seksjon). Merk
+at embedding modellen er uavhengig av språkmodellen i bruk. Ofte brukes en
+embedding modell som sammenfaller med språkmodellen, f.eks. brukes OpenAI sin
+embedding modell sammen med GPT-4, men det er absolutt ingen krav[^3].
 
 I @fig-rag-vector-database er det illustrert hvordan kunnskapsbasen og
 vektordatabasen henger sammen for å hente frem relevant kontekst for
@@ -61,13 +61,6 @@ embedding modellen samtidig som spørsmålet til brukeren går gjennom embedding
 modellen for å søke i vektordatabasen. Merk at vektordatabasen oppdateres
 uavhengig fra språkmodellen som tilrettelegger for oppdatert informasjon fra
 kunnskapsbasen.
-
-::: {.callout-note}
-## _KBS_ i NAV
-For [NAIS applikasjoner][nais_doc] opprettes det automatisk en Cloud SQL
-database. Denne databasen støtter [`pgvector`][pgvector] som kan brukes som et
-utgangspunkt for en [vektordatabase][pgvector_gcp].
-:::
 
 ![Kunnskapsbase Baserte Språkmodeller med vektordatabase. I grått på
 illustrasjonen er det prøvd å vise hvordan vektordatabasen oppdateres fra
@@ -88,10 +81,10 @@ til modellen, noe som også gir et insentiv for å begrense antall dokumenter.
 
 Både [Azure OpenAI][azure_ai_search] og [Vertex AI][vertex_ai_search] tilbyr
 egne databaser for søk sammen med språkmodeller. Argumentet for å bruke disse
-databasene sammenlignet med en renere vektordatabase er at både Azure og Vertex
+databasene sammenlignet med self-hosting eller lignende er at både Azure og Vertex
 AI tilbyr forbedret søk, noe som er veldig viktig i en _KBS_ kontekst. Bakdelen
 med disse databasene er at man mister litt av kontrollen over databasen til
-tilbyder samtidig som det er en ekstra kostnad som må tas hensyn til. Det er
+tilbyder, samtidig som det er en ekstra kostnad som må tas hensyn til. Det er
 derfor viktig å teste om de ekstra tjenestene som tilbys gir mer verdi i
 sammenheng med kunnskapsbasen som det skal søkes i.
 
@@ -124,15 +117,32 @@ vektorene.
 
 :::{.column-margin}
 ![Eksempel på embedding av enkelt ord, som illustrerer likhet i vektorrom mellom
-ord som er semantisk like.  Merk for eksempel at avstanden mellom `Mann` -
-`Kvinne` og `Konge` - `Dronning` kan
-sammenlignes.](./assets/images/word%20embedding.png)
+ord som er semantisk like. Merk at vi eksplisitt ikke har markert aksene da
+disse som oftest ikke betyr noe konkret og det er forskjeller i vektorrommet som
+betyr noe.](./assets/images/word_embedding_illustration.png)
+:::
+
+Et eksempel på en operasjon vi kunne ønske å gjøre i vektorrommet er å finne det
+tilsvarende ordet for `Konge` for en kvinne. I bildet i margen kan dette
+illustreres ved å generere en vektor mellom `Mann` og `Konge`. Deretter legger
+vi denne vektoren til punktet for `Kvinne` og velger det nærmeste ordet. I
+bildet i margen tilsvarer dette `Dronning` og vi returnerer det som svar. Merk
+at disse operasjonene bare utføres i det abstrakte vektorrommet og vi forholder
+oss ikke til de faktiske ordene. Allikevel, hvis embedding modellen er god, vil
+disse operasjonene gi gode resultater.
+
+:::{.column-margin}
+![Illustrasjon av hvordan en vektoroperasjon kan
+fungere. Vi finner først forskjellen mellom `Mann` og `Konge` som gir en vektor
+(striplet blå linje). Deretter legger vi denne vektoren til punktet `Kvinne` for å
+finne et ord som burde ha tilsvarende mening for
+kvinne.](./assets/images/word_embedding_illustration.gif)
 :::
 
 Et viktig poeng med embedding modeller er at de kan brukes på mer enn bare
 tekst, multimodale modeller kan også representere bilder, video og lyd. Hvis
 samme modell kan tolke flere forskjellige media kan man så bruke vektorene
-produsert for å sammenligne innholdet i de forskjellige media.
+produsert for å sammenligne innholdet i forskjellige media.
 
 [wiki_rag]: https://en.wikipedia.org/wiki/Prompt_engineering#Retrieval-augmented_generation
 [openai_token]: https://platform.openai.com/docs/introduction/tokens
