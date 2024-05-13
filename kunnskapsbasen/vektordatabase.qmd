@@ -38,10 +38,11 @@ av rammeverk.*
 
 ### Forberede `Document`-er
 
-`LangChain` organiserer kunnskapsbasene sine rundt `Document` som er et dokument
-med tekst, `page_content`, og metadata. Som en første tilnærming leser vi bare
-inn innholdet i et `Document` og legger ved all relevant metadata som vi har fra
-den originale kunnskapsbasen.
+`LangChain` organiserer kunnskapsbasene sine rundt
+[`Document`][langchain_document] som er et dokument med tekst, `page_content`,
+og metadata. Som en første tilnærming leser vi bare inn innholdet i et
+`Document` og legger ved all relevant metadata som vi har fra den originale
+kunnskapsbasen.
 
 ```python
 client = bigquery.Client(project=project)
@@ -182,4 +183,5 @@ vector_store: AzureSearch = AzureSearch(
 Ved oppsett av custom schema for Azure Search index kan man også vurdere å legge til en `scoring profile`. En `scoring profile` kan benyttes for å vekte relevansen av kolonnene som ikke er den vektoriserte teksten, noe som kan være nyttig ved hybridsøk. 
 :::
 
+[langchain_document]: https://api.python.langchain.com/en/latest/documents/langchain_core.documents.base.Document.html#langchain_core.documents.base.Document
 [langchain_text_splitters]: https://python.langchain.com/docs/modules/data_connection/document_transformers/
