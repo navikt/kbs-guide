@@ -19,6 +19,12 @@ skreddersydd for dette formålet. Forhåpentligvis kan guiden fungere som
 inspirasjon for andre systemer, samt gi en innføring i konseptet _KBS_ som kan
 gjenbrukes.
 
+Veiledningen er basert på vårt arbeid med *NKS Digital Assistent*. Koden kan
+sees [på Github][nks_ds_github], merk at vi har valgt en commit som tilsvarer
+det omtrentlige tidspunktet for når teksten ble skrevet.
+
 # Endringslogg
 
 - **{{< meta date >}}**: Første versjon publisert
+
+[nks_ds_github]: https://github.com/navikt/nks_ds/tree/d7ae2c38845170eca5afbdcab126ffe96140676a
