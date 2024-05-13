@@ -44,7 +44,7 @@ Fordelen med `hit rate` og `MRR` er at de begge de begge er enkle å forstå og 
 Ulempen er kanskje at de er litt for enkle:  
 
 - Vi klassifiserer i praksis de returnerte dokumentene binært som "riktig" eller "feil". I virkeligheten vil dokumentene ha ulike grad av relevans, der tekster som ikke er "fasit"-teksten likevel kan handle om samme tema som det syntetiske spørsmålet. Her kan man vurdere å utarbeide en mer avansert relevans-scoring og anvende evalueringsmetrikker som hensyntar dette.   
-- `hit rate` og `MRR` vil egne seg  mindre bra til å evaluere caser der det er meningen å returnere mer enn 1 tekst. Selv om den type caser vil være viktig for NKS Digital assistent å beherske, så har vi i sammenligningen av vektordatabasene holdt dette utenfor.  
+- `hit rate` og `MRR` vil egne seg  mindre bra til å evaluere caser der det er meningen å returnere mer enn 1 tekst. Selv om den type caser vil være viktig for NKS Digital Assistent å beherske, så har vi i sammenligningen av vektordatabasene holdt dette utenfor.  
 - `hit rate` og `MRR` gir heller ingen "straff" til vektordatabasene dersom de returnerer irrelevante dokumenter (så lenge riktig dokument blir funnet.)  
 
 En annen faktor å ha med i betraktingen er at noen av tekstene som har vært kilde for et syntetisk spørsmål, har i vektordatabasene blitt splittet opp i flere chunks. Når vi ber om å få returnert de topp `k` mest relevante dokumentene for et spørsmål kan det derfor hende at samme tekst vil bli representert mer enn én gang i resultatsettet. Vi har valgt å holde evalueringen på "tekst-nivå" ved å gi uttelling til vektordatabasen for den høyest rangerte chunken fra riktige tekst. 
