@@ -19,8 +19,10 @@ gjentakende svar som ligner på hverandre. Bakdelen med dette er at svarene har
 en tendens til å bli kortere og kan oppleves kjedelig av brukeren.
 :::
 
+::: {.column-margin}
 [`LangChain` har en god introduksjon til *KBS*][langchain_rag] som inneholder
 mer detaljer enn det vi kommer til å gjenskape her.
+:::
 
 ## Gi dokumenter til modellen
 
@@ -102,6 +104,11 @@ svaret fra modellen som en ren tekststreng.
 
 Tilslutt, for å benytte kjeden:
 
+::: {.column-margin}
+[`LangChain` har støtte for å kalle på kjeden på mange forskjellige
+måter][langchain_runnable] i forskjellige kontekster. Dette gir muligheter for å
+`batch`-e kallene eller strømme svar for bedre brukeropplevelse.
+:::
 
 ```python
 rag_chain.invoke("Hva er samordning mellom dagpenger og sykepenger?")
@@ -114,12 +121,6 @@ NAV vurdere en kombinasjon av dagpenger og sykepenger. Dette innebærer at
 personen må sende inn søknad om sykepenger og NAV vil sende beskjed til det
 lokale NAV-kontoret som vurderer denne samordningen.
 ```
-
----
-
-[`LangChain` har støtte for å kalle på kjeden på mange forskjellige
-måter][langchain_runnable] i forskjellige kontekster. Dette gir muligheter for å
-`batch`-e kallene eller strømme svar for bedre brukeropplevelse.
 
 ## Forbedre spørsmål i en chat-historikk
 
