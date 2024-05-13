@@ -25,6 +25,11 @@ datafortelling)](https://data.ansatt.nav.no/story/98cec0de-b872-4713-a56f-9bdb49
 
 Med de syntetiske spørsmålene har vi ønsket å sammenligne hvor gode de forskjellige vektordatabasene er på å finne tilbake "fasiten", det vil si teksten som spørsmålet ble generert fra. 
 
+::: {.column-margin}
+Merk at vi har benyttet standard oppsett fra hver tilbyder gjennom `LangChain`,
+noe som resulterer i forskjellige distanse metrikker og forskjeller i indekser.
+:::
+
 To metrikker som ofte går igjen i evaluering av RAG-systemer er `hit rate` og `mean reciprocal rank`. Se f.eks [LlamaIndex](https://www.llamaindex.ai/blog/boosting-rag-picking-the-best-embedding-reranker-models-42d079022e83). 
 
 ### Hit rate
