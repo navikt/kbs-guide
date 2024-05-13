@@ -1,5 +1,9 @@
 # Forberedelser
 
+For å komme i gang med *KBS* må vi først gjøre klar API tjenester til ønsket
+embedding- og språkmodell. Vi har forsøkt å oppsummere stegene under for ansatte
+i NAV IT.
+
 ## Providere tjenester på Azure OpenAI Services
 
 - Opprett et prosjekt på Azure OpenAI
@@ -19,8 +23,8 @@ til dataseksjonen][azure_tilgang].
         - Dette tar deg til Azure OpenAI Studio
     - Velg `Create new deployment` og sett opp ønskede ressurser
         - For _KBS_ trenger man
-            - `text-embedding-ada-002`
-            - `gpt-4`
+            - `text-embedding-ada-002` (embedding modell)
+            - `gpt-4` (språkmodell)
 
 ### Providere en Azure Search instans
 Dersom man videre vil bruke Azure Search som vektordatabase setter man opp dette slik:
@@ -38,7 +42,7 @@ For beskrivelse av hvordan man laster opp dokumenter til en Azure Search Index, 
 
 - For å komme i gang med Vertex AI trenger man et prosjekt på GCP og deretter
 [aktivere Vertex AI komponentene][vertex_tilgang].
-    - Vertex AI komponentene også aktiveres med: `gcloud services enable aiplatform.googleapis.com`
+    - Vertex AI komponentene kan også aktiveres med: `gcloud services enable aiplatform.googleapis.com`
 
 
 [azure_tilgang]: https://dataseksjonen.intern.nav.no/kompetanse/guider/openai_azure.html
