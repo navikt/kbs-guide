@@ -1,0 +1,28 @@
+name: Publiser KBS bok
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build-deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout source
+              uses: actions/checkout@v4
+            - name: Install Quarto
+              uses: quarto-dev/quarto-actions/setup@v2
+              with:
+                # Trenger Latex for PDF output
+                tinytex: true
+            - name: Render project
+              uses: quarto-dev/quarto-actions/render@v2
+            # TODO: Last opp til Datamarkedsplassen
+            - name: Save output
+              uses: actions/upload-artifact@v4
+              with:
+                name: kbs_guide
+                path: _book
+                overwrite: true
