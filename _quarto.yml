@@ -13,7 +13,7 @@ book:
       affiliation: NAV IT
       email: beate.sildnes@nav.no
   publisher: "NAV - Arbeids- og velferdsetaten"
-  image: "./assets/images/rag_overview.png"
+  image: "./assets/cover.png"
   genre: "Guide, Tutorial, Veiledning"
   license: "CC BY"
   language: "no"
@@ -60,3 +60,5 @@ format:
     theme:
       light: flatly
       dark: darkly
+  epub:
+    cover-image: ./assets/cover.png
