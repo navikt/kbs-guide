@@ -20,8 +20,8 @@ en tendens til å bli kortere og kan oppleves kjedelig av brukeren.
 :::
 
 ::: {.column-margin}
-[`LangChain` har en god introduksjon til *KBS*][langchain_rag] som inneholder
-mer detaljer enn det vi kommer til å gjenskape her.
+Merk at [`LangChain` har en god introduksjon til *KBS*][langchain_rag] som
+inneholder mer detaljer enn det vi kommer til å gjenskape her.
 :::
 
 ## Gi dokumenter til modellen
