@@ -64,3 +64,7 @@ format:
   epub:
     cover-image: ./assets/cover.png
     epub-cover-image: ./assets/cover.png
+  pdf:
+    toc: true
+    colorlinks: true
+    number-sections: true
