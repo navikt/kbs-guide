@@ -132,12 +132,14 @@ oss ikke til de faktiske ordene. Dette gjør for eksempel at vi kunne ha gjort
 operasjonene i motsatt retning og funnet et ord som tilsvarer forskjellen mellom
 `Konge` og `Mann` for `Dronning`.
 
-:::{.column-margin}
+::: {.content-visible unless-format="pdf"}
+::: {.column-margin}
 ![Animasjon av hvordan en vektoroperasjon kan
 fungere. Vi finner først forskjellen mellom `Mann` og `Konge` som gir en vektor
 (striplet blå linje). Deretter legger vi denne vektoren til punktet `Kvinne` for å
 finne et ord som burde ha tilsvarende mening for
 kvinne.](./assets/images/word_embedding_illustration.gif)
+:::
 :::
 
 Et viktig poeng med embedding modeller er at de kan brukes på mer enn bare
