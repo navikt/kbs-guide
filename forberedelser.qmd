@@ -45,6 +45,6 @@ For beskrivelse av hvordan man laster opp dokumenter til en Azure Search Index, 
     - Vertex AI komponentene kan også aktiveres med: `gcloud services enable aiplatform.googleapis.com`
 
 
-[azure_tilgang]: https://dataseksjonen.intern.nav.no/kompetanse/guider/openai_azure.html
+[azure_tilgang]: https://dataseksjonen.ansatt.nav.no/kompetanse/guider/openai_azure.html
 [vertex_tilgang]: https://cloud.google.com/vertex-ai/docs/start/cloud-environment
 [azure_portal]: https://portal.azure.com
