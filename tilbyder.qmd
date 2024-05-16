@@ -20,8 +20,24 @@ utvikling og tilbyr ekstra funksjonalitet utover bare språkmodellen,
 vektordatabase og embedding modell. Bakdelen med disse no/low-code løsningene er
 selvsagt at man mister litt av kontrollen og låser seg helt til en tilbyder.
 
++-----------------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
+| Organisering          | Fordeler                                                        | Ulemper                                                                |
++=======================+=================================================================+========================================================================+
+| No/low-code           | -   Enkelt å komme i gang med                                   | -   Låser til én tilbyder av alle komponenter                          |
+|                       | -   Krever ikke kodekompetanse                                  | -   Kan ikke kjøre på NAIS                                             |
+|                       | -   Både Azure og Vertex AI er verdensledende på *KBS* systemer | -   Vanskelig å feilsøke hvis systemet ikke oppfører seg som forventet |
+|                       |                                                                 | -   Vanskelig å gjøre utvidelser utover det tilbyder allerede støtter  |
++-----------------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
+| Selvlaget             | -   Full kontroll og innsikt i systemet                         | -   Krever kodekompetanse                                              |
+|                       | -   Kan blande tilbydere av komponenter                         | -   (Kanskje) Lengre ledetid til produksjon                            |
+|                       | -   Kan kjøre på NAIS plattformen                               |                                                                        |
++-----------------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
+
+: Fordeler og ulemper med no/low-code løsninger
+
 ::: {.callout-tip collapse="true"}
 ## Alternativer til no/low-code
+
 Det er selvsagt mange alternativer man kan utforske når man ikke går for en av
 no/low-code løsningene til Azure OpenAI eller Vertex AI og vi kommer ikke til å
 liste opp alle her, men kanskje forslagene kan være et sted å starte å se på
@@ -31,7 +47,7 @@ alternativer:
 språkmodell-baserte applikasjoner.
     -   Har støtte for de fleste tilbydere og man kan gjennom dette rammeverket
     kalle på Azure OpenAI og Vertex AI modeller.
-- [`LlamaIndex`](https://www.llamaindex.ai/) - Et rammeverk for å skape
+-   [`LlamaIndex`](https://www.llamaindex.ai/) - Et rammeverk for å skape
 språkmodell-baserte applikasjoner.
 -   API direkte - Et godt valg hvis man vet at man ikke kommer til å bytte
 mellom tilbydere.
@@ -52,7 +68,7 @@ begge modeller og preferanser utover selve modellen. Husk også at modellene
 forbedres hele tiden så egen erfaring og testing burde veie tungt sammenlignet
 med tidsbestemte anbefalinger, som denne tabellen.
 
-::: {.column-margin}
+::: column-margin
 På kort sikt er det fornuftig å velge en språkmodell som gir gode svar fra
 første stund. Men i et lengre perspektiv burde produktutviklingen i NAV ta
 stilling til lokale modeller som kan ytterligere tilpasses den enkeltes
@@ -70,7 +86,7 @@ bruksområde.
 
 : Fordeler og ulemper ved valg av språkmodell.
 
-:::{.column-margin}
+::: column-margin
 Selv om `GPT` modellene fra Azure OpenAI i dag *kanskje* gir bedre svar vil det
 på sikt jevne seg ut[^tilbyder-1]. Gemeni-1.5 Pro har for eksempel et veldig mye
 større kontekstvindu som kan være attraktivt.
@@ -101,12 +117,13 @@ Norsk godt.
 
 ::: {.callout-tip collapse="true"}
 ## Benchmark som et godt utgangspunkt
+
 Det finnes flere benchmark-er som sammenligner forskjellige modeller som gir et
 godt utgangspunkt før man velger modell.
 
-- [Skandinavisk modell
+-   [Skandinavisk modell
 sammenligning](https://kennethenevoldsen.github.io/scandinavian-embedding-benchmark/)
-- [Hugging Face embedding
+-   [Hugging Face embedding
 leaderboard](https://huggingface.co/spaces/mteb/leaderboard)
 :::
 
@@ -121,6 +138,7 @@ har også mulighet for å velge en "self-hosted" løsning med PostgreSQL.
 
 ::: {.callout-note collapse="true"}
 ## *KBS* i NAV
+
 På NAIS plattformen vil det være Cloud SQL med støtte for `pgvector` som vil
 være ekvivalent med en "self-hosted" løsning.
 :::
@@ -148,12 +166,12 @@ anbefalingene så må man teste og vurdere på bakgrunn av kunnskapsbasen man
 |                         | -   Enklere å kombinere tabeller for applikasjonen | -   Krever mer i oppstartfasen               |
 |                         | -   Mer kontroll over database og kostnader        | -   Krever kode                              |
 +-------------------------+----------------------------------------------------+----------------------------------------------+
-| BigQuery                | -   Enkel tilgang for NAV                          | -   Låser til Google GCP [^2]                |
+| BigQuery                | -   Enkel tilgang for NAV                          | -   Låser til Google GCP [^tilbyder-2]       |
 |                         | -   Enkelt å komme i gang med                      |                                              |
 |                         | -   God nok ytelse for mindre kunnskapsbaser       |                                              |
 +-------------------------+----------------------------------------------------+----------------------------------------------+
 
 : Fordeler og ulemper med vektordatabaser.
 
-[^2]: BigQuery er en proprietær løsning fra Google og er ikke nødvendigvis
-overførbar til andre SQL løsninger.
+[^tilbyder-2]: BigQuery er en proprietær løsning fra Google og er ikke
+nødvendigvis overførbar til andre SQL løsninger.
