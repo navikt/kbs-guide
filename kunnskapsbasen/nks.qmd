@@ -2,6 +2,12 @@
 
 NAV Kontaktsenter (NKS) sitt oppslagsverk med rutiner og faglig innhold heter kunnskapsbasen. Kunnskapsbasen består av mange kunnskapsartikler.
 
+::: {.callout-important}
+## For henvendelser om NKS kunnskapsbasen
+Kunnskapsbasen forvaltes av NKS. Ved bruk av Kunnskapsbasen kontaktes NKS
+direkte ved [Daniel Sundnes](mailto:daniel.sundnes@nav.no).
+:::
+
 En kunnskapsartikkel er inneholder informasjon som veilederne i NAV Kontaktsenter kan dele med den som tar kontakt. Artiklene kan også inneholde interne rutiner og grensesnitt. Kunnskapsartiklene oppdateres jevnlig av NKS sine fagnettverk.
 
 For ansatte i NKS er kunnskapsbasen tilgjengelig gjennom Salesforce. For NAV-ansatte uten Salesforce-lisens er kunnskapsartiklene tilgjengelig via [datamarkedsplassen](https://data.intern.nav.no/quarto/e7b3e02a-0c45-4b5c-92a2-a6d364120dfb).
