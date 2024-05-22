@@ -13,7 +13,7 @@ book:
       affiliation: NAV IT
       email: beate.sildnes@nav.no
   publisher: "NAV - Arbeids- og velferdsetaten"
-  image: "./assets/cover.png"
+  image: assets/cover.png
   genre: "Guide, Tutorial, Veiledning"
   license: "CC BY"
   language: "no"
@@ -43,7 +43,7 @@ book:
     - appendices/pgvector.qmd
     - appendices/definisjoner.qmd
   navbar:
-    logo: "./assets/nav_logo.svg"
+    logo: assets/nav_logo.svg
     logo-alt: "Logo til NAV - Arbeids- og velferdsetaten"
     right:
       - icon: slack
@@ -62,8 +62,8 @@ format:
       light: flatly
       dark: darkly
   epub:
-    cover-image: ./assets/cover.png
-    epub-cover-image: ./assets/cover.png
+    cover-image: assets/cover.png
+    epub-cover-image: assets/cover.png
   pdf:
     toc: true
     colorlinks: true
