@@ -19,10 +19,11 @@ jobs:
                 tinytex: true
             - name: Render project
               uses: quarto-dev/quarto-actions/render@v2
-            # TODO: Last opp til Datamarkedsplassen
-            - name: Save output
-              uses: actions/upload-artifact@v4
+            - name: Last opp til Datamarkedsplassen
+              uses: navikt/story-upload@v1
               with:
-                name: kbs_guide
-                path: _book
-                overwrite: true
+                id: 58aa330c-3a72-470e-926f-22e029719879
+                dir: _book
+                team_token: ${{ secrets.TEAM_TOKEN }}
+                env: prod
+                public: false
