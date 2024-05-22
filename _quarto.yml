@@ -17,7 +17,7 @@ book:
   genre: "Guide, Tutorial, Veiledning"
   license: "CC BY"
   language: "no"
-  date: now
+  date: "05.22.2024"
   date-format: "DD.MM.YYYY"
   page-navigation: true
   repo-url: https://github.com/navikt/kbs-guide
