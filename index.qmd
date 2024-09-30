@@ -25,6 +25,7 @@ det omtrentlige tidspunktet for når teksten ble skrevet.
 
 # Endringslogg
 
+- **30.09.2024**: Modell med `LangChain` og `LangGraph`
 - **{{< meta date >}}**: Første versjon publisert
 
 [nks_ds_github]: https://github.com/navikt/nks_ds/tree/d7ae2c38845170eca5afbdcab126ffe96140676a
