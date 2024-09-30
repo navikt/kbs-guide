@@ -409,48 +409,51 @@ graph TD;
 Det siste vi skal diskutere i dette kapittelet er hvordan man kan guide modellen
 til å gi kilder. 
 
-Utenom system spesifikk sitering vil arbeidet med sitering være forbehold
-ledetekstutvikling (@def-prompt-engineer). Her anbefales det å prøve seg frem og
-be språkmodellen om strukturerte svar i form av `JSON` eller `XML` som man
-deretter kan tolke. Store språkmodeller som `GPT-4` er gode på å tolke og
-formulere både `JSON` og `XML` så denne egenskapen kan brukes for å hente ut
-strukturerte svar uten at modellen må tilpasses.
+For `LangChain` er den beste måten å generere siteringer å benytte [strukturerte
+svar][langchain_structured]. Med denne teknikken passer `LangChain` på at
+språkmodellen gir ut forventet JSON struktur og vi kan til og med validere dette
+med Pydantic.
 
-Vi modifiserer systemledeteksten vi brukte i forrige seksjon til å inneholde et
-krav om å forklare hvor sitatet kom fra.
+### Eksempel
 
-```txt
-You are an assistant for question-answering tasks. Use the following pieces of
-retrieved context to answer the question. If you don't know the answer, just
-say that you don't know. Use three sentences maximum and keep the answer
-concise. Answer in Norwegian, or English if the question is English.
+Vi kommer til å benytte en Pydantic modell, noe som gir god sikkerhet i hva som
+blir produsert samtidig som det gir stor frihet i oppbygningen av svar-modellen.
 
-When answering you should try to cite VERBATIM from the context in the form of
-<quote source="KnowledgeArticleId" title="Tittel" section="Seksjon">Text
-quote</quote>.
+::: {.callout-important}
+Merk at både `docstring` og `description` attributtene blir sendt til
+språkmodellen, så disse må inneholde gode beskrivelser av hva som forventes av
+språkmodellen.
+:::
 
-{context}
+```python
+from pydantic import BaseModel, Field
+
+class CitedAnswer(BaseModel):
+    """Answer to the user question with citation to source"""
+    answer: str = Field(description="The answer to the user's question")
+    citation: str = Field(description="Citation from the source")
 ```
 
-Ledeteksten over gir svar på følgende format:
+Vi benytter så denne svar-modellen sammen med språkmodellen.
 
-```txt
-Spørsmål til kunnskapsbasen: Hva er samordning mellom dagpenger og sykepenger?
+```python
+from langchain_google_vertexai import ChatVertexAI
 
-Samordning mellom dagpenger og sykepenger er en prosess som skal hindre at flere
-ytelser hver for seg gir full dekning for samme inntektstap. Det er aktuelt å
-samordne dagpenger og sykepenger når man fyller vilkårene for begge ytelsene
-samtidig. Dette vil være aktuelt i tilfeller hvor bruker er sykmeldt 50% eller
-mindre. Hvis bruker er sykmeldt over 50%, er det ikke aktuelt med samordning
-mellom sykepenger og dagpenger, da det er kun sykepenger som er aktuelt. <quote
-source="kA02o000000M7PACA0" title="Dagpenger DP - Dagpenger og sykepenger"
-section="Intern informasjon">Samordning skal hindre at flere ytelser hver for
-seg gir full dekning for samme inntektstap.</quote> <quote
-source="kA02o000000M8QUCA0" title="Sykepenger - Kombinerte ytelser: Dagpenger"
-section="Intern informasjon">Sykepenger og dagpenger kan kombineres / samordnes.
-Dette vil være aktuelt i tilfeller hvor bruker er sykmeldt 50% eller mindre
-(inntil 50% sykmelding).</quote>
+llm = ChatVertexAI(model_name="gemini-1.5-flash-002")
+structured_llm = llm.with_structured_output(CitedAnswer)
 ```
+
+Når vi så benytter denne modellen vil alle svar være av typen `CitedAnswer` og
+vi kan aksessere attributtene i denne svar-modellen som et vanlig Pydantic
+objekt.
+
+```python
+answer = structured_llm.invoke("What is the meaning of life?")
+print(f"Svaret på livet: {answer.answer}")
+print(f"Begrunnelse: {answer.citation}")
+```
+
 
 [langgraph_rag]: https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag/
 [langchain_runnable]: https://python.langchain.com/docs/expression_language/interface/
+[langchain_structured]: https://python.langchain.com/docs/how_to/structured_output/
