@@ -9,6 +9,33 @@ språkmodellene. Dette gjør at det ikke er så mye som skal settes opp for å k
 i gang og jobben som må gjøres går mer på å forberede ledetekst
 (@def-prompt-engineer) enn å sette opp selve språkmodellen.
 
+For å skape et system som enkelt kan utvides med funksjonalitet og flere
+språkmodeller som jobber sammen for å generere endelig svar kommer vi til å
+benytte [`LangGraph`](https://langchain-ai.github.io/langgraph/) sammen med
+`LangChain`. I `LangGraph` modelleres systemet som en graf (vi kommer til å
+bruke begrepet _kjøretidsgraf_) hvor noder utfører handlinger, mens kanter
+dirigerer flyten mellom nodene. `LangGraph` gjør det enklere å modellere flyten
+mellom språkmodeller og samtidig blir koden ofte mer lesbar fordi det er flere
+"vanlige" Python metoder sammenlignet med `LangChain`.
+
+
+::: {.column-margin}
+Merk at [`LangGraph` har introduksjon til flere varianter av
+*KBS*][langgraph_rag] som inneholder mer detaljer enn det vi kommer til å
+gjenskape her.
+:::
+
+::: {.column-margin}
+Vi har illustrert forskjellen på ren `LangChain` mot `LangGraph` i en
+[presentasjon du finner
+her](https://data.ansatt.nav.no/story/134d904a-5321-4b0b-a537-1b34011f342e/index.html).
+:::
+
+::: {.callout-caution}
+Veiledningen brukte tidligere bare `LangChain`, mens nyere erfaring tilsier at
+`LangChain` + `LangGraph` gir mer forståelig flyt og enklere å utvide systemet.
+:::
+
 :::{.callout-note collapse="true"}
 ## Temperatur til språkmodellen
 En av de få variablene som man kan endre på som vil gi store utslag på svarene
@@ -19,19 +46,63 @@ gjentakende svar som ligner på hverandre. Bakdelen med dette er at svarene har
 en tendens til å bli kortere og kan oppleves kjedelig av brukeren.
 :::
 
-::: {.column-margin}
-Merk at [`LangChain` har en god introduksjon til *KBS*][langchain_rag] som
-inneholder mer detaljer enn det vi kommer til å gjenskape her.
+## Opprette en kjøretidsgraf
+
+Det første man burde tenke over med `LangGraph` er hvordan tilstanden som sendes
+mellom nodene skal se ut. Til å begynne med har vi en enkel tilstand med
+spørsmål fra bruker, et sted for dokumentene vi henter fra vektordatabasen og
+svaret fra språkmodellen.
+
+Vi definerer tilstanden som en `TypedDict` for å si at tilstanden er en `dict`
+med bare angitte nøkler.
+
+```{.python}
+from typing import TypedDict
+
+class GraphState(TypedDict):
+    """Tilstanden i kjøretidsgrafen"""
+    question: str
+    context: list[str]
+    answer: str
+```
+
+Når vi kompilerer og bruker kjøretidsgrafen senere vil det bli tydelig hvordan
+denne klassen brukes i praksis.
+
+### Hente dokumenter
+
+Det første vi må gjøre i *KBS* systemet vårt er å hente ut dokumenter slik at vi
+har noe språkmodellen kan jobbe med. Dette blir inngangen i kjøretidsgrafen vår
+og vi definerer den første noden.
+
+::: {.callout-important}
+Signaturen til nodene i `LangGraph` har formen `GraphState` -> `Partial update`.
+Dette tillater flere noder å parallelt produsere svar som senere blir kombinert.
 :::
 
-## Gi dokumenter til modellen
+```python
+from langchain_google_community import BigQueryVectorSearch
 
-Det første vi trenger å gjøre i *KBS* systemet er å gi språkmodellen tilgang til
-utvalgte dokumenter fra kunnskapsbasen vår. Siden de fleste språkmodeller har
-begrenset kontekstvindu må vi begrense antall dokumenter, også for å ikke
-forvirre modellen. Måten vi gjør dette på er å designe systemledeteksten vår på
-en måte hvor den inneholder dokumentene og så ber modellen svare på påfølgende
-spørsmål på bakgrunn av disse dokumentene.
+store = BigQueryVectorSearch.from_documents()  # Se kapittel om vektordatabase
+retriever = store.as_retriever(search_kwargs=dict(k=5))
+
+def retrieve(state):
+    """Node i grafen som henter dokumenter fra vektordatabasen
+    basert på spørsmål fra bruker."""
+    docs = retriever.invoke(state["question"])
+    return {"context": docs}
+```
+
+Denne noden blir inngangen i kjøretidsgrafen vår. Merk også at i denne noden så
+benytter vi oss ikke av en språkmodell. Dette illustrerer styrken i `LangGraph`
+ved at vi kan kjede sammen forskjellige noder med forskjellige oppgaver.
+
+### Be modellen generere svar på bakgrunn av dokumentene
+
+Det neste vi trenger å gjøre i *KBS* systemet er å gi språkmodellen tilgang til
+dokumentene fra kunnskapsbasen vår. Måten vi gir dokumenter på er å designe
+systemledeteksten vår på en måte hvor den inneholder dokumentene og så ber
+modellen svare på påfølgende spørsmål på bakgrunn av disse dokumentene.
 
 Et eksempel på en systemledetekst er gitt under:
 ```txt
@@ -74,53 +145,65 @@ prompt = ChatPromptTemplate.from_messages(
 )
 ```
 
-Vi setter så dette sammen til en `LangChain` kjede:
+Vi lager deretter en funksjon som vil fungere som en node i `LangGraph`
+kjøretidsgrafen vår.
 
 ```python
 from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnablePassthrough
-from langchain_google_community import BigQueryVectorSearch
 from langchain_openai import AzureChatOpenAI
 
-store = BigQueryVectorSearch.from_documents()  # Se kapittel om vektordatabase
-retriever = store.as_retriever(search_kwargs=dict(k=5))
 llm = AzureChatOpenAI()
-rag_chain = (
-    {"context": retriever , "question": RunnablePassthrough()}
-    | prompt
-    | llm
-    | StrOutputParser()
-)
+chain = prompt | llm | StrOutputParser()
+
+def generator(state):
+    """Noden som svarer på spørsmål"""
+    context = "\n\n".join(state["context"])
+    answer = chain.invoke({"context": context, "question": state["question"]})
+    return {"answer": answer}
 ```
 
-Måten denne kjeden fungerer er ved at `context` blir fylt ut av `retriever` (ved
-å kalle `__call__` metoden til `retriever` som søker i vektordatabasen med
-teksten som kommer inn som argument til hele kjeden) samtidig som `question`
-blir fylt ut av teksten som kommer inn som argument til kjeden. Deretter sendes
-begge disse over til `prompt` som bruker parameterne (`context` og `question`)
-til å formatere ledeteksten. Ferdig utfylt ledetekst blir deretter sendt til
-språkmodellen, `llm`, som genererer svaret vårt. Kjeden avsluttes ved å tolke
-svaret fra modellen som en ren tekststreng.
+### Bygge grafen
 
-Tilslutt, for å benytte kjeden:
+For å sette sammen stegene over bygger vi kjøretidsgrafen.
+
+```python
+from langgraph.graph import END, START, StateGraph
+
+# Vi benytter her tilstanden vi definerte i starten som grunnlag for grafen
+workflow = StateGraph(GraphState)
+
+# Legg til noder i grafen
+workflow.add_node(retrieve)
+workflow.add_node("rag", generator)
+
+# Definer hvordan nodene henger sammen
+workflow.add_edge(START, "retrieve")
+workflow.add_edge("retrieve", "rag")
+workflow.add_edge("rag", END)
+
+# Kompiler grafen
+app = workflow.compile()
+```
+
+Tilslutt, for å benytte grafen:
 
 ::: {.column-margin}
-[`LangChain` har støtte for å kalle på kjeden på mange forskjellige
+[`LangGraph` har støtte for å kalle på kjeden på mange forskjellige
 måter][langchain_runnable] i forskjellige kontekster. Dette gir muligheter for å
 `batch`-e kallene eller strømme svar for bedre brukeropplevelse.
 :::
 
 ```python
-rag_chain.invoke("Hva er samordning mellom dagpenger og sykepenger?")
+initial_state = {"question": "Hva er samordning mellom dagpenger og sykepenger?"}
+final_state = app.invoke(initial_state)
+final_state["answer"]
 ```
 
-```txt
 > Samordning mellom dagpenger og sykepenger er relevant når en person er
-sykmeldt, men fortsatt i stand til å jobbe 50% eller mer. I slike tilfeller vil
-NAV vurdere en kombinasjon av dagpenger og sykepenger. Dette innebærer at
-personen må sende inn søknad om sykepenger og NAV vil sende beskjed til det
-lokale NAV-kontoret som vurderer denne samordningen.
-```
+> sykmeldt, men fortsatt i stand til å jobbe 50% eller mer. I slike tilfeller vil
+> NAV vurdere en kombinasjon av dagpenger og sykepenger. Dette innebærer at
+> personen må sende inn søknad om sykepenger og NAV vil sende beskjed til det
+> lokale NAV-kontoret som vurderer denne samordningen.
 
 ## Forbedre spørsmål i en chat-historikk
 
@@ -154,19 +237,47 @@ kontekst fra det første spørsmålet. Språkmodellen mottar deretter dokumenter
 ikke har så mye med samordning og pensjon, og klarer ikke å generere et svar med
 de begrensningene vi har gitt i systemledeteksten.
 
-For å utbedre dette kan vi først benytte språkmodellen til å omformulere
+For å utbedre dette kan vi først benytte en språkmodell til å omformulere
 spørsmålet før vi sender spørsmålet videre til vektordatabasen.
 
 ### Omformulere spørsmålet
 
-Teknikken er å be språkmodellen om å omformulere spørsmålet hvis det mangler
+Teknikken er å be en språkmodellen om å omformulere spørsmålet hvis det mangler
 kontekst. Dette koster oss litt ekstra tid ved å spørre en språkmodellen, men
-det er en robust måte å få omformulert spørsmålet slik at man ikke trenger
-chat historikk for å finne dokumenter i vektordatabasen. I @fig-context-system
-har vi illustrert hvordan omformulering fungerer.
+det er en robust måte å få omformulert spørsmålet slik at man ikke trenger chat
+historikk for å finne dokumenter i vektordatabasen.
 
-Vi lager først en ny ledetekst som ber språkmodellen om å kontekstualisere et
-spørsmål:
+::: {.column-margin}
+For mindre krevende oppgaver kan det være lurt å benytte raskere modeller som
+`GPT-4o-mini` eller `Gemini-1.5-Flash`. Disse er mer enn kapable til å håndtere
+mindre oppgaver samtidig som de er billigere og mye raskere.
+:::
+
+#### Oppdatere tilstand
+
+Det første vi må gjøre for å støtte omformulering er å legge til støtte for
+omformulering i tilstand. Vi gjør dette for å ha mulighet for å gi språkmodellen
+som genererer svar enten det originale spørsmålet eller det omformulerte.
+
+```{.python}
+from typing import TypedDict
+from langchain_core.messages import BaseMessage
+
+class GraphState(TypedDict):
+    """Tilstanden i kjøretidsgrafen"""
+    question: str
+    rewritten_q: str # <1>
+    chat_history: list[BaseMessage] # <2>
+    context: list[str]
+    answer: str
+```
+1. Legger til ny variabel med omformulert spørsmål.
+2. Legger til chat historikk som en variabel.
+
+#### Node for omformulering
+
+Vi må nå fylle den nye tilstanden med et omformulert spørsmål. Vi lager først
+en ny ledetekst som ber språkmodellen om å kontekstualisere et spørsmål:
 
 ```txt
 Given a chat history and the latest user question which might reference context
@@ -191,18 +302,6 @@ context_prompt = ChatPromptTemplate.from_messages(
     )
 ```
 
-Tilslutt kombinerer vi både kontekst omformuleringen med vår tidligere kjede:
-
-```python
-from langchain.chains import create_history_aware_retriever, create_retrieval_chain
-from langchain.chains.combine_documents import create_stuff_documents_chain
-
-history_retriever = create_history_aware_retriever(llm, retriever, context_prompt)
-qa_chain = create_stuff_documents_chain(llm, question_prompt)
-
-rag_chain = create_retrieval_chain(history_retriever, qa_chain)
-```
-
 Merk at `question_prompt` også blir endret til å inneholde `MessagesPlaceholder`
 for å gi chat historikken til språkmodellen:
 
@@ -216,65 +315,145 @@ question_prompt = ChatPromptTemplate.from_messages(
 )
 ```
 
-### Illustrert
+Vi lager deretter en node til kjøretidsgrafen som kan omformulere spørsmålet.
 
-Oppsummert ender vi opp med et system som illustrert i @fig-context-system. For
-vektordatabasen omformulerer vi spørsmålet til et selvstendig spørsmål som ikke
-er avhengig av kontekst. Samtidig ser språkmodellen det originale spørsmålet,
-chat historikken og de relevante dokumentene (hentet ved hjelp av det
-omformulerte spørsmålet).
+```python
+from langchain_core.output_parsers import StrOutputParser
+from langchain_openai import AzureChatOpenAI
 
-![Illustrasjon av hvordan omformulering fungerer for å hente ut relevante
-dokumenter til det originale
-spørsmålet.](./assets/images/vectordatabase_context.png){#fig-context-system}
+_llm = AzureChatOpenAI()
+context_chain = context_prompt | _llm | StrOutputParser()
+
+def context(state):
+    """Noden som omformulerer spørsmål hvis det trengs mer kontekst"""
+    new_question = context_chain.invoke(
+        {
+            "question": state["question"],
+            "chat_history": state["chat_history"]
+        }
+    )
+    return {"rewritten_q": new_question}
+```
+
+Når dette er gjort kan vi endre hvilken `state` variabel vi henter spørsmål fra
+i `retrieve` funksjonen vår.
+
+```python
+def retrieve(state):
+    """Node i grafen som henter dokumenter fra vektordatabasen
+    basert på spørsmål fra bruker."""
+    docs = retriever.invoke(state["rewritten_q"]) # <1>
+    return {"context": docs}
+```
+1. Benytte omformulert spørsmål istedenfor originalt spørsmål.
+
+#### Oppdater grafen
+
+Før vi er helt ferdig må vi legge til den nye `context` noden i kjøretidsgrafen.
+
+```python
+from langgraph.graph import END, START, StateGraph
+
+# Vi benytter her tilstanden vi definerte i starten som grunnlag for grafen
+workflow = StateGraph(GraphState)
+
+# Legg til noder i grafen
+workflow.add_node("contextualize", context) # <1>
+workflow.add_node(retrieve)
+workflow.add_node("rag", generator)
+
+# Definer hvordan nodene henger sammen
+workflow.add_edge(START, "contextualize") # <2>
+workflow.add_edge("contextualize", "retrieve") # <2>
+workflow.add_edge("retrieve", "rag")
+workflow.add_edge("rag", END)
+
+# Kompiler grafen
+app = workflow.compile()
+```
+1. Legger til den nye noden i grafen.
+2. Legger den inn som første node, før vi henter dokumenter.
+
+Når dette er gjort kan vi holde styr på chat historikk utenfor grafen og benytte
+dette som input til grafen.
+
+## Kjøretidsgrafen illustrert
+
+En liten fordel med `LangGraph` er at den har mulighet til å illustrere grafen.
+For den enkle grafen vi har bygget her gir det kanskje ikke så mye verdi, men
+for mer kompliserte grafer kan det være et nyttig verktøy.
+
+```python
+app.get_graph().draw_mermaid()
+```
+
+```{mermaid}
+%%{init: {'flowchart': {'curve': 'linear'}}}%%
+graph TD;
+    __start__([<p>__start__</p>]):::first
+    contextualize(contextualize)
+    retrieve(retrieve)
+    rag(rag)
+    __end__([<p>__end__</p>]):::last
+    __start__ --> contextualize;
+    contextualize --> retrieve;
+    rag --> __end__;
+    retrieve --> rag;
+    classDef default fill:#f2f0ff,line-height:1.2
+    classDef first fill-opacity:0
+    classDef last fill:#bfb6fc
+```
 
 ## Sitere kilder
 
 Det siste vi skal diskutere i dette kapittelet er hvordan man kan guide modellen
 til å gi kilder. 
 
-Utenom system spesifikk sitering vil arbeidet med sitering være forbehold
-ledetekstutvikling (@def-prompt-engineer). Her anbefales det å prøve seg frem og
-be språkmodellen om strukturerte svar i form av `JSON` eller `XML` som man
-deretter kan tolke. Store språkmodeller som `GPT-4` er gode på å tolke og
-formulere både `JSON` og `XML` så denne egenskapen kan brukes for å hente ut
-strukturerte svar uten at modellen må tilpasses.
+For `LangChain` er den beste måten å generere siteringer å benytte [strukturerte
+svar][langchain_structured]. Med denne teknikken passer `LangChain` på at
+språkmodellen gir ut forventet JSON struktur og vi kan til og med validere dette
+med Pydantic.
 
-Vi modifiserer systemledeteksten vi brukte i forrige seksjon til å inneholde et
-krav om å forklare hvor sitatet kom fra.
+### Eksempel
 
-```txt
-You are an assistant for question-answering tasks. Use the following pieces of
-retrieved context to answer the question. If you don't know the answer, just
-say that you don't know. Use three sentences maximum and keep the answer
-concise. Answer in Norwegian, or English if the question is English.
+Vi kommer til å benytte en Pydantic modell, noe som gir god sikkerhet i hva som
+blir produsert samtidig som det gir stor frihet i oppbygningen av svar-modellen.
 
-When answering you should try to cite VERBATIM from the context in the form of
-<quote source="KnowledgeArticleId" title="Tittel" section="Seksjon">Text
-quote</quote>.
+::: {.callout-important}
+Merk at både `docstring` og `description` attributtene blir sendt til
+språkmodellen, så disse må inneholde gode beskrivelser av hva som forventes av
+språkmodellen.
+:::
 
-{context}
+```python
+from pydantic import BaseModel, Field
+
+class CitedAnswer(BaseModel):
+    """Answer to the user question with citation to source"""
+    answer: str = Field(description="The answer to the user's question")
+    citation: str = Field(description="Citation from the source")
 ```
 
-Ledeteksten over gir svar på følgende format:
+Vi benytter så denne svar-modellen sammen med språkmodellen.
 
-```txt
-Spørsmål til kunnskapsbasen: Hva er samordning mellom dagpenger og sykepenger?
+```python
+from langchain_google_vertexai import ChatVertexAI
 
-Samordning mellom dagpenger og sykepenger er en prosess som skal hindre at flere
-ytelser hver for seg gir full dekning for samme inntektstap. Det er aktuelt å
-samordne dagpenger og sykepenger når man fyller vilkårene for begge ytelsene
-samtidig. Dette vil være aktuelt i tilfeller hvor bruker er sykmeldt 50% eller
-mindre. Hvis bruker er sykmeldt over 50%, er det ikke aktuelt med samordning
-mellom sykepenger og dagpenger, da det er kun sykepenger som er aktuelt. <quote
-source="kA02o000000M7PACA0" title="Dagpenger DP - Dagpenger og sykepenger"
-section="Intern informasjon">Samordning skal hindre at flere ytelser hver for
-seg gir full dekning for samme inntektstap.</quote> <quote
-source="kA02o000000M8QUCA0" title="Sykepenger - Kombinerte ytelser: Dagpenger"
-section="Intern informasjon">Sykepenger og dagpenger kan kombineres / samordnes.
-Dette vil være aktuelt i tilfeller hvor bruker er sykmeldt 50% eller mindre
-(inntil 50% sykmelding).</quote>
+llm = ChatVertexAI(model_name="gemini-1.5-flash-002")
+structured_llm = llm.with_structured_output(CitedAnswer)
 ```
 
-[langchain_rag]: https://python.langchain.com/docs/use_cases/question_answering/
+Når vi så benytter denne modellen vil alle svar være av typen `CitedAnswer` og
+vi kan aksessere attributtene i denne svar-modellen som et vanlig Pydantic
+objekt.
+
+```python
+answer = structured_llm.invoke("What is the meaning of life?")
+print(f"Svaret på livet: {answer.answer}")
+print(f"Begrunnelse: {answer.citation}")
+```
+
+
+[langgraph_rag]: https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag/
 [langchain_runnable]: https://python.langchain.com/docs/expression_language/interface/
+[langchain_structured]: https://python.langchain.com/docs/how_to/structured_output/
