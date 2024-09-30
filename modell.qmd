@@ -75,6 +75,11 @@ Det første vi må gjøre i *KBS* systemet vårt er å hente ut dokumenter slik 
 har noe språkmodellen kan jobbe med. Dette blir inngangen i kjøretidsgrafen vår
 og vi definerer den første noden.
 
+::: {.callout-important}
+Signaturen til nodene i `LangGraph` har formen `GraphState` -> `Partial update`.
+Dette tillater flere noder å parallelt produsere svar som senere blir kombinert.
+:::
+
 ```python
 from langchain_google_community import BigQueryVectorSearch
 
@@ -84,14 +89,13 @@ retriever = store.as_retriever(search_kwargs=dict(k=5))
 def retrieve(state):
     """Node i grafen som henter dokumenter fra vektordatabasen
     basert på spørsmål fra bruker."""
-    state["context"] = retriever.invoke(state["question"])
-    return state
+    docs = retriever.invoke(state["question"])
+    return {"context": docs}
 ```
 
-Denne noden blir inngangen i kjøretidsgrafen vår. Vi kommer tilbake til hva
-`state` er litt senere. For nå så kan vi merk oss at i denne noden så benytter
-vi oss ikke av en språkmodell. Dette illustrerer styrken i `LangGraph` ved at vi
-kan kjede sammen forskjellige noder med forskjellige oppgaver.
+Denne noden blir inngangen i kjøretidsgrafen vår. Merk også at i denne noden så
+benytter vi oss ikke av en språkmodell. Dette illustrerer styrken i `LangGraph`
+ved at vi kan kjede sammen forskjellige noder med forskjellige oppgaver.
 
 ### Be modellen generere svar på bakgrunn av dokumentene
 
@@ -154,8 +158,8 @@ chain = prompt | llm | StrOutputParser()
 def generator(state):
     """Noden som svarer på spørsmål"""
     context = "\n\n".join(state["context"])
-    state["answer"] = chain.invoke({"context": context, "question": state["question"]})
-    return state
+    answer = chain.invoke({"context": context, "question": state["question"]})
+    return {"answer": answer}
 ```
 
 ### Bygge grafen
@@ -169,7 +173,7 @@ from langgraph.graph import END, START, StateGraph
 workflow = StateGraph(GraphState)
 
 # Legg til noder i grafen
-workflow.add_node("retrieve", retrieve)
+workflow.add_node(retrieve)
 workflow.add_node("rag", generator)
 
 # Definer hvordan nodene henger sammen
@@ -184,7 +188,7 @@ app = workflow.compile()
 Tilslutt, for å benytte grafen:
 
 ::: {.column-margin}
-[`LangChain` har støtte for å kalle på kjeden på mange forskjellige
+[`LangGraph` har støtte for å kalle på kjeden på mange forskjellige
 måter][langchain_runnable] i forskjellige kontekster. Dette gir muligheter for å
 `batch`-e kallene eller strømme svar for bedre brukeropplevelse.
 :::
@@ -233,7 +237,7 @@ kontekst fra det første spørsmålet. Språkmodellen mottar deretter dokumenter
 ikke har så mye med samordning og pensjon, og klarer ikke å generere et svar med
 de begrensningene vi har gitt i systemledeteksten.
 
-For å utbedre dette kan vi først benytte språkmodellen til å omformulere
+For å utbedre dette kan vi først benytte en språkmodell til å omformulere
 spørsmålet før vi sender spørsmålet videre til vektordatabasen.
 
 ### Omformulere spørsmålet
@@ -242,6 +246,12 @@ Teknikken er å be en språkmodellen om å omformulere spørsmålet hvis det man
 kontekst. Dette koster oss litt ekstra tid ved å spørre en språkmodellen, men
 det er en robust måte å få omformulert spørsmålet slik at man ikke trenger chat
 historikk for å finne dokumenter i vektordatabasen.
+
+::: {.column-margin}
+For mindre krevende oppgaver kan det være lurt å benytte raskere modeller som
+`GPT-4o-mini` eller `Gemini-1.5-Flash`. Disse er mer enn kapable til å håndtere
+mindre oppgaver samtidig som de er billigere og mye raskere.
+:::
 
 #### Oppdatere tilstand
 
@@ -316,13 +326,13 @@ context_chain = context_prompt | _llm | StrOutputParser()
 
 def context(state):
     """Noden som omformulerer spørsmål hvis det trengs mer kontekst"""
-    state["rewritten_q"] = context_chain.invoke(
+    new_question = context_chain.invoke(
         {
             "question": state["question"],
             "chat_history": state["chat_history"]
         }
     )
-    return state
+    return {"rewritten_q": new_question}
 ```
 
 Når dette er gjort kan vi endre hvilken `state` variabel vi henter spørsmål fra
@@ -332,8 +342,8 @@ i `retrieve` funksjonen vår.
 def retrieve(state):
     """Node i grafen som henter dokumenter fra vektordatabasen
     basert på spørsmål fra bruker."""
-    state["context"] = retriever.invoke(state["rewritten_q"]) # <1>
-    return state
+    docs = retriever.invoke(state["rewritten_q"]) # <1>
+    return {"context": docs}
 ```
 1. Benytte omformulert spørsmål istedenfor originalt spørsmål.
 
@@ -349,7 +359,7 @@ workflow = StateGraph(GraphState)
 
 # Legg til noder i grafen
 workflow.add_node("contextualize", context) # <1>
-workflow.add_node("retrieve", retrieve)
+workflow.add_node(retrieve)
 workflow.add_node("rag", generator)
 
 # Definer hvordan nodene henger sammen
@@ -364,9 +374,14 @@ app = workflow.compile()
 1. Legger til den nye noden i grafen.
 2. Legger den inn som første node, før vi henter dokumenter.
 
+Når dette er gjort kan vi holde styr på chat historikk utenfor grafen og benytte
+dette som input til grafen.
+
 ## Kjøretidsgrafen illustrert
 
 En liten fordel med `LangGraph` er at den har mulighet til å illustrere grafen.
+For den enkle grafen vi har bygget her gir det kanskje ikke så mye verdi, men
+for mer kompliserte grafer kan det være et nyttig verktøy.
 
 ```python
 app.get_graph().draw_mermaid()
