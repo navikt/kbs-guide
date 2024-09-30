@@ -18,6 +18,13 @@ dirigerer flyten mellom nodene. `LangGraph` gjør det enklere å modellere flyte
 mellom språkmodeller og samtidig blir koden ofte mer lesbar fordi det er flere
 "vanlige" Python metoder sammenlignet med `LangChain`.
 
+
+::: {.column-margin}
+Merk at [`LangGraph` har introduksjon til flere varianter av
+*KBS*][langgraph_rag] som inneholder mer detaljer enn det vi kommer til å
+gjenskape her.
+:::
+
 ::: {.column-margin}
 Vi har illustrert forskjellen på ren `LangChain` mot `LangGraph` i en
 [presentasjon du finner
@@ -37,11 +44,6 @@ fra språkmodellen er [temperatur @def-temperatur].
 I et *KBS* system vil det være naturlig å velge lavere temperatur for å få
 gjentakende svar som ligner på hverandre. Bakdelen med dette er at svarene har
 en tendens til å bli kortere og kan oppleves kjedelig av brukeren.
-:::
-
-::: {.column-margin}
-Merk at [`LangChain` har en god introduksjon til *KBS*][langchain_rag] som
-inneholder mer detaljer enn det vi kommer til å gjenskape her.
 :::
 
 ## Opprette en kjøretidsgraf
@@ -435,5 +437,5 @@ Dette vil være aktuelt i tilfeller hvor bruker er sykmeldt 50% eller mindre
 (inntil 50% sykmelding).</quote>
 ```
 
-[langchain_rag]: https://python.langchain.com/docs/use_cases/question_answering/
+[langgraph_rag]: https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag/
 [langchain_runnable]: https://python.langchain.com/docs/expression_language/interface/
