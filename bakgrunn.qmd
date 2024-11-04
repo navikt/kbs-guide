@@ -77,7 +77,7 @@ viktig at kunnskapsbasen har høy [dekning (eller sensitivitet)][wiki_recall_nn]
 De fleste tilbydere av språkmodeller tar også betalt for antall token i input
 til modellen, noe som også gir et insentiv for å begrense antall dokumenter.
 
-### Hybridsøk
+### Hybridsøk {#sec-hybridsok}
 
 Både [Azure OpenAI][azure_ai_search] og [Vertex AI][vertex_ai_search] tilbyr
 egne databaser for søk sammen med språkmodeller. Argumentet for å bruke disse

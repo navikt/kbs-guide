@@ -90,6 +90,9 @@ genereres slik at vi har mulighet til å hente ut den samme metadata.
 **Husk å ha en form for ID på original dokumentene slik at man kan identifisere
 splitter som hører sammen.**
 
+Hvis du er interessert i å lese om noen mer avanserte teknikker for 
+dokumentoppdeling, sjekk @sec-contextual-retrieval.
+
 ### Opplasting til vektordatabase
 
 Tilslutt kan vi laste opp til vektordatabasen. Litt avhengig av hvordan man

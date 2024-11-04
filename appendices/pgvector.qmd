@@ -1,4 +1,4 @@
-# Oppsett av `pgvector` på NAIS
+# Oppsett av `pgvector` på NAIS {#sec-oppsett-pgvector}
 
 Det er mulig å bruke PostgreSQL på GCP (kalt CloudSQL) som en vektordatabase som
 en del av en [NAIS applikasjon][nais_postgres]. For å gjøre dette må man først
