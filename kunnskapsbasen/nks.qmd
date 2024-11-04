@@ -10,7 +10,7 @@ direkte ved [Daniel Sundnes](mailto:daniel.sundnes@nav.no).
 
 En kunnskapsartikkel er inneholder informasjon som veilederne i NAV Kontaktsenter kan dele med den som tar kontakt. Artiklene kan også inneholde interne rutiner og grensesnitt. Kunnskapsartiklene oppdateres jevnlig av NKS sine fagnettverk.
 
-For ansatte i NKS er kunnskapsbasen tilgjengelig gjennom Salesforce. For NAV-ansatte uten Salesforce-lisens er kunnskapsartiklene tilgjengelig via [datamarkedsplassen](https://data.intern.nav.no/quarto/e7b3e02a-0c45-4b5c-92a2-a6d364120dfb).
+For ansatte i NKS er kunnskapsbasen tilgjengelig gjennom Salesforce. For NAV-ansatte uten Salesforce-lisens er kunnskapsartiklene tilgjengelig via [datamarkedsplassen](https://data.ansatt.nav.no/quarto/e7b3e02a-0c45-4b5c-92a2-a6d364120dfb).
 
 ## Artikkeltyper
 Det finnes i hovedsak 3 artikkeltyper:
