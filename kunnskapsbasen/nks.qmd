@@ -1,6 +1,6 @@
 # NKS kunnskapsbasen {#sec-nks-kunnskapsbase}
 
-NAV Kontaktsenter (NKS) sitt oppslagsverk med rutiner og faglig innhold heter kunnskapsbasen. Kunnskapsbasen består av mange kunnskapsartikler.
+Nav kontaktsenter (NKS) sitt oppslagsverk med rutiner og faglig innhold heter kunnskapsbasen. Kunnskapsbasen består av mange kunnskapsartikler.
 
 ::: {.callout-important}
 ## For henvendelser om NKS kunnskapsbasen
@@ -8,9 +8,9 @@ Kunnskapsbasen forvaltes av NKS. Ved bruk av Kunnskapsbasen kontaktes NKS
 direkte ved [Daniel Sundnes](mailto:daniel.sundnes@nav.no).
 :::
 
-En kunnskapsartikkel er inneholder informasjon som veilederne i NAV Kontaktsenter kan dele med den som tar kontakt. Artiklene kan også inneholde interne rutiner og grensesnitt. Kunnskapsartiklene oppdateres jevnlig av NKS sine fagnettverk.
+En kunnskapsartikkel er inneholder informasjon som veilederne i Nav kontaktsenter kan dele med den som tar kontakt. Artiklene kan også inneholde interne rutiner og grensesnitt. Kunnskapsartiklene oppdateres jevnlig av NKS sine fagnettverk.
 
-For ansatte i NKS er kunnskapsbasen tilgjengelig gjennom Salesforce. For NAV-ansatte uten Salesforce-lisens er kunnskapsartiklene tilgjengelig via [datamarkedsplassen](https://data.ansatt.nav.no/quarto/e7b3e02a-0c45-4b5c-92a2-a6d364120dfb).
+For ansatte i NKS er kunnskapsbasen tilgjengelig gjennom Salesforce. For Nav-ansatte uten Salesforce-lisens er kunnskapsartiklene tilgjengelig via [datamarkedsplassen](https://data.ansatt.nav.no/quarto/e7b3e02a-0c45-4b5c-92a2-a6d364120dfb).
 
 ## Artikkeltyper
 Det finnes i hovedsak 3 artikkeltyper:
@@ -26,7 +26,7 @@ Her følger en oversikt over artikkelfeltene som finnes i en fag-artikkel.
 **Personbruker**
 Her finnes informasjon som gjelder for henvendelser som i hovedsak gjelder personbrukere. I feltet "Til brukeren" finner veileder tekster med informasjon som kan deles i svar til brukeren.
 
-I feltet "Mer informasjon" finnes avklaringer og spesielle tilfeller som også kan deles med brukeren. Her kan det også finnes informasjon som kun er ment for ansatte i NAV Kontaktsenter, denne informasjonen er merket med "Informasjon til veileder i NAV Kontaktsenter".
+I feltet "Mer informasjon" finnes avklaringer og spesielle tilfeller som også kan deles med brukeren. Her kan det også finnes informasjon som kun er ment for ansatte i Nav kontaktsenter, denne informasjonen er merket med "Informasjon til veileder i Nav kontaktsenter".
 
 **Oversettelser**
 Her ligger det eventuelt nynorsk og engelsk versjon av teksten som finnes under "Til brukeren".
@@ -36,24 +36,24 @@ Her finnes relevant informasjon for arbeidsgivere, primært til bruk for veilede
 
 I feltet "Til arbeidsgiver" finnes tekster med informasjon som kan deles med arbeidsgiver.
 
-I feltet "Mer informasjon" finnes avklaringer og spesielle tilfeller som også kan deles med arbeidsgiver. Her kan det også finnes informasjon som kun er ment ansatte i NAV Kontaktsenter, denne informasjonen er merket med "Informasjon til veileder i NAV Kontaktsenter".
+I feltet "Mer informasjon" finnes avklaringer og spesielle tilfeller som også kan deles med arbeidsgiver. Her kan det også finnes informasjon som kun er ment ansatte i Nav kontaktsenter, denne informasjonen er merket med "Informasjon til veileder i Nav Kontaktsenter".
 
 **Internasjonalt**
 Her legges relevant informasjon for veiledere som besvarer henvendelser på tema "Internasjonalt".
 
 I feltet "Til brukeren" finnes tekster med informasjon som kan deles i svar til brukeren.
 
-I feltet "Mer informasjon" finnes avklaringer og spesielle tilfeller som også kan deles med brukeren. Her kan det også finnes informasjon som kun er ment for ansatte i NAV Kontaktsenter, denne informasjonen er merket med "Informasjon til veileder i NAV Kontaktsenter"
+I feltet "Mer informasjon" finnes avklaringer og spesielle tilfeller som også kan deles med brukeren. Her kan det også finnes informasjon som kun er ment for ansatte i Nav kontaktsenter, denne informasjonen er merket med "Informasjon til veileder i Nav kontaktsenter"
 
 **Lege og behandler**
 Her finnes informasjon som gjelder for henvendelser som i hovedsak gjelder samhandlere.
 
 I feltet "Til samhandler" finnes tekster med informasjon som kan deles i svar til den som tar kontakt med NKS.
 
-I feltet "Mer informasjon" finnes avklaringer og spesielle tilfeller som også kan deles med samhandler. Her kan det også finnes informasjon som kun er ment for ansatte i NAV Kontaktsenter, denne informasjonen er merket med "Informasjon til veileder i NAV Kontaktsenter".
+I feltet "Mer informasjon" finnes avklaringer og spesielle tilfeller som også kan deles med samhandler. Her kan det også finnes informasjon som kun er ment for ansatte i Nav kontaktsenter, denne informasjonen er merket med "Informasjon til veileder i Nav kontaktsenter".
 
 **Hvem gjør hva?**
-Her er det satt opp en oversikt over hvem som gjør hva både internt og eksternt (der det er relevant). Er det grensesnitt opp mot NAV-kontoret f.eks., vil man kunne finne det her.
+Her er det satt opp en oversikt over hvem som gjør hva både internt og eksternt (der det er relevant). Er det grensesnitt opp mot Nav-kontoret f.eks., vil man kunne finne det her.
 
 **Slik sender du oppgave**
 Her vil man finne informasjon om hvor oppgave skal sendes og hvordan de skal merkes.
@@ -73,7 +73,7 @@ Fellesartiklene følger i stor grad samme struktur som fagartiklene, bare forenk
 **Generelt**
 I feltet "Til brukeren" finnes tekster med informasjon som kan deles i svar til brukeren.
 
-I feltet "Mer informasjon" finnes avklaringer og spesielle tilfeller som også kan deles med brukeren. Her kan det også finnes informasjon som kun er ment for ansatte i NAV Kontaktsenter, denne informasjonen er merket med "Informasjon til veileder i NAV Kontaktsenter".
+I feltet "Mer informasjon" finnes avklaringer og spesielle tilfeller som også kan deles med brukeren. Her kan det også finnes informasjon som kun er ment for ansatte i Nav kontaktsenter, denne informasjonen er merket med "Informasjon til veileder i Nav kontaktsenter".
 
 ### Intern rutine
 Det finnes også en artikkeltype som heter "Intern rutine" som ikke har noen underkomponenter. I disse artiklene legges interne rutiner som for eksempel rutinene NKS har for chat eller skriv til oss.

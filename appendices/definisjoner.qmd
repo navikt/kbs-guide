@@ -69,6 +69,14 @@ neste passende ord i svaret sitt. Høyere temperatur gir mer variasjon i svar,
 mens lavere temperatur gir mer uniforme svar.
 :::
 
+::: {#def-vektordatabase}
+## Vektordatabase
+I kontekst av KBS-systemer er vektordatabaser databaser for å lagre matematiske 
+representasjoner av tekstene som skal brukes som kunnskapsgrunnlag. 
+Vektordatabasen muliggjør effektive semantiske søk. For en grundigere 
+beskrevelse, se kapittel @sec-vektordatabase. 
+:::
+
 ::: {#def-vertex-ai}
 ## Vertex AI
 Er navnet på det helhetlige Generativ KI (@def-gki) produktet til Google på GCP.

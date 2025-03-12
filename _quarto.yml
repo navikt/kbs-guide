@@ -3,16 +3,16 @@ project:
 
 book:
   title: "Kunnskapsbase baserte språkmodeller"
-  description: "Introduksjon til utvikling av kunnskapsbase baserte språkmodeller for NAV"
+  description: "Introduksjon til utvikling av kunnskapsbase baserte språkmodeller for Nav"
   status: "Under arbeid"
   author:
     - name: Jørgen Nordmoen
-      affiliation: NAV IT
+      affiliation: Nav IT
       email: jorgen.halvorsen.nordmoen@nav.no
     - name: Beate Sildnes
-      affiliation: NAV IT
+      affiliation: Nav IT
       email: beate.sildnes@nav.no
-  publisher: "NAV - Arbeids- og velferdsetaten"
+  publisher: "Nav - Arbeids- og velferdsetaten"
   image: assets/cover.png
   genre: "Guide, Tutorial, Veiledning"
   license: "CC BY"
@@ -36,23 +36,26 @@ book:
         - kunnskapsbasen/vektordatabase.qmd
         - kunnskapsbasen/tips.qmd
     - modell.qmd
+    - part: avanserte_teknikker/intro.qmd
+      chapters:
+        - avanserte_teknikker/contextual_retrieval.qmd
+        - avanserte_teknikker/grading.qmd
     - fremtid.qmd
   appendices:
     - appendices/kost.qmd
     - appendices/arkitektur.qmd
     - appendices/pgvector.qmd
     - appendices/definisjoner.qmd
-    - appendices/contextual_retrieval.qmd
   navbar:
     logo: assets/nav_logo_hvit.png
-    logo-alt: "Logo til NAV - Arbeids- og velferdsetaten"
+    logo-alt: "Logo til Nav - Arbeids- og velferdsetaten"
     right:
       - icon: slack
         href: https://nav-it.slack.com/archives/C04MRJ9SHM4
         aria-label: Slack kanal for kontakt
       - icon: people-fill
         href: https://teamkatalog.nav.no/team/415e12bc-61fb-4579-840a-c9307765f2fc
-        aria-label: Ansvarlig team hos NAV
+        aria-label: Ansvarlig team hos Nav
 
 format:
   html:

@@ -14,18 +14,27 @@ forsøker å holde en oppdatert liste med begreper og definisjoner i
 @sec-definisjoner. Bruk gjerne `Foreslå endringer` knappen i menyen til høyre
 hvis du har et forslag eller tips om noe som bør forklares bedre.
 
-Guiden antar at modellen skal kjøre på interne flater hos NAV og vil være
+Guiden antar at modellen skal kjøre på interne flater hos Nav og vil være
 skreddersydd for dette formålet. Forhåpentligvis kan guiden fungere som
 inspirasjon for andre systemer, samt gi en innføring i konseptet _KBS_ som kan
 gjenbrukes.
 
 Veiledningen er basert på vårt arbeid med *NKS Digital Assistent*. Koden kan
-sees [på Github][nks_ds_github], merk at vi har valgt en commit som tilsvarer
-det omtrentlige tidspunktet for når teksten ble skrevet.
+sees i følgende reoper på Github:  
+
+- [KBS-systemet]([nks_kbs_github])  
+- [Vektordatabase for NKS Kunnskapsartikler]([nks_vdb_github])  
+- [Vektordatabase for nav.no]([navno_vdb_github])  
+
+Merk at vi har valgt å lenke til commits som tilsvarer det omtrentlige tidspunktet 
+for når denne teksten sist ble oppdatert.
 
 # Endringslogg
 
+- **12.03.2025**: Utvidet med kapitler om mer avanserte KBS-teknikker
 - **30.09.2024**: Modell med `LangChain` og `LangGraph`
 - **{{< meta date >}}**: Første versjon publisert
 
-[nks_ds_github]: https://github.com/navikt/nks_ds/tree/d7ae2c38845170eca5afbdcab126ffe96140676a
+[nks_kbs_github]: https://github.com/navikt/nks_kbs/tree/5e7131917fb47f5fc7345cc35badf38d72f8245a
+[nks_vdb_github]: https://github.com/navikt/nks_vdb/tree/368f42bc40ce290f0cbdbd8374e042596a086624
+[navno_vdb_github]: https://github.com/navikt/navno_vdb/tree/3f3bb39af1e043d7b939db1f1bd355e4bf3ff330

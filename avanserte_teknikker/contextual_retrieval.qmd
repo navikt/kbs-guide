@@ -7,7 +7,7 @@ vektordatabasen. Dette gjøres både fordi embeddingmodellene har begrensninger 
  vektorsøket blir mer presist. Men ved slik oppsplitting er det også risiko for 
  at noen segmenter mister viktige deler av konteksten sin.
 
-I dette vedlegget går vi gjennom noen avanserte teknikker innen 
+I dette kapittelet går vi gjennom noen avanserte teknikker innen 
 informasjonsinnhenting som kan bidra til å bevare kontekst som ellers kan gå 
 tapt når dokumenter splittes opp i mindre deler.
 
@@ -28,9 +28,10 @@ techniques" (avanserte KBS-teknikker).
 :::
 
 ## Utfordringen med oppsplitting av dokumenter
-La oss ta utgangspunkt i NKS Kunnskapsbasen. Selv om artiklene der er godt 
-strukturert med seksjoner og underoverskrifter som gir naturlige inndelinger av 
-teksten, er det likevel noen avsnitt som er for lange og må splittes opp.
+La oss ta utgangspunkt i NKS sin kunnskapsbase for å illustrere problemstillingen. 
+Selv om artiklene der er godt strukturert med seksjoner og underoverskrifter 
+som gir naturlige inndelinger av teksten, er det likevel noen avsnitt som er for
+lange og må splittes opp.
 
 Enkelte tekstbiter kan bli skilt fra sin tilhørende underoverskrift og dermed 
 miste viktig kontekst. Dette kan føre til at vektorrepresentasjonen av teksten 
@@ -46,12 +47,12 @@ Dette er en kjent utfordring for mange som har utviklet KBS-systemer, men det er
 
 ## Teknikker for kontekstuell informasjonsinnhenting
 Hvis du har utfordringer med tekstbiter som mangler viktig kontekst, finnes det 
-flere tilnærminger for å håndtere dette. I dette vedlegget har vi valgt å 
+flere tilnærminger for å håndtere dette. I dette kapittelet har vi valgt å 
 begrense scopet til metoder for å bedre tilrettelegge og indeksere dokumenter 
 for vektorsøk.
 
 :::{.callout-note collapse="true"}
-## Metoder utenfor scopet for dette vedlegget 
+## Metoder utenfor scopet for dette kapittelet 
 Det finnes også metoder som retter seg mot andre deler av KBS-systemet enn selve
  dokumentene. Vi går ikke nærmere inn på disse her, men noen av dem kan likevel 
  være verdt å nevne:

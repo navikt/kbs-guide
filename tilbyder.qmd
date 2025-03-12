@@ -1,7 +1,7 @@
 # Valg av tilbyder {#sec-tilbyder}
 
 Et av de første valgene man må foreta seg er hvilke tilbyder(e) man ønsker å
-benytte for systemet. Som nevnt tidligere har vi i NAV i hovedsak mulighet til å
+benytte for systemet. Som nevnt tidligere har vi i Nav i hovedsak mulighet til å
 bruke [Azure OpenAI
 Services](https://azure.microsoft.com/en-us/products/ai-services/openai-service)
 (@def-azure-openai) eller [Vertex AI](https://cloud.google.com/vertex-ai?hl=nb)
@@ -57,7 +57,7 @@ mellom tilbydere.
 
 Hvilken løsning man ønsker å gå for bestemmes i stor grad av produktet som skal
 utvikles og hvem som er med å utvikle produktet. På samme måte som ellers i
-produktutvikling for NAV anbefales det at teamet tar en bevist avgjørelse med de
+produktutvikling for Nav anbefales det at teamet tar en bevist avgjørelse med de
 fordeler og ulemper som følger med.
 
 ## Valg av språkmodell
@@ -70,7 +70,7 @@ med tidsbestemte anbefalinger, som denne tabellen.
 
 ::: column-margin
 På kort sikt er det fornuftig å velge en språkmodell som gir gode svar fra
-første stund. Men i et lengre perspektiv burde produktutviklingen i NAV ta
+første stund. Men i et lengre perspektiv burde produktutviklingen i Nav ta
 stilling til lokale modeller som kan ytterligere tilpasses den enkeltes
 bruksområde.
 :::
@@ -137,7 +137,7 @@ Search](https://azure.microsoft.com/en-us/products/ai-services/ai-search) og
 har også mulighet for å velge en "self-hosted" løsning med PostgreSQL.
 
 ::: {.callout-note collapse="true"}
-## *KBS* i NAV
+## *KBS* i Nav
 
 På NAIS plattformen vil det være Cloud SQL med støtte for `pgvector` som vil
 være ekvivalent med en "self-hosted" løsning.
@@ -166,7 +166,7 @@ anbefalingene så må man teste og vurdere på bakgrunn av kunnskapsbasen man
 |                         | -   Enklere å kombinere tabeller for applikasjonen | -   Krever mer i oppstartfasen               |
 |                         | -   Mer kontroll over database og kostnader        | -   Krever kode                              |
 +-------------------------+----------------------------------------------------+----------------------------------------------+
-| BigQuery                | -   Enkel tilgang for NAV                          | -   Låser til Google GCP [^tilbyder-2]       |
+| BigQuery                | -   Enkel tilgang for Nav                          | -   Låser til Google GCP [^tilbyder-2]       |
 |                         | -   Enkelt å komme i gang med                      |                                              |
 |                         | -   God nok ytelse for mindre kunnskapsbaser       |                                              |
 +-------------------------+----------------------------------------------------+----------------------------------------------+

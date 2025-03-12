@@ -1,0 +1,12 @@
+# Avanserte teknikker
+
+I [Kapittel @sec-modell] beskrev vi hvordan en *KBS* kan settes opp.
+
+I dette kapittelet kommer vi til å ta for oss noen mulige utvidelser av dette 
+oppsettet som poteniselt kan være med på å forbedre systemet:
+
+- I [Kapittel @sec-contextual-retrieval] går vi gjennom konseptet contextual 
+retrieval, som beskriver teknikker for bevare så mye kontekst fra kildedokumentene
+som mulig. 
+- Deretter ser vi på hvordan man kan sette opp grading for å filtrere bort mindre
+relevante søketreff [Kapittel @sec-grading].

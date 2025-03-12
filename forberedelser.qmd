@@ -2,7 +2,7 @@
 
 For å komme i gang med *KBS* må vi først gjøre klar API tjenester til ønsket
 embedding- og språkmodell. Vi har forsøkt å oppsummere stegene under for ansatte
-i NAV IT.
+i Nav IT.
 
 ## Providere tjenester på Azure OpenAI Services
 

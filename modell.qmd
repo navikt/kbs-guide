@@ -1,4 +1,4 @@
-# Lage modellen
+# Lage modellen {#sec-modell}
 
 Frem til nå har denne veiledningen fokusert på kunnskapsbasen og embedding
 modellen som brukes sammen med vektordatabasen. Vi skal i dette kapittelet
@@ -162,7 +162,7 @@ def generator(state):
     return {"answer": answer}
 ```
 
-### Bygge grafen
+### Bygge grafen {#sec-bygge-graf}
 
 For å sette sammen stegene over bygger vi kjøretidsgrafen.
 
