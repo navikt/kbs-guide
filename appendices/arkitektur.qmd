@@ -1,6 +1,7 @@
 # Arkitektur
 
-Dette vedlegget inneholder et forslag til arkitektur på NAIS plattformen i NAV.
+Dette vedlegget inneholder et forslag til arkitektur på [NAIS plattformen
+@def-nais] i Nav.
 
 ---
 
