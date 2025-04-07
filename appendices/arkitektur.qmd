@@ -5,7 +5,7 @@ Dette vedlegget inneholder et forslag til arkitektur på NAIS plattformen i NAV.
 ---
 
 I hovedsak foreslås det at man skiller på backend for brukergrensesnittet og
-backend for _KBS_ systemet og lar disse snakke med hverandre over et REST API.
+backend for _KBS_ systemet og lar disse snakke med hverandre over et HTTP API.
 Dette tillater at disse komponentene kan utvikles uavhengig av hverandre og kan
 benytte forskjellige rammeverk. De fleste rammeverk for språkmodeller sikter på
 å støtte Python og det vil derfor være mer naturlig å implementere _KBS_
