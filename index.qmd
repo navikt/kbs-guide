@@ -22,15 +22,18 @@ gjenbrukes.
 Veiledningen er basert på vårt arbeid med *NKS Digital Assistent*. Koden kan
 sees i følgende reoper på Github:  
 
-- [KBS-systemet]([nks_kbs_github])  
-- [Vektordatabase for NKS Kunnskapsartikler]([nks_vdb_github])  
-- [Vektordatabase for nav.no]([navno_vdb_github])  
+- [KBS-systemet (Nav-intern)]([nks_kbs_github])  
+- [Vektordatabase for NKS Kunnskapsartikler (Nav-intern)]([nks_vdb_github])  
+- [Vektordatabase for nav.no (Nav-intern)]([navno_vdb_github])  
 
 Merk at vi har valgt å lenke til commits som tilsvarer det omtrentlige tidspunktet 
 for når denne teksten sist ble oppdatert.
 
 # Endringslogg
 
+- **07.04.2025**:
+    - Markerte lenker som Nav-interne
+    - Oppdaterte arkitekturskisse
 - **12.03.2025**: Utvidet med kapitler om mer avanserte KBS-teknikker
 - **30.09.2024**: Modell med `LangChain` og `LangGraph`
 - **{{< meta date >}}**: Første versjon publisert
