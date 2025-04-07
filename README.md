@@ -2,7 +2,7 @@
 
 Dette repoet inneholder en [Quarto](https://quarto.org/) veiledning for å komme
 i gang med Kunnskapsbase Baserte Språkmodeller (_KBS_), oversatt fra
-Retrieval-Augmented Generation (_RAG_), i NAV.
+Retrieval-Augmented Generation (_RAG_), i Nav.
 
 Veiledningen er foreløpig under arbeid så den er ikke publisert enda.
 

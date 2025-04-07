@@ -201,9 +201,9 @@ final_state["answer"]
 
 > Samordning mellom dagpenger og sykepenger er relevant når en person er
 > sykmeldt, men fortsatt i stand til å jobbe 50% eller mer. I slike tilfeller vil
-> NAV vurdere en kombinasjon av dagpenger og sykepenger. Dette innebærer at
-> personen må sende inn søknad om sykepenger og NAV vil sende beskjed til det
-> lokale NAV-kontoret som vurderer denne samordningen.
+> Nav vurdere en kombinasjon av dagpenger og sykepenger. Dette innebærer at
+> personen må sende inn søknad om sykepenger og Nav vil sende beskjed til det
+> lokale Nav-kontoret som vurderer denne samordningen.
 
 ## Forbedre spørsmål i en chat-historikk
 
@@ -221,9 +221,9 @@ For å prøve å kontekstualisere dette kan vi se på en tenkt samtale:
 
 > (Språkmodell): Samordning mellom dagpenger og sykepenger er relevant når en
 person er sykmeldt, men fortsatt i stand til å jobbe 50% eller mer. I slike
-tilfeller vil NAV vurdere en kombinasjon av dagpenger og sykepenger. Dette
-innebærer at personen må sende inn søknad om sykepenger og NAV vil sende beskjed
-til det lokale NAV-kontoret som vurderer denne samordningen.
+tilfeller vil Nav vurdere en kombinasjon av dagpenger og sykepenger. Dette
+innebærer at personen må sende inn søknad om sykepenger og Nav vil sende beskjed
+til det lokale Nav-kontoret som vurderer denne samordningen.
 
 > (Bruker) Hva innebærer det for pensjon?
 

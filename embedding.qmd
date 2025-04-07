@@ -9,7 +9,7 @@ bakgrunn.
 
 ## Valg av modell
 
-I NAV har vi i hovedsak mulighet til å bruke embedding modeller fra både OpenAI
+I Nav har vi i hovedsak mulighet til å bruke embedding modeller fra både OpenAI
 (Azure) samt Vertex AI (GCP)[^1]. Hvilken modell som gir best resultat er avhengig
 av kunnskapsbasen[^2] samt hvilken vektordatabase som skal brukes.
 
