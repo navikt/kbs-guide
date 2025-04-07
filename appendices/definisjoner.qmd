@@ -41,6 +41,14 @@ GKI er en samlebetegnelse for metoder som bruker store nevrale nettverk til å
 generere media. [Språkmodeller @def-sprakmodell] er et eksempel på GKI.
 :::
 
+::: {#def-nais}
+## NAIS
+Nav sin skyplattform.
+
+> En plattform laget av Nav for å gi fart og flyt til utviklerne av det
+> offentlige Norge. - [Nais.io](https://nais.io)
+:::
+
 ::: {#def-prompt}
 ## Prompt (eller ledetekst)
 Er teksten vi gir med oppgave til språkmodellen. Den kan referere til både
