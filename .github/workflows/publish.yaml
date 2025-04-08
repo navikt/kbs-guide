@@ -12,6 +12,10 @@ jobs:
         steps:
             - name: Checkout source
               uses: actions/checkout@v4
+            - name: Install Chrome pinned
+              uses: browser-actions/setup-chrome@v1
+              with:
+                chrome-version: 127
             - name: Install Quarto
               uses: quarto-dev/quarto-actions/setup@v2
             - name: Render project
