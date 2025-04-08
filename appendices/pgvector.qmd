@@ -6,6 +6,10 @@ be om en PostgreSQL database i NAIS konfigurasjonen, før man trenger å skru p�
 [`pgvector` som er en utvidelse til PostgreSQL][pgvector] som tilfører vektorsøk
 funksjonalitet.
 
+::: {.column-margin}
+[NAIS @def-nais] er navnet på sky-plattformen til Nav.
+:::
+
 ## NAIS konfigurasjon
 
 Det anbefales å følge veiledningen til [NAIS om oppsett av

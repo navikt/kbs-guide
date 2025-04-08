@@ -99,7 +99,7 @@ og avveiningen blir naturlig nok mellom tid og penger.
 I Azure AI Search kan man selv styre hvordan databasen skal operere. Ved bruk av
 `hybrid` vil den operere som beskrevet i denne seksjonen, men ved bruk av
 `similarity` vil den operere som en ren vektordatabase. Vær varsom med å benytte
-riktig søk og i NAV sammenheng vurder andre databaser hvis bare `similarity`
+riktig søk og i Nav sammenheng vurder andre databaser hvis bare `similarity`
 benyttes.
 :::
 

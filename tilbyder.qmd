@@ -7,6 +7,11 @@ Services](https://azure.microsoft.com/en-us/products/ai-services/openai-service)
 (@def-azure-openai) eller [Vertex AI](https://cloud.google.com/vertex-ai?hl=nb)
 (@def-vertex-ai).
 
+::: {.column-margin}
+Når vi beskriver sky-plattformen til Nav kommer vi til å bruke [NAIS @def-nais]
+som forkortelse.
+:::
+
 Selv om man kan blande tilbyder av språkmodell, embedding modell og
 vektordatabase vil det i de fleste tilfeller falle naturlig å velge én tilbyder
 av alle tre. Det er derfor viktig å være bevist dette valget og tenke på
@@ -139,8 +144,8 @@ har også mulighet for å velge en "self-hosted" løsning med PostgreSQL.
 ::: {.callout-note collapse="true"}
 ## *KBS* i Nav
 
-På NAIS plattformen vil det være Cloud SQL med støtte for `pgvector` som vil
-være ekvivalent med en "self-hosted" løsning.
+På [NAIS @def-nais] plattformen vil det være Cloud SQL med støtte for `pgvector`
+som vil være ekvivalent med en "self-hosted" løsning.
 :::
 
 Det som man må være observant på og teste selv er hvor mye ekstra verdi
