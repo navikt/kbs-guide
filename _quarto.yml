@@ -24,7 +24,7 @@ book:
   repo-actions: [edit, issue]
   twitter-card: true
   open-graph: true
-  downloads: [pdf, epub]
+  downloads: [epub]
   chapters:
     - index.qmd
     - bakgrunn.qmd
@@ -68,7 +68,7 @@ format:
   epub:
     cover-image: assets/cover.png
     epub-cover-image: assets/cover.png
-  pdf:
-    toc: true
-    colorlinks: true
-    number-sections: true
+  # pdf:
+  #   toc: true
+  #   colorlinks: true
+  #   number-sections: true
