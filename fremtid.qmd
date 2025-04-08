@@ -17,8 +17,13 @@ Scratch](https://github.com/langchain-ai/rag-from-scratch)
     - Både dokumentasjon og "how-to-guides" til inspirasjon
 - [Ragas](https://docs.ragas.io/en/stable/index.html)
     - Rammeverk for å evaluere *KBS* systemet.
-- [Eksempel på hybridsøk med PostgreSQL](https://github.com/pgvector/pgvector-python/blob/master/examples/hybrid_search_rrf.py)
+- [Eksempel på hybridsøk med PostgreSQL](https://data.nav.no/fortelling/postgres-hybrid-search/)
     - Hvordan kombinere vektorsøk med tekstsøk gjennom Reciprocal Rank Fusion.
+- [Hvordan finjustere en embeddingmodell
+(Nav-intern)](https://data.ansatt.nav.no/quarto/22139f5a-35c5-4d3d-ad9d-b79f7102e1be/index.html)
+    - Vi beskriver hvordan vi har finjustert en embeddingmodell med data lett
+    tilgjengelig for data scientister i Nav.
+    - Vi jobber med en større datafortelling som kommer til å bli åpent tilgjengelig.
 
 ## Forskningsartikler
 

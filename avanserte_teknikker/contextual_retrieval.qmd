@@ -269,4 +269,5 @@ Ved å ta i bruk teknikker for kontekstuell informasjonsinnhenting, kan man oppn
   som gir de beste resultatene. 
 
 For en beskrivelse av hva vi har testet ut av teknikker for NKS Kunnskapsbasen, 
-se [denne datafortellingen](https://data.ansatt.nav.no/story/25ad0df6-ec93-4e6c-892f-a7f69b713a92).
+se [denne datafortellingen
+(Nav-intern)](https://data.ansatt.nav.no/story/25ad0df6-ec93-4e6c-892f-a7f69b713a92).

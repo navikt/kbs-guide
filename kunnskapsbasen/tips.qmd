@@ -18,8 +18,8 @@ ha lik mulighet til å gjøre det bra eller dårlig.
 I vårt arbeid med NKS Digital Assistent har vi gjort en sammenligning basert på
 syntetiske spørsmål.
 
-- [Fremgangsmåte for å generere spørsmål (ekstern
-datafortelling)](https://data.ansatt.nav.no/story/98cec0de-b872-4713-a56f-9bdb49112345/index.html)
+- [Fremgangsmåte for å generere spørsmål
+(Nav-intern)](https://data.ansatt.nav.no/story/98cec0de-b872-4713-a56f-9bdb49112345/index.html)
 
 ## Evalueringsmetrikker
 
@@ -50,5 +50,4 @@ Ulempen er kanskje at de er litt for enkle:
 En annen faktor å ha med i betraktingen er at noen av tekstene som har vært kilde for et syntetisk spørsmål, har i vektordatabasene blitt splittet opp i flere chunks. Når vi ber om å få returnert de topp `k` mest relevante dokumentene for et spørsmål kan det derfor hende at samme tekst vil bli representert mer enn én gang i resultatsettet. Vi har valgt å holde evalueringen på "tekst-nivå" ved å gi uttelling til vektordatabasen for den høyest rangerte chunken fra riktige tekst. 
 
 - [Sammenligning av forskjellige vektordatabaser på NKS sin kunnskapsbase
-(ekstern
-datafortelling)](https://data.ansatt.nav.no/story/e17a7b82-8721-4357-ba92-4c734f68e9f5/index.html#resultater)
+(Nav-intern)](https://data.ansatt.nav.no/story/e17a7b82-8721-4357-ba92-4c734f68e9f5/index.html#resultater)
