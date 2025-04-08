@@ -16,6 +16,12 @@ jobs:
               uses: browser-actions/setup-chrome@v1
               with:
                 chrome-version: 127
+            - name: 'Check Chromium'
+              if: ${{ runner.os == 'Linux' }}
+              run: |
+                echo $(which google-chrome)
+                $(which google-chrome) --headless --no-sandbox --disable-gpu --renderer-process-limit=1 https://www.chromestatus.com
+              shell: bash
             - name: Install Quarto
               uses: quarto-dev/quarto-actions/setup@v2
             - name: Render project
