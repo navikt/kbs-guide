@@ -72,6 +72,24 @@ AIMessage(content='', additional_kwargs={'tool_calls': [{'id':
 'call_iXj4DiW1p7WLjTAQMRO0jxMs', 'function': {'arguments': '{"a":2,"b":2}',
 'name': 'add'}, 'type': 'function'}], 'refusal': None})
 ```
+
+:::{.callout collapse="true"}
+## Hvordan ser språkmodellen verktøyet vårt?
+De fleste språkmodeller støtter verktøykall ved at man kan legge ved en JSON
+beskrivelse av verktøyene. Det er nettopp det LangChain gjør automagisk for oss
+når vi bruker `@tool`.
+
+Vi kan undersøke hva LangChain gjør ved å inspisere metadata lagt ved funksjoner
+dekorert med `@tool`.
+
+```python
+>>> add.args
+{'a': {'title': 'A', 'type': 'integer'}, 'b': {'title': 'B', 'type': 'integer'}}
+>>> add.args_schema.model_json_schema()
+{'description': 'Add two numbers', 'properties': {'a': {'title': 'A', 'type': 'integer'}, 'b': {'title': 'B', 'type': 'integer'}}, 'required': ['a', 'b'], 'title': 'add', 'type': 'object'}
+```
+:::
+
 ## Verktøy for å hente informasjon
 
 I @sec-retrieve-node så vi hvordan vi kan hente informasjon fra en
