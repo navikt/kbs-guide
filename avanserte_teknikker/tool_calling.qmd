@@ -106,7 +106,7 @@ store = BigQueryVectorSearch.from_documents()  # Se kapittel om vektordatabase
 retriever = store.as_retriever(search_kwargs=dict(k=5))
 
 @tool
-async def search_database(query: str) -> str:
+async def search_database(query: str) -> str: # <1>
     """Search for information related to Nav.
 
     Args:
@@ -116,6 +116,29 @@ async def search_database(query: str) -> str:
     docs = await retriever.ainvoke(query)
     return "Context:\n\n" + "\n\n".join([doc.page_content for doc in docs])
 ```
+1. Legg merke til at vi kan bruke asynkrone Python funksjoner som verktøy.
+
+:::{.callout-tip collapse="true"}
+## Bruk av `artifact` for strukturert data
+Som nevnt tidligere kan vi returnere strukturerte data ved å endre litt på
+`@tool` dekoratøren vår.
+
+Søkefunksjonen kunne da sett slik ut:
+```python
+@tool(response_format="content_and_artifact") # <1>
+async def search_database(query: str) -> tuple[str, list[str]]: # <2>
+    """Search for information related to Nav.
+
+    Args:
+        query: A complete sentence describing the information to retrieve from
+        Nav's database.
+    """
+    docs = await retriever.ainvoke(query)
+    return f"Retrieved {len(docs)} documents", [doc.page_content for doc in docs] # <2>
+```
+1. Legg merke til `response_format` i `@tool` dekoratøren.
+2. Vi kan deretter endre resultatet vi gir ut.
+:::
 
 Vi begynner deretter å definere starten på kjøretidsgrafen vår.
 
