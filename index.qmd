@@ -31,8 +31,7 @@ for når denne teksten sist ble oppdatert.
 
 # Endringslogg
 
-- **16.09.2025**:
-    - Verktøykall som avansert teknikk
+- **16.09.2025**: Verktøykall som avansert teknikk
 - **07.04.2025**:
     - Markerte lenker som Nav-interne
     - Oppdaterte arkitekturskisse
