@@ -1,0 +1,154 @@
+# Verktøykall (tool-calling) {#sec-tool-calling}
+
+Verktøykalling (kjent som _tool-calling_ på engelsk) er en generell teknikk hvor
+vi kan lage verktøy som språkmodellen får tilgang til. Dette fungerer ved at vi
+gir modellen en beskrivelse av verktøyene den har tilgang til, navn og
+parametere, og språkmodellen kan dermed returnere at den ønsker å benytte ett
+eller flere verktøy.
+
+For å kunne bruke verktøykall må språkmodellen være spesifikt trent for dette.
+De fleste språkmodeller en vil ønske seg å bruke støtter dette, men det kan være
+verdt å merke seg med eldre eller små lokale språkmodeller.
+
+Vi kommer her til å vise hvordan verktøykalling kan brukes med
+[LangChain](https://python.langchain.com/docs/concepts/tools/), men teknikken
+burde være overførbar til andre rammeverk og generelt uten bruk av rammeverk.
+
+## Definere et enkelt verktøy
+
+I LangChain finnes det enkel støtte for å definere et verktøy ved å bruke
+`@tool` dekoratoren på en "vanlig" Python funksjon.
+
+```python
+from langchain_core.tools import tool
+
+@tool
+def add(a: int, b: int) -> str:
+    """Add two numbers"""
+    return str(a + b)
+```
+
+Det som er viktig å bemerke seg med funksjonen over er at vi definerer typene vi
+forventer at funksjonen skal motta, typen til resultatet av metoden samt gir en
+beskrivelse av hva funksjonen gjør. Dette er påkrevd for at LangChain skal kunne
+opprette en beskrivelse som kan sendes til språkmodellen.
+
+:::{.column-margin}
+For å lære mer om typing i Python anbefales det å se på [dokumentasjonen til
+Python](https://docs.python.org/3/library/typing.html) samt benytte seg av
+[_Typing cheat sheet_ fra
+`mypy`](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html).
+:::
+
+Som med instrukser vi bruker til språkmodellene så kan en god beskrivelse være
+gull verdt. For nyere språkmodeller kan det derfor være lurt å beskrive
+eksempler på bruk og andre viktige instrukser for verktøyet slik at
+språkmodellen enklere kan tolke når og hvordan den skal bruke verktøyet.
+
+:::{.callout-important collapse="true"}
+# Alle verktøy i LangChain må returnere `str`
+LangChain forventer at alle verktøy returnerer en streng som resultat slik at
+det kan brukes som tekstliginnhold i en `ToolMessage`. Dette kan være
+begrensende i en kjøretidsgraf hvor vi kan ønske å gi ut strukturerte data.
+Heldigvis har [LangChain støtte for dette gjennom
+`response_format="content_and_artifact"`](https://python.langchain.com/docs/concepts/tools/#tool-artifacts).
+:::
+
+Når vi har definert verktøyet vårt kan vi deretter dele det med språkmodellen
+som så kan velge å be oss kalle på metoden.
+
+```python
+from langchain_openai import AzureChatOpenAI
+
+llm = AzureChatOpenAI().bind_tools([add])
+response = llm.invoke({"role": "user", "content": "Hva er 2+2?"})
+assert not response.content, "Forventet ikke at språkmodellen gir et tekstlig svar"
+assert response.tool_calls, "Forventet at språkmodellen returnerer ønske om verktøykall"
+print(response)
+```
+
+```python
+AIMessage(content='', additional_kwargs={'tool_calls': [{'id':
+'call_iXj4DiW1p7WLjTAQMRO0jxMs', 'function': {'arguments': '{"a":2,"b":2}',
+'name': 'add'}, 'type': 'function'}], 'refusal': None})
+```
+## Verktøy for å hente informasjon
+
+I @sec-retrieve-node så vi hvordan vi kan hente informasjon fra en
+vektordatabase som en node i kjøretidsgrafen. Et alternativ til å bruke en node
+er å strukturere uthenting av informasjon som et verktøykall.
+
+La oss først definere et verktøy for å søke i vektordatabasen vår.
+
+```python
+from langchain_core.tools import tool
+from langchain_google_community import BigQueryVectorSearch
+
+store = BigQueryVectorSearch.from_documents()  # Se kapittel om vektordatabase
+retriever = store.as_retriever(search_kwargs=dict(k=5))
+
+@tool
+async def search_database(query: str) -> str:
+    """Search for information related to Nav.
+
+    Args:
+        query: A complete sentence describing the information to retrieve from
+        Nav's database.
+    """
+    docs = await retriever.ainvoke(query)
+    return "Context:\n\n" + "\n\n".join([doc.page_content for doc in docs])
+```
+
+Vi begynner deretter å definere starten på kjøretidsgrafen vår.
+
+```python
+from langchain_core.messages import AnyMessage
+from langchain_openai import AzureChatOpenAI
+from langgraph.graph import MessagesState
+
+llm = AzureChatOpenAI().bind_tools([search_database])
+
+async def respond_or_tool(state: MessagesState) -> dict[str, list[AnyMessage]]:
+    """Node i kjøretidsgrafen som enten svarer eller kaller på verktøy"""
+    response = await llm.ainvoke(state["messages"])
+    return {"messages": [response]}
+```
+
+Tilslutt definerer vi kjøretidsgrafen og benytter en
+[`ToolNode`](https://langchain-ai.github.io/langgraph/reference/agents/#langgraph.prebuilt.tool_node.ToolNode)
+fra LangGraph
+som kan automatisk kalle på verktøy for oss.
+
+```python
+from langgraph.graph import END, START, StateGraph
+from langgraph.prebuilt import ToolNode, tools_condition
+
+# Benytter en generell tilstand som inneholder en liste med meldinger til og fra
+# språkmodell(ene)
+workflow = StateGraph(MessagesState)
+
+# Legg til noder i grafen
+workflow.add_node(respond_or_tool)
+workflow.add_node("run_tools", ToolNode([search_database])) # <1>
+
+# Definer hvordan nodene henger sammen
+workflow.add_edge(START, "respond_or_tool")
+workflow.add_conditional_edges(
+    "respond_or_tool", tools_condition, {"tools": "run_tools", END: END}
+) # <2>
+workflow.add_edge("run_tools", "respond_or_tool") # <3>
+
+# Kompiler grafen
+app = workflow.compile()
+```
+1. Oppretter en `ToolNode` i kjøretidsgrafen med tilgang til verktøy.
+2. `tools_condition` sjekker om det skal gjøres verktøykall og leder oss enten
+til `run_tools` eller avslutter.
+3. Etter at vi har kalt på et verktøy returnerer vi til første noden for å
+generere et svar til bruker.
+
+Merk at vi ikke er begrenset til bare disse 2 nodene i kjøretidsgrafen. Vi kan
+gjøre kjøretidsgrafen så komplisert vi bare ønsker. Fordelen med verktøykall er
+at modellen selv kan bestemme, i motsetning til modellen vi har beskrevet før
+kreves det nå ett språkmodellkall mindre for samme funksjonalitet og vi har
+mulighet til å legge til flere verktøy.
