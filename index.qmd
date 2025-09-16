@@ -1,6 +1,6 @@
 # Om veiledningen {.unnumbered}
 
-Denne veiledningen tar for seg hvordan komme i gang med Kunnskapsbase Baserte
+Denne veiledningen tar for seg hvordan komme i gang med Kunnskapsbasebaserte
 Språkmodeller (Retrieval-Augmented Generation (_RAG_)), forkortet _KBS_, se
 [Kapittel @sec-bakgrunn] for en introduksjon til teknikken.
 
