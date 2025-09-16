@@ -188,6 +188,25 @@ til `run_tools` eller avslutter.
 3. Etter at vi har kalt på et verktøy returnerer vi til første noden for å
 generere et svar til bruker.
 
+```{mermaid}
+---
+config:
+  flowchart:
+    curve: linear
+  layout: dagre
+---
+flowchart TD
+    __start__(["<p>__start__</p>"]) --> initial("respond_or_tool")
+    initial -. &nbsp;__end__&nbsp; .-> __end__
+    initial -. &nbsp;tools&nbsp; .-> run_tools("run_tools")
+    run_tools --> initial
+     __start__:::first
+     __end__:::last
+    classDef default fill:#f2f0ff,line-height:1.2
+    classDef first fill-opacity:0
+    classDef last fill:#bfb6fc
+```
+
 Merk at vi ikke er begrenset til bare disse 2 nodene i kjøretidsgrafen. Vi kan
 gjøre kjøretidsgrafen så komplisert vi bare ønsker. Fordelen med verktøykall er
 at modellen selv kan bestemme, i motsetning til modellen vi har beskrevet før
