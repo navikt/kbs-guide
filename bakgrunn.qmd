@@ -1,8 +1,8 @@
 # Bakgrunn {#sec-bakgrunn}
 
-## Kunnskapsbase Baserte Språkmodeller
+## Kunnskapsbasebaserte Språkmodeller
 
-Kunnskapsbase Baserte Språkmodeller (_KBS_), oversatt fra [Retrieval-Augmented
+Kunnskapsbasebaserte Språkmodeller (_KBS_), oversatt fra [Retrieval-Augmented
 Generation][wiki_rag], er en teknikk for å inkorporere ekstern eller ny
 informasjon når en stor språkmodell skal generere svar. Uten _KBS_ vil en stor
 språkmodell generere svaret sitt basert på informasjon den plukket opp under
@@ -26,7 +26,7 @@ I @fig-rag-overview er det illustrert hvordan flyten går fra bruker stiller
 spørsmål til språkmodellen som benytter både spørsmålet samt relevante
 dokumenter som input for å generere et svar.
 
-![Illustrasjon av Kunnskapsbase Baserte Språkmodeller. Språkmodellen tar som
+![Illustrasjon av Kunnskapsbasebaserte Språkmodeller. Språkmodellen tar som
 input både spørsmålet fra brukeren og relevante dokumenter som finnes i
 kunnskapsbasen for å kunne generere et
 svar.](assets/images/rag_overview.png){#fig-rag-overview}
@@ -62,7 +62,7 @@ modellen for å søke i vektordatabasen. Merk at vektordatabasen oppdateres
 uavhengig fra språkmodellen som tilrettelegger for oppdatert informasjon fra
 kunnskapsbasen.
 
-![Kunnskapsbase Baserte Språkmodeller med vektordatabase. I grått på
+![Kunnskapsbasebaserte Språkmodeller med vektordatabase. I grått på
 illustrasjonen er det prøvd å vise hvordan vektordatabasen oppdateres fra
 kunnskapsbasen. Oppdateringen skjer uavhengig av
 språkmodellen.](assets/images/rag_vector_database.png){#fig-rag-vector-database}

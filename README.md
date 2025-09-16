@@ -1,7 +1,7 @@
-# Kunnskapsbase Baserte Språkmodeller
+# Kunnskapsbasebaserte Språkmodeller
 
 Dette repoet inneholder en [Quarto](https://quarto.org/) veiledning for å komme
-i gang med Kunnskapsbase Baserte Språkmodeller (_KBS_), oversatt fra
+i gang med Kunnskapsbasebaserte Språkmodeller (_KBS_), oversatt fra
 Retrieval-Augmented Generation (_RAG_), i Nav.
 
 Veiledningen er foreløpig under arbeid så den er ikke publisert enda.

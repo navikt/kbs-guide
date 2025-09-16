@@ -2,8 +2,8 @@ project:
   type: book
 
 book:
-  title: "Kunnskapsbase baserte språkmodeller"
-  description: "Introduksjon til utvikling av kunnskapsbase baserte språkmodeller for Nav"
+  title: "Kunnskapsbasebaserte språkmodeller"
+  description: "Introduksjon til utvikling av kunnskapsbasebaserte språkmodeller for Nav"
   status: "Under arbeid"
   author:
     - name: Jørgen Nordmoen
