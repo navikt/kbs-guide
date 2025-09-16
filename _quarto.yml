@@ -40,6 +40,7 @@ book:
       chapters:
         - avanserte_teknikker/contextual_retrieval.qmd
         - avanserte_teknikker/grading.qmd
+        - avanserte_teknikker/tool_calling.qmd
     - fremtid.qmd
   appendices:
     - appendices/kost.qmd
