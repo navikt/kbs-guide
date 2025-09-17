@@ -4,7 +4,8 @@ Verktøykalling (kjent som _tool-calling_ på engelsk) er en generell teknikk hv
 vi kan lage verktøy som språkmodellen får tilgang til. Dette fungerer ved at vi
 gir modellen en beskrivelse av verktøyene den har tilgang til, navn og
 parametere, og språkmodellen kan dermed returnere at den ønsker å benytte ett
-eller flere verktøy.
+eller flere verktøy. Det er viktig å påpeke at _språkmodellen ikke kjører
+verktøyene_, den kan bare "ønske" seg å benytte verktøy.
 
 For å kunne bruke verktøykall må språkmodellen være spesifikt trent for dette.
 De fleste språkmodeller en vil ønske seg å bruke støtter dette, men det kan være
@@ -13,6 +14,8 @@ verdt å merke seg med eldre eller små lokale språkmodeller.
 Vi kommer her til å vise hvordan verktøykalling kan brukes med
 [LangChain](https://python.langchain.com/docs/concepts/tools/), men teknikken
 burde være overførbar til andre rammeverk og generelt uten bruk av rammeverk.
+Dette er fordi grensesnittet vi bruker mot språkmodellene for å gi tilgang til
+verktøy er lik uavhengig av verktøy.
 
 ## Definere et enkelt verktøy
 
@@ -29,7 +32,7 @@ def add(a: int, b: int) -> str:
 ```
 
 Det som er viktig å bemerke seg med funksjonen over er at vi definerer typene vi
-forventer at funksjonen skal motta, typen til resultatet av metoden samt gir en
+forventer at funksjonen skal motta, typen til resultatet av metoden, samt gir en
 beskrivelse av hva funksjonen gjør. Dette er påkrevd for at LangChain skal kunne
 opprette en beskrivelse som kan sendes til språkmodellen.
 
@@ -44,6 +47,15 @@ Som med instrukser vi bruker til språkmodellene så kan en god beskrivelse vær
 gull verdt. For nyere språkmodeller kan det derfor være lurt å beskrive
 eksempler på bruk og andre viktige instrukser for verktøyet slik at
 språkmodellen enklere kan tolke når og hvordan den skal bruke verktøyet.
+
+:::{.column-margin}
+[LangChain støtter
+også](https://python.langchain.com/docs/how_to/custom_tools/#docstring-parsing)
+å tolke [Google formatert
+docstring](https://google.github.io/styleguide/pyguide.html#383-functions-and-methods).
+Dette kan gi enda mer kontekst til språkmodellen og gjøre det enklere å
+dokumentere funksjonen.
+:::
 
 :::{.callout-important collapse="true"}
 # Alle verktøy i LangChain må returnere `str`
@@ -197,7 +209,7 @@ config:
 ---
 flowchart TD
     __start__(["<p>__start__</p>"]) --> initial("respond_or_tool")
-    initial -. &nbsp;__end__&nbsp; .-> __end__
+    initial -. &nbsp;__end__&nbsp; .-> __end__(["<p>__end__</p>"])
     initial -. &nbsp;tools&nbsp; .-> run_tools("run_tools")
     run_tools --> initial
      __start__:::first
