@@ -200,6 +200,8 @@ til `run_tools` eller avslutter.
 3. Etter at vi har kalt på et verktøy returnerer vi til første noden for å
 generere et svar til bruker.
 
+Flyten i kjøretidsgrafen vil da se slik ut:
+
 ```{mermaid}
 ---
 config:
@@ -219,8 +221,12 @@ flowchart TD
     classDef last fill:#bfb6fc
 ```
 
-Merk at vi ikke er begrenset til bare disse 2 nodene i kjøretidsgrafen. Vi kan
-gjøre kjøretidsgrafen så komplisert vi bare ønsker. Fordelen med verktøykall er
-at modellen selv kan bestemme, i motsetning til modellen vi har beskrevet før
-kreves det nå ett språkmodellkall mindre for samme funksjonalitet og vi har
-mulighet til å legge til flere verktøy.
+I diagramet over kan vi merke oss at vi har skapt en løkke hvor resultatet av at
+vi kaller på verktøyet kommer tilbake til språkmodellen og den kan benytte
+resultatet av verktøyet for å svare på spørsmålet.
+
+Merk at vi ikke er begrenset til bare disse 2 nodene i kjøretidsgrafen eller at
+resultatet fra verktøykall må gå tilbake til samme node som vi kom fra. Fordelen
+med verktøykall er at modellen selv kan bestemme å kalle på verktøy og samtidig
+kan vi benytte deterministiske verktøy som kan gi oss større trygghet i svaret
+fra språkmodellene.
