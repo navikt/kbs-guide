@@ -221,8 +221,8 @@ flowchart TD
     classDef last fill:#bfb6fc
 ```
 
-I diagramet over kan vi merke oss at vi har skapt en løkke hvor resultatet av at
-vi kaller på verktøyet kommer tilbake til språkmodellen og den kan benytte
+I diagrammet over kan vi merke oss at vi har skapt en løkke hvor resultatet av
+at vi kaller på verktøyet kommer tilbake til språkmodellen og den kan benytte
 resultatet av verktøyet for å svare på spørsmålet.
 
 Merk at vi ikke er begrenset til bare disse 2 nodene i kjøretidsgrafen eller at
