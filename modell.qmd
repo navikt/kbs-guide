@@ -69,7 +69,16 @@ class GraphState(TypedDict):
 Når vi kompilerer og bruker kjøretidsgrafen senere vil det bli tydelig hvordan
 denne klassen brukes i praksis.
 
-### Hente dokumenter
+### Hente dokumenter {#sec-retrieve-node}
+
+:::{.callout-tip}
+## Verktøykalling
+Et alternativ til å ha en egen node i kjøretidsgrafen som henter informasjon er
+å bruke verktøykall (forklart i @sec-tool-calling). Verktøykall er en kraftig
+generell teknikk som kan brukes til mange formål (ikke bare til å hente
+informasjon). **Det anbefales derfor å gjøre seg kjent med verktøykalling før
+man designer resten av kjøretidsgrafen.**
+:::
 
 Det første vi må gjøre i *KBS* systemet vårt er å hente ut dokumenter slik at vi
 har noe språkmodellen kan jobbe med. Dette blir inngangen i kjøretidsgrafen vår
