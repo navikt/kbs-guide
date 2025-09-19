@@ -15,7 +15,7 @@ Vi kommer her til å vise hvordan verktøykalling kan brukes med
 [LangChain](https://python.langchain.com/docs/concepts/tools/), men teknikken
 burde være overførbar til andre rammeverk og generelt uten bruk av rammeverk.
 Dette er fordi grensesnittet vi bruker mot språkmodellene for å gi tilgang til
-verktøy er lik uavhengig av verktøy.
+verktøy er lik uavhengig av rammeverk (alt er JSON).
 
 ## Definere et enkelt verktøy
 
